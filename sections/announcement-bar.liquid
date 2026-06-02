@@ -1,0 +1,45 @@
+{%- if section.settings.show_announcement -%}
+<div class="px-announcement" role="complementary">
+  <div class="px-announcement-inner">
+    {%- if section.settings.item_1 != blank -%}
+      <div class="px-announcement-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        <span>{{ section.settings.item_1 }}</span>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.item_2 != blank -%}
+      <div class="px-announcement-item" style="display:none;" class="md-flex">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        <span>{{ section.settings.item_2 }}</span>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.item_3 != blank -%}
+      <div class="px-announcement-item" style="display:none;" class="md-flex">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        <span>{{ section.settings.item_3 }}</span>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
+      <a href="{{ section.settings.link_url }}">{{ section.settings.link_text }} →</a>
+    {%- endif -%}
+  </div>
+</div>
+<style>
+  @media(min-width:640px){.md-flex{display:flex!important;}}
+</style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barre d'annonce",
+  "settings": [
+    { "type": "checkbox", "id": "show_announcement", "label": "Afficher la barre", "default": true },
+    { "type": "text", "id": "item_1", "label": "Message 1", "default": "🚚 Livraison offerte dès 60€" },
+    { "type": "text", "id": "item_2", "label": "Message 2", "default": "✅ Retours gratuits 30 jours" },
+    { "type": "text", "id": "item_3", "label": "Message 3", "default": "🔒 Paiement 100% sécurisé" },
+    { "type": "text", "id": "link_text", "label": "Texte du lien" },
+    { "type": "url", "id": "link_url", "label": "URL du lien" }
+  ],
+  "presets": [{ "name": "Barre d'annonce" }]
+}
+{% endschema %}

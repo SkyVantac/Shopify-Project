@@ -1,0 +1,52 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "PlumeX Conversion Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "PlumeX",
+    "theme_documentation_url": "https://plumeex.com",
+    "theme_support_url": "https://plumeex.com/contact"
+  },
+  {
+    "name": "Logo & Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "range", "id": "logo_height", "label": "Hauteur logo (desktop)", "min": 24, "max": 100, "step": 1, "unit": "px", "default": 56 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      { "type": "color", "id": "color_primary", "label": "Couleur principale (CTA)", "default": "#4d6945" },
+      { "type": "color", "id": "color_primary_hover", "label": "Couleur principale hover", "default": "#426045" },
+      { "type": "color", "id": "color_navy", "label": "Couleur sombre", "default": "#0e1320" },
+      { "type": "color", "id": "color_sage", "label": "Couleur sauge (fond clair)", "default": "#eef1ea" },
+      { "type": "color", "id": "color_body_bg", "label": "Fond du site", "default": "#ffffff" },
+      { "type": "color", "id": "color_text", "label": "Couleur du texte", "default": "#0e1320" }
+    ]
+  },
+  {
+    "name": "Typographie",
+    "settings": [
+      { "type": "font_picker", "id": "font_heading", "label": "Police des titres", "default": "anton_n4" },
+      { "type": "font_picker", "id": "font_body", "label": "Police du corps", "default": "inter_n4" }
+    ]
+  },
+  {
+    "name": "Checkout & Panier",
+    "settings": [
+      { "type": "select", "id": "cart_type", "label": "Type de panier", "options": [{"value":"drawer","label":"Tiroir coulissant"},{"value":"page","label":"Page panier"},{"value":"popup","label":"Popup"}], "default": "drawer" },
+      { "type": "number", "id": "free_shipping_threshold", "label": "Seuil livraison gratuite (€)", "default": 60 }
+    ]
+  },
+  {
+    "name": "Réseaux sociaux",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube" }
+    ]
+  }
+]

@@ -1,0 +1,166 @@
+<!-- Collection Header -->
+<div class="px-collection-header">
+  {%- if collection.image -%}
+    <div style="position:relative;overflow:hidden;max-height:280px;border-radius:0 0 24px 24px;margin:-3rem -1.5rem 2rem;">
+      <img src="{{ collection.image | image_url: width: 1600 }}" alt="{{ collection.title | escape }}" style="width:100%;height:280px;object-fit:cover;opacity:0.6;" loading="eager">
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,19,32,0.5),rgba(14,19,32,0.8));display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;">
+        <h1 class="px-h1" style="color:white;margin-bottom:0.5rem;">{{ collection.title }}</h1>
+        {%- if collection.description != blank -%}<p style="color:rgba(255,255,255,0.8);max-width:560px;font-size:1rem;">{{ collection.description }}</p>{%- endif -%}
+      </div>
+    </div>
+  {%- else -%}
+    <p class="px-label">Collection</p>
+    <h1 class="px-h2">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p>{{ collection.description }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+<!-- Products -->
+<div class="px-collection-layout">
+  <!-- Filters Sidebar -->
+  <aside class="px-filters" aria-label="Filtres">
+    <h3 style="font-size:1rem;font-weight:800;color:#0e1320;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:2px solid var(--px-border);">Filtrer par</h3>
+
+    {%- for filter in collection.filters -%}
+      <div class="px-filter-section">
+        <div class="px-filter-title">
+          {{ filter.label }}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="px-filter-options">
+          {%- for value in filter.values -%}
+            <label class="px-filter-option">
+              <input
+                type="checkbox"
+                name="{{ value.param_name }}"
+                value="{{ value.value }}"
+                {% if value.active %}checked{% endif %}
+                onchange="this.form.submit()"
+              >
+              {{ value.label }}
+              <span style="margin-left:auto;font-size:0.78rem;color:#999;">({{ value.count }})</span>
+            </label>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endfor -%}
+
+    <div class="px-filter-section">
+      <div class="px-filter-title">Prix</div>
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <input type="number" placeholder="Min" style="width:80px;padding:0.4rem;border:1px solid var(--px-border);border-radius:6px;font-size:0.85rem;">
+        <span>—</span>
+        <input type="number" placeholder="Max" style="width:80px;padding:0.4rem;border:1px solid var(--px-border);border-radius:6px;font-size:0.85rem;">
+      </div>
+    </div>
+  </aside>
+
+  <!-- Products Grid -->
+  <div>
+    <div class="px-sort-bar">
+      <span class="px-sort-label">{{ collection.products_count }} produits</span>
+      <select class="px-sort-select" onchange="location.href=this.value">
+        {%- for option in collection.sort_options -%}
+          <option value="{{ collection.url }}?sort_by={{ option.value }}" {% if collection.sort_by == option.value %}selected{% endif %}>
+            {{ option.name }}
+          </option>
+        {%- endfor -%}
+      </select>
+    </div>
+
+    <div class="px-product-grid">
+      {%- for product in collection.products -%}
+        <article class="px-product-card" data-reveal>
+          <a href="{{ product.url }}" class="px-product-image">
+            {%- if product.featured_image -%}
+              <img
+                src="{{ product.featured_image | image_url: width: 600 }}"
+                alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                loading="lazy"
+                width="600"
+                height="600"
+              >
+              {%- if product.images[1] -%}
+                <img
+                  class="px-product-image-secondary"
+                  src="{{ product.images[1] | image_url: width: 600 }}"
+                  alt="{{ product.images[1].alt | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+              {%- endif -%}
+            {%- endif -%}
+            <div class="px-product-badges">
+              {%- if product.compare_at_price > product.price -%}
+                {%- assign s = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                <span class="px-badge px-badge-sale">-{{ s }}%</span>
+              {%- elsif product.available == false -%}
+                <span class="px-badge" style="background:#666;color:white;">Épuisé</span>
+              {%- endif -%}
+            </div>
+            <div class="px-product-quick-add">
+              {%- if product.available -%}
+                <button class="px-quick-add-btn" data-add-to-cart data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                  Ajouter
+                </button>
+              {%- endif -%}
+            </div>
+          </a>
+          <div class="px-product-body">
+            <h3 class="px-product-title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+            <div class="px-product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">({{ product.metafields.reviews.rating_count | default: 12 }})</span>
+            </div>
+            <div class="px-product-price">
+              <span class="px-price">{{ product.price | money }}</span>
+              {%- if product.compare_at_price > product.price -%}
+                <span class="px-price-compare">{{ product.compare_at_price | money }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- else -%}
+        <div style="grid-column:1/-1;text-align:center;padding:4rem 1rem;color:var(--px-text-muted);">
+          <p style="font-size:1.1rem;font-weight:600;">Aucun produit trouvé</p>
+          <a href="{{ collection.url }}" class="px-btn px-btn-outline" style="margin-top:1rem;display:inline-flex;">Réinitialiser les filtres</a>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Pagination -->
+    {%- if paginate.pages > 1 -%}
+      <div style="display:flex;justify-content:center;gap:0.5rem;margin-top:3rem;">
+        {%- if paginate.previous -%}
+          <a href="{{ paginate.previous.url }}" class="px-btn px-btn-outline">← Précédent</a>
+        {%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}" class="px-btn px-btn-outline">{{ part.title }}</a>
+          {%- elsif part.title == paginate.current_page -%}
+            <span class="px-btn px-btn-primary">{{ part.title }}</span>
+          {%- else -%}
+            <span style="display:flex;align-items:center;padding:0 0.5rem;color:var(--px-text-muted);">{{ part.title }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}
+          <a href="{{ paginate.next.url }}" class="px-btn px-btn-outline">Suivant →</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page collection",
+  "settings": [
+    { "type": "range", "id": "products_per_page", "label": "Produits par page", "min": 8, "max": 48, "step": 4, "default": 24 }
+  ],
+  "presets": [{ "name": "Page collection" }]
+}
+{% endschema %}

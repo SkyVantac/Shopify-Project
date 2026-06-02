@@ -1,0 +1,138 @@
+{%- liquid
+  assign collection = collections[section.settings.collection]
+  assign products_count = section.settings.products_count | default: 8
+-%}
+
+<section class="px-section px-{{ section.settings.background }}" style="{% if section.settings.background == 'sage' %}background:var(--px-sage);{% endif %}">
+  <div class="px-container">
+    <div class="px-section-header" data-reveal>
+      {%- if section.settings.label != blank -%}
+        <p class="px-label">{{ section.settings.label }}</p>
+      {%- endif -%}
+      <h2 class="px-h2">{{ section.settings.title | default: 'Nos produits' }}</h2>
+      {%- if section.settings.description != blank -%}
+        <p>{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if collection != blank -%}
+      <div class="px-product-grid">
+        {%- for product in collection.products limit: products_count -%}
+          <article class="px-product-card" data-reveal>
+            <a href="{{ product.url }}" class="px-product-image" aria-label="{{ product.title }}">
+              {%- if product.featured_image -%}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+                {%- if product.images[1] -%}
+                  <img
+                    class="px-product-image-secondary"
+                    src="{{ product.images[1] | image_url: width: 600 }}"
+                    alt="{{ product.images[1].alt | escape }}"
+                    loading="lazy"
+                    width="600"
+                    height="600"
+                  >
+                {%- endif -%}
+              {%- else -%}
+                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--px-sage);">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4d6945" stroke-width="1.5"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </div>
+              {%- endif -%}
+
+              <div class="px-product-badges">
+                {%- if product.available == false -%}
+                  <span class="px-badge" style="background:#666;color:white;">Épuisé</span>
+                {%- elsif product.compare_at_price > product.price -%}
+                  {%- assign saving = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                  <span class="px-badge px-badge-sale">-{{ saving }}%</span>
+                {%- elsif product.created_at > 'now' | date: '%s' | minus: 2592000 | date: '%Y-%m-%d' -%}
+                  <span class="px-badge px-badge-new">Nouveau</span>
+                {%- endif -%}
+              </div>
+
+              <div class="px-product-quick-add">
+                {%- if product.available -%}
+                  <button
+                    class="px-quick-add-btn"
+                    data-add-to-cart
+                    data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                    aria-label="Ajouter {{ product.title }} au panier"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                    Ajouter au panier
+                  </button>
+                {%- else -%}
+                  <button class="px-quick-add-btn" disabled style="opacity:0.5;cursor:not-allowed;">Rupture de stock</button>
+                {%- endif -%}
+              </div>
+            </a>
+
+            <div class="px-product-body">
+              {%- if product.vendor != blank -%}
+                <p class="px-product-vendor">{{ product.vendor }}</p>
+              {%- endif -%}
+              <h3 class="px-product-title">
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
+              <div class="px-product-rating" aria-label="4,9 étoiles">
+                <span class="stars" aria-hidden="true">★★★★★</span>
+                <span class="count">({{ product.metafields.reviews.rating_count | default: '12' }})</span>
+              </div>
+              <div class="px-product-price">
+                <span class="px-price">{{ product.price | money }}</span>
+                {%- if product.compare_at_price > product.price -%}
+                  <span class="px-price-compare">{{ product.compare_at_price | money }}</span>
+                  {%- assign saving_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                  <span class="px-price-saving">-{{ saving_pct }}%</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.show_view_all and collection.products_count > products_count -%}
+        <div style="text-align:center;margin-top:3rem;">
+          <a href="{{ collection.url }}" class="px-btn px-btn-secondary px-btn-lg">
+            Voir toute la collection
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="px-product-grid">
+        {%- for i in (1..4) -%}
+          <div class="px-product-card">
+            <div class="px-product-image px-skeleton" style="height:280px;"></div>
+            <div class="px-product-body">
+              <div class="px-skeleton" style="height:12px;width:60%;margin-bottom:8px;border-radius:4px;"></div>
+              <div class="px-skeleton" style="height:16px;width:90%;margin-bottom:12px;border-radius:4px;"></div>
+              <div class="px-skeleton" style="height:20px;width:40%;border-radius:4px;"></div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection vedette",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Nos bestsellers" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Découvrez nos produits" },
+    { "type": "textarea", "id": "description", "label": "Description" },
+    { "type": "range", "id": "products_count", "label": "Nombre de produits", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "select", "id": "background", "label": "Fond", "options": [{"value":"white","label":"Blanc"},{"value":"sage","label":"Vert sauge"}], "default": "white" },
+    { "type": "checkbox", "id": "show_view_all", "label": "Afficher 'Voir tout'", "default": true }
+  ],
+  "presets": [{ "name": "Collection vedette" }]
+}
+{% endschema %}

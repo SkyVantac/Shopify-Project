@@ -1,0 +1,79 @@
+<section class="px-hero">
+  <div class="px-hero-bg">
+    {%- if section.settings.background_video != blank -%}
+      <video autoplay muted loop playsinline>
+        <source src="{{ section.settings.background_video }}" type="video/mp4">
+      </video>
+    {%- elsif section.settings.background_image != blank -%}
+      <img
+        src="{{ section.settings.background_image | image_url: width: 1920 }}"
+        alt=""
+        loading="eager"
+        fetchpriority="high"
+        width="1920"
+        height="1080"
+      >
+    {%- endif -%}
+    <div class="px-hero-overlay"></div>
+  </div>
+
+  <div class="px-hero-content">
+    {%- if section.settings.badge != blank -%}
+      <div class="px-hero-badge px-animate-up">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        {{ section.settings.badge }}
+      </div>
+    {%- endif -%}
+
+    <h1 class="px-hero-title px-animate-up px-delay-1">
+      {{ section.settings.title | replace: '[vert]', '<span>' | replace: '[/vert]', '</span>' }}
+    </h1>
+
+    {%- if section.settings.description != blank -%}
+      <p class="px-hero-desc px-animate-up px-delay-2">{{ section.settings.description }}</p>
+    {%- endif -%}
+
+    <div class="px-hero-cta px-animate-up px-delay-3">
+      {%- if section.settings.cta_primary_text != blank -%}
+        <a href="{{ section.settings.cta_primary_url | default: '/collections/all' }}" class="px-btn px-btn-primary px-btn-xl">
+          {{ section.settings.cta_primary_text }}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      {%- endif -%}
+      {%- if section.settings.cta_secondary_text != blank -%}
+        <a href="{{ section.settings.cta_secondary_url | default: '#' }}" class="px-btn px-btn-outline" style="color:white;border-color:rgba(255,255,255,0.6);">
+          {{ section.settings.cta_secondary_text }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_social_proof -%}
+      <div class="px-hero-social-proof px-animate-up px-delay-4">
+        <div class="px-hero-stars" aria-label="4,9 étoiles">
+          ★★★★★
+        </div>
+        <span>{{ section.settings.social_proof_text | default: '+2 000 clients satisfaits' }}</span>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero principal",
+  "settings": [
+    { "type": "image_picker", "id": "background_image", "label": "Image de fond" },
+    { "type": "text", "id": "background_video", "label": "URL vidéo de fond (MP4)" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "✨ Nouveau 2026" },
+    { "type": "textarea", "id": "title", "label": "Titre (utiliser [vert] [/vert] pour coloriser)", "default": "La nature au cœur de [vert]votre quotidien[/vert]" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Des produits conçus pour vous offrir le meilleur de la nature. Qualité premium, livraison rapide, satisfaction garantie." },
+    { "type": "text", "id": "cta_primary_text", "label": "Bouton principal", "default": "Découvrir la collection" },
+    { "type": "url", "id": "cta_primary_url", "label": "URL bouton principal" },
+    { "type": "text", "id": "cta_secondary_text", "label": "Bouton secondaire" },
+    { "type": "url", "id": "cta_secondary_url", "label": "URL bouton secondaire" },
+    { "type": "checkbox", "id": "show_social_proof", "label": "Afficher la preuve sociale", "default": true },
+    { "type": "text", "id": "social_proof_text", "label": "Texte preuve sociale", "default": "+2 000 clients satisfaits" }
+  ],
+  "presets": [{ "name": "Hero principal" }]
+}
+{% endschema %}

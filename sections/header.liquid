@@ -1,0 +1,71 @@
+<header class="px-header" role="banner">
+  <div class="px-header-inner">
+    <!-- Logo -->
+    <a href="/" class="px-header-logo" aria-label="{{ shop.name }}">
+      {%- if settings.logo -%}
+        <img
+          src="{{ settings.logo | image_url: height: 92 }}"
+          alt="{{ shop.name }}"
+          height="{{ settings.logo_height | default: 56 }}"
+          width="auto"
+          loading="eager"
+        >
+      {%- else -%}
+        <span style="font-family:'Anton',sans-serif;font-size:1.6rem;color:#0e1320;letter-spacing:-0.02em;">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="px-header-nav" aria-label="Navigation principale">
+      {%- for link in linklists.main-menu.links -%}
+        <a
+          href="{{ link.url }}"
+          {% if link.active %}class="active"{% endif %}
+        >{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <!-- Actions -->
+    <div class="px-header-actions">
+      <!-- Search -->
+      <a href="/search" class="px-header-icon" aria-label="Rechercher">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/>
+        </svg>
+      </a>
+
+      <!-- Account -->
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="px-header-icon" aria-label="Mon compte">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/>
+          </svg>
+        </a>
+      {%- endif -%}
+
+      <!-- Cart -->
+      <button class="px-btn-cart-header" data-open-cart aria-label="Ouvrir le panier">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span>Panier</span>
+        <span class="px-cart-count" style="display:none;">0</span>
+      </button>
+
+      <!-- Mobile menu button -->
+      <button class="px-mobile-menu-btn px-header-icon" data-open-menu aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "En-tête",
+  "settings": [],
+  "presets": [{ "name": "En-tête" }]
+}
+{% endschema %}

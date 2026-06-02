@@ -1,0 +1,140 @@
+{
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_announcement": true,
+        "item_1": "🚚 Livraison offerte dès 60€",
+        "item_2": "✅ Retours gratuits 30 jours",
+        "item_3": "🔒 Paiement 100% sécurisé"
+      }
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "badge": "✨ Collection 2026",
+        "title": "La nature au cœur de [vert]votre quotidien[/vert]",
+        "description": "Des produits naturels et premium conçus pour sublimer votre quotidien. Qualité garantie, livraison rapide.",
+        "cta_primary_text": "Découvrir la collection",
+        "cta_secondary_text": "En savoir plus",
+        "show_social_proof": true,
+        "social_proof_text": "+2 000 clients satisfaits"
+      }
+    },
+    "trust": {
+      "type": "trust-strip",
+      "settings": {
+        "icon_1": "truck",
+        "item_1": "Livraison offerte dès 60€",
+        "icon_2": "refresh",
+        "item_2": "Retours gratuits 30 jours",
+        "icon_3": "shield",
+        "item_3": "Paiement 100% sécurisé",
+        "icon_4": "star",
+        "item_4": "4,9★ sur +500 avis"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "label": "Nos bestsellers",
+        "title": "Découvrez nos produits",
+        "products_count": 8,
+        "background": "white",
+        "show_view_all": true
+      }
+    },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "100% Naturel",
+            "description": "Formulé à partir d'ingrédients naturels soigneusement sélectionnés pour votre bien-être."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "star",
+            "title": "Qualité Premium",
+            "description": "Des produits testés et approuvés, avec des matières de première qualité pour une expérience optimale."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "truck",
+            "title": "Livraison Rapide",
+            "description": "Expédié sous 24h et livré en 2-3 jours ouvrés partout en France et en Europe."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "title": "Satisfait ou Remboursé",
+            "description": "30 jours pour changer d'avis, sans question ni justification. Votre satisfaction est notre priorité."
+          }
+        }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {
+        "label": "Nos engagements",
+        "title": "Pourquoi choisir PlumeX ?",
+        "description": "Nous mettons tout en œuvre pour vous offrir la meilleure expérience."
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Produit exceptionnel, je suis ravie ! La qualité est vraiment au rendez-vous et la livraison était ultra rapide. Je recommande les yeux fermés.",
+            "name": "Sophie M.",
+            "meta": "Acheteuse vérifiée · Paris"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "J'étais sceptique au départ mais j'ai été agréablement surpris par la qualité. Le packaging est soigné et le produit est conforme à la description.",
+            "name": "Thomas R.",
+            "meta": "Acheteur vérifié · Lyon"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Commande passée le lundi, reçue le mercredi. Parfait ! Le service client est très réactif et professionnel. Je reviendrai c'est sûr.",
+            "name": "Camille D.",
+            "meta": "Acheteuse vérifiée · Bordeaux"
+          }
+        }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {
+        "label": "Témoignages",
+        "title": "Ils nous font confiance",
+        "rating": "4,9",
+        "stats": "sur +500 avis vérifiés"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "label": "Offre exclusive",
+        "title": "-10% sur votre première commande",
+        "description": "Inscrivez-vous et recevez votre code promo + nos dernières nouveautés en avant-première.",
+        "button": "J'en profite →"
+      }
+    }
+  },
+  "order": ["hero", "trust", "featured_collection", "benefits", "testimonials", "newsletter"]
+}

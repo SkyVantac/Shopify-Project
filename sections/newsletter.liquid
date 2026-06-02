@@ -1,0 +1,40 @@
+<section class="px-section px-newsletter">
+  <div class="px-container">
+    <div class="px-newsletter-inner" data-reveal>
+      {%- if section.settings.label != blank -%}
+        <p class="px-label" style="color:var(--px-sage);">{{ section.settings.label }}</p>
+      {%- endif -%}
+      <h2 class="px-h2" style="color:white;">{{ section.settings.title | default: 'Rejoignez la communauté PlumeX' }}</h2>
+      <p>{{ section.settings.description | default: 'Inscrivez-vous et recevez -10% sur votre première commande + nos dernières actualités.' }}</p>
+      <form class="px-newsletter-form" method="post" action="/contact#contact_form">
+        <input type="hidden" name="form_type" value="customer">
+        <input type="hidden" name="utf8" value="✓">
+        <input
+          type="email"
+          name="contact[email]"
+          class="px-newsletter-input"
+          placeholder="{{ section.settings.placeholder | default: 'Votre adresse email' }}"
+          required
+          autocomplete="email"
+        >
+        <button type="submit" class="px-btn px-btn-primary">{{ section.settings.button | default: "J'en profite" }}</button>
+      </form>
+      <p class="px-newsletter-note">{{ section.settings.note | default: '🔒 Pas de spam. Désabonnement en 1 clic.' }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Offre exclusive" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "-10% sur votre première commande" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Inscrivez-vous et recevez votre code promo + nos dernières nouveautés en avant-première." },
+    { "type": "text", "id": "placeholder", "label": "Placeholder email", "default": "Votre adresse email" },
+    { "type": "text", "id": "button", "label": "Texte bouton", "default": "J'en profite →" },
+    { "type": "text", "id": "note", "label": "Note", "default": "🔒 Pas de spam. Désabonnement en 1 clic." }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

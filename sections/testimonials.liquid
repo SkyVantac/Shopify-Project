@@ -1,0 +1,87 @@
+<section class="px-section px-testimonials">
+  <div class="px-container">
+    <div class="px-section-header" data-reveal>
+      {%- if section.settings.label != blank -%}
+        <p class="px-label">{{ section.settings.label }}</p>
+      {%- endif -%}
+      <h2 class="px-h2">{{ section.settings.title | default: 'Ce que disent nos clients' }}</h2>
+      {%- if section.settings.stats != blank -%}
+        <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:0.75rem;">
+          <span style="color:#f5c842;font-size:1.2rem;">★★★★★</span>
+          <strong style="font-size:1.1rem;color:#0e1320;">{{ section.settings.rating | default: '4,9' }}</strong>
+          <span style="color:#5a6272;font-size:0.9rem;">{{ section.settings.stats }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="px-testimonials-grid">
+      {%- for block in section.blocks -%}
+        <div class="px-testimonial-card" data-reveal {{ block.shopify_attributes }}>
+          <div class="px-verified-badge">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            Avis vérifié
+          </div>
+          <div class="px-testimonial-stars" aria-label="{{ block.settings.rating }} étoiles">
+            {%- assign rating = block.settings.rating | default: 5 | times: 1 -%}
+            {%- for i in (1..5) -%}★{%- endfor -%}
+          </div>
+          <blockquote class="px-testimonial-text">"{{ block.settings.text }}"</blockquote>
+          <div class="px-testimonial-author">
+            {%- if block.settings.avatar != blank -%}
+              <img
+                class="px-testimonial-avatar"
+                src="{{ block.settings.avatar | image_url: width: 88, height: 88 }}"
+                alt="{{ block.settings.name }}"
+                width="44" height="44"
+                loading="lazy"
+              >
+            {%- else -%}
+              <div class="px-testimonial-avatar" style="background:var(--px-green);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.1rem;">
+                {{ block.settings.name | slice: 0 }}
+              </div>
+            {%- endif -%}
+            <div>
+              <div class="px-testimonial-name">{{ block.settings.name }}</div>
+              <div class="px-testimonial-meta">{{ block.settings.meta | default: 'Client vérifié' }}</div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avis clients",
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Avis",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Note", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Témoignage", "default": "Produit exceptionnel, je suis ravie de mon achat ! La qualité est au rendez-vous et la livraison était ultra rapide." },
+        { "type": "image_picker", "id": "avatar", "label": "Photo (optionnel)" },
+        { "type": "text", "id": "name", "label": "Prénom Nom", "default": "Sophie M." },
+        { "type": "text", "id": "meta", "label": "Info (achat vérifié, localisation...)", "default": "Acheteuse vérifiée · Paris" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Témoignages" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Ils nous font confiance" },
+    { "type": "text", "id": "rating", "label": "Note globale", "default": "4,9" },
+    { "type": "text", "id": "stats", "label": "Statistique", "default": "sur +500 avis vérifiés" }
+  ],
+  "presets": [
+    {
+      "name": "Avis clients",
+      "blocks": [
+        { "type": "testimonial", "settings": { "text": "Produit exceptionnel, je suis ravie ! La qualité est vraiment au rendez-vous et la livraison était ultra rapide. Je recommande les yeux fermés.", "name": "Sophie M.", "meta": "Acheteuse vérifiée · Paris" } },
+        { "type": "testimonial", "settings": { "text": "J'étais sceptique au départ mais j'ai été agréablement surpris par la qualité. Le packaging est soigné et le produit est conforme à la description.", "name": "Thomas R.", "meta": "Acheteur vérifié · Lyon" } },
+        { "type": "testimonial", "settings": { "text": "Commande passée le lundi, reçue le mercredi. Parfait ! Le service client est très réactif et professionnel. Je reviendrai c'est sûr.", "name": "Camille D.", "meta": "Acheteuse vérifiée · Bordeaux" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

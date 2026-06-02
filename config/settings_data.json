@@ -1,0 +1,14 @@
+{
+  "current": {
+    "color_primary": "#4d6945",
+    "color_primary_hover": "#426045",
+    "color_navy": "#0e1320",
+    "color_sage": "#eef1ea",
+    "color_body_bg": "#ffffff",
+    "color_text": "#0e1320",
+    "logo_height": 56,
+    "cart_type": "drawer",
+    "free_shipping_threshold": 60
+  },
+  "presets": {}
+}

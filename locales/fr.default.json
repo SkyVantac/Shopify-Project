@@ -1,0 +1,41 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Entrez le mot de passe"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Rupture de stock",
+      "unavailable": "Indisponible",
+      "pick_an_option": "Choisir une option"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Mon panier",
+      "subtotal": "Sous-total",
+      "checkout": "Passer commande",
+      "empty": "Votre panier est vide"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Mon compte"
+    },
+    "login": {
+      "title": "Connexion",
+      "submit": "Se connecter"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "submit": "Créer mon compte"
+    }
+  },
+  "collections": {
+    "general": {
+      "all_collections": "Toutes les collections"
+    }
+  }
+}

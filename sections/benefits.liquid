@@ -1,0 +1,73 @@
+<section class="px-section px-benefits">
+  <div class="px-container">
+    <div class="px-section-header" data-reveal>
+      {%- if section.settings.label != blank -%}
+        <p class="px-label">{{ section.settings.label }}</p>
+      {%- endif -%}
+      <h2 class="px-h2">{{ section.settings.title | default: 'Pourquoi nous choisir ?' }}</h2>
+      {%- if section.settings.description != blank -%}
+        <p>{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="px-benefits-grid">
+      {%- for block in section.blocks -%}
+        <div class="px-benefit-card" data-reveal {{ block.shopify_attributes }}>
+          <div class="px-benefit-icon">
+            {%- case block.settings.icon -%}
+              {%- when 'leaf' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16c.55.55 1.37 1 2.4 1 1.6 0 2.6-1.2 2.6-2.4 0-2-2.3-3.3-3.4-3.9C7.2 10 5 8.5 5 6.3 5 4.5 6.4 3 8.2 3c2.6 0 4.3 2 6.3 4.2 1.6 1.7 3.2 3.6 5.5 3.8M12 20v-4M12 20H8M12 20h4"/></svg>
+              {%- when 'star' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+              {%- when 'shield' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              {%- when 'heart' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              {%- when 'truck' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3m0 0h4l3 4v3m0 0a2 2 0 11-4 0m4 0H9m2 0a2 2 0 11-4 0"/></svg>
+              {%- when 'recycle' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            {%- endcase -%}
+          </div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avantages",
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Avantage",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icône", "options": [{"value":"leaf","label":"Feuille"},{"value":"star","label":"Étoile"},{"value":"shield","label":"Bouclier"},{"value":"heart","label":"Cœur"},{"value":"truck","label":"Camion"},{"value":"recycle","label":"Recyclage"},{"value":"check","label":"Coche"}], "default": "leaf" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Naturel & Éco-responsable" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Nos produits sont formulés à base d'ingrédients naturels, sans perturbateurs endocriniens." }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Nos engagements" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Pourquoi choisir PlumeX ?" },
+    { "type": "textarea", "id": "description", "label": "Description" }
+  ],
+  "presets": [
+    {
+      "name": "Avantages",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "leaf", "title": "100% Naturel", "description": "Formulé à partir d'ingrédients naturels soigneusement sélectionnés pour votre bien-être." } },
+        { "type": "benefit", "settings": { "icon": "star", "title": "Qualité Premium", "description": "Des produits testés et approuvés par des experts, avec des matières de première qualité." } },
+        { "type": "benefit", "settings": { "icon": "truck", "title": "Livraison Rapide", "description": "Expédié sous 24h et livré en 2-3 jours ouvrés partout en France et en Europe." } },
+        { "type": "benefit", "settings": { "icon": "shield", "title": "Satisfait ou Remboursé", "description": "30 jours pour changer d'avis, sans question ni justification. Votre satisfaction est notre priorité." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

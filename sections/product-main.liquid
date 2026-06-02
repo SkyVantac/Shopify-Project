@@ -1,0 +1,239 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign product_form_id = 'product-form-' | append: product.id -%}
+
+<div class="px-product-page">
+  <div class="px-product-layout">
+
+    <!-- Gallery -->
+    <div class="px-product-gallery">
+      <div class="px-gallery-main">
+        <img
+          id="gallery-main-img"
+          src="{{ product.featured_image | image_url: width: 1000 }}"
+          alt="{{ product.featured_image.alt | default: product.title | escape }}"
+          loading="eager"
+          width="1000"
+          height="1000"
+        >
+      </div>
+      {%- if product.images.size > 1 -%}
+        <div class="px-gallery-thumbs">
+          {%- for image in product.images limit: 6 -%}
+            <div class="px-gallery-thumb {% if forloop.first %}active{% endif %}">
+              <img
+                src="{{ image | image_url: width: 144, height: 144 }}"
+                alt="{{ image.alt | default: product.title | escape }}"
+                loading="lazy"
+                width="72"
+                height="72"
+              >
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Info -->
+    <div class="px-product-info">
+      {%- if product.vendor != blank -%}
+        <p class="px-product-info-vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+
+      <h1 class="px-product-info-title">{{ product.title }}</h1>
+
+      <div class="px-product-info-rating">
+        <span class="stars" aria-label="4,9 étoiles">★★★★★</span>
+        <span style="font-weight:700;color:#0e1320;">4,9</span>
+        <a href="#reviews">({{ product.metafields.reviews.rating_count | default: '38' }} avis)</a>
+        <span style="color:#4d6945;font-weight:600;font-size:0.82rem;">✓ En stock</span>
+      </div>
+
+      <div class="px-product-info-price">
+        <span class="px-price">{{ current_variant.price | money }}</span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="px-price-compare">{{ current_variant.compare_at_price | money }}</span>
+          {%- assign saving_pct = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
+          <span class="px-price-saving">-{{ saving_pct }}%</span>
+        {%- endif -%}
+      </div>
+
+      <!-- Benefits -->
+      {%- if section.settings.benefit_1 != blank or section.settings.benefit_2 != blank or section.settings.benefit_3 != blank -%}
+        <ul class="px-product-benefit-list">
+          {%- if section.settings.benefit_1 != blank -%}
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>{{ section.settings.benefit_1 }}</span>
+            </li>
+          {%- endif -%}
+          {%- if section.settings.benefit_2 != blank -%}
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>{{ section.settings.benefit_2 }}</span>
+            </li>
+          {%- endif -%}
+          {%- if section.settings.benefit_3 != blank -%}
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>{{ section.settings.benefit_3 }}</span>
+            </li>
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
+
+      <!-- Stock bar -->
+      {%- if section.settings.show_stock_bar and current_variant.inventory_quantity > 0 -%}
+        {%- assign stock = current_variant.inventory_quantity -%}
+        {%- assign max_stock = 50 -%}
+        {%- assign pct = stock | times: 100 | divided_by: max_stock -%}
+        <div class="px-stock-bar">
+          <div class="px-stock-bar-label">
+            <span>🔥 Il n'en reste que <strong>{{ stock }}</strong> en stock !</span>
+            <span style="color:#c0392b;">Stock limité</span>
+          </div>
+          <div class="px-stock-bar-track">
+            <div class="px-stock-bar-fill" data-width="{{ pct }}%" style="width:{{ pct }}%;"></div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Urgency -->
+      {%- if section.settings.show_urgency -%}
+        <div class="px-urgency-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Commandez dans <strong data-countdown="{{ section.settings.urgency_end_date }}">--:--:--</strong> pour recevoir votre colis demain</span>
+        </div>
+      {%- endif -%}
+
+      <!-- Variants -->
+      <form id="{{ product_form_id }}" data-product-form action="/cart/add" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="form_type" value="product">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div style="margin-bottom:1.25rem;">
+              <div class="px-variant-label">
+                {{ option.name }}
+                <span>{{ option.selected_value }}</span>
+              </div>
+              <div class="px-variant-buttons">
+                {%- for value in option.values -%}
+                  {%- assign variant_label = value -%}
+                  <button
+                    type="button"
+                    class="px-variant-btn {% if option.selected_value == value %}active{% endif %}"
+                    data-option="{{ option.position }}"
+                    data-value="{{ value | escape }}"
+                  >{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <!-- Quantity + ATC -->
+        <div class="px-quantity-row">
+          <div class="px-quantity-input">
+            <button type="button" class="px-qty-btn" data-qty="minus" aria-label="Diminuer la quantité">−</button>
+            <input class="px-qty-value" type="number" name="quantity" value="1" min="1" aria-label="Quantité" readonly>
+            <button type="button" class="px-qty-btn" data-qty="plus" aria-label="Augmenter la quantité">+</button>
+          </div>
+          <button
+            type="submit"
+            class="px-atc-btn"
+            data-add-to-cart
+            {%- unless current_variant.available -%}disabled{%- endunless -%}
+            aria-label="Ajouter au panier"
+          >
+            <span class="btn-text">
+              {%- if current_variant.available -%}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;margin-right:6px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                Ajouter au panier
+              {%- else -%}
+                Rupture de stock
+              {%- endif -%}
+            </span>
+            <div class="loading-spinner"></div>
+          </button>
+        </div>
+
+        {%- if current_variant.available -%}
+          <button
+            type="button"
+            class="px-buy-now-btn"
+            onclick="
+              const id = document.querySelector('[name=id]').value;
+              const qty = document.querySelector('.px-qty-value').value || 1;
+              window.location='/cart?items[][id]=' + id + '&items[][quantity]=' + qty + '&checkout=1';
+            "
+          >
+            ⚡ Acheter maintenant
+          </button>
+        {%- endif -%}
+      </form>
+
+      <!-- Trust badges -->
+      <div class="px-trust-row">
+        <div class="px-trust-item-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          <span>Livraison offerte dès 60€</span>
+        </div>
+        <div class="px-trust-item-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Retours 30 jours</span>
+        </div>
+        <div class="px-trust-item-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span>Paiement sécurisé</span>
+        </div>
+      </div>
+
+      <!-- Description accordion -->
+      {%- if product.description != blank -%}
+        <details style="margin-top:1.5rem;border-top:1px solid var(--px-border);padding-top:1rem;">
+          <summary style="cursor:pointer;font-weight:700;font-size:0.95rem;color:#0e1320;display:flex;align-items:center;justify-content:space-between;list-style:none;">
+            Description du produit
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div style="margin-top:1rem;font-size:0.9rem;line-height:1.8;color:#5a6272;">
+            {{ product.description }}
+          </div>
+        </details>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<!-- Sticky ATC (mobile + desktop) -->
+<div class="px-sticky-atc" id="sticky-atc">
+  <div class="px-sticky-atc-inner">
+    <div class="px-sticky-atc-product">
+      <img class="px-sticky-atc-img" src="{{ product.featured_image | image_url: width: 104, height: 104 }}" alt="{{ product.title | escape }}" width="52" height="52">
+      <div>
+        <div class="px-sticky-atc-title">{{ product.title }}</div>
+        <div class="px-sticky-atc-price">{{ current_variant.price | money }}</div>
+      </div>
+    </div>
+    <button class="px-atc-btn" data-add-to-cart style="min-width:200px;height:48px;">
+      <span class="btn-text">Ajouter au panier</span>
+      <div class="loading-spinner"></div>
+    </button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page produit",
+  "settings": [
+    { "type": "text", "id": "benefit_1", "label": "Bénéfice 1", "default": "Ingrédients naturels et certifiés" },
+    { "type": "text", "id": "benefit_2", "label": "Bénéfice 2", "default": "Résultats visibles en 4 semaines" },
+    { "type": "text", "id": "benefit_3", "label": "Bénéfice 3", "default": "Sans perturbateurs endocriniens" },
+    { "type": "checkbox", "id": "show_stock_bar", "label": "Afficher la barre de stock", "default": true },
+    { "type": "checkbox", "id": "show_urgency", "label": "Afficher l'urgence de livraison", "default": false },
+    { "type": "text", "id": "urgency_end_date", "label": "Date fin urgence (ISO 8601)" }
+  ],
+  "presets": [{ "name": "Page produit" }]
+}
+{% endschema %}

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0e1320">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <title>
+    {%- if page_title == shop.name -%}{{ shop.name }}{%- else -%}{{ page_title }} — {{ shop.name }}{%- endif -%}
+  </title>
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  {%- if page_description -%}<meta property="og:description" content="{{ page_description | escape }}">{%- endif -%}
+  {%- if request.page_type == 'product' -%}
+    <meta property="og:type" content="product">
+    <meta property="og:image" content="{{ product.featured_image | image_url: width: 1200 }}">
+  {%- elsif request.page_type == 'article' -%}
+    <meta property="og:type" content="article">
+  {%- else -%}
+    <meta property="og:type" content="website">
+  {%- endif -%}
+
+  <!-- Favicon -->
+  {%- if settings.favicon -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts: Anton + Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Theme CSS -->
+  {{ 'plumeX.css' | asset_url | stylesheet_tag }}
+
+  <!-- Shopify -->
+  {{ content_for_header }}
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ shop.url }}/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Skip to content -->
+  <a class="px-sr-only" href="#main-content">Aller au contenu principal</a>
+
+  <!-- Announcement Bar -->
+  {%- section 'announcement-bar' -%}
+
+  <!-- Header -->
+  {%- section 'header' -%}
+
+  <!-- Mobile Navigation -->
+  <nav class="px-mobile-nav" id="mobile-nav" aria-label="Navigation mobile">
+    <div class="px-mobile-nav-header">
+      {%- if settings.logo -%}
+        <img src="{{ settings.logo | image_url: height: 56 }}" alt="{{ shop.name }}" height="56" width="auto">
+      {%- else -%}
+        <span style="font-family:'Anton',sans-serif;font-size:1.5rem;color:#0e1320;">{{ shop.name }}</span>
+      {%- endif -%}
+      <button data-close-menu aria-label="Fermer le menu" style="background:none;border:none;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="px-mobile-nav-links">
+      {%- for link in linklists.main-menu.links -%}
+        <a href="{{ link.url }}" class="px-mobile-nav-link">
+          {{ link.title }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      {%- endfor -%}
+    </div>
+    <div class="px-mobile-nav-cta">
+      <a href="/collections/all" class="px-btn px-btn-primary px-btn-full">Voir tous les produits</a>
+    </div>
+  </nav>
+
+  <!-- Cart Overlay + Drawer -->
+  <div class="px-cart-overlay" aria-hidden="true"></div>
+  {%- section 'cart-drawer' -%}
+
+  <!-- Main Content -->
+  <main id="main-content" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- Footer -->
+  {%- section 'footer' -%}
+
+  <!-- Back to Top -->
+  <button class="px-back-to-top" aria-label="Retour en haut">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+  </button>
+
+  <!-- Theme JS -->
+  <script src="{{ 'plumeX.js' | asset_url }}" defer></script>
+</body>
+</html>

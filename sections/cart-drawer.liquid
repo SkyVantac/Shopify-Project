@@ -1,0 +1,153 @@
+<div class="px-cart-drawer" id="cart-drawer" aria-label="Panier" role="dialog" aria-modal="true">
+  <div class="px-cart-header">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <h2>Mon panier</h2>
+      <span class="px-cart-count-bubble" style="display:none;">0</span>
+    </div>
+    <button class="px-cart-close" data-close-cart aria-label="Fermer le panier">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="px-cart-free-shipping">
+    <span>Plus que <strong>{{ section.settings.free_shipping_threshold | default: 60 }}€</strong> pour la livraison offerte !</span>
+    <div class="px-cart-free-shipping-bar">
+      <div class="px-cart-free-shipping-fill" style="width:0%;"></div>
+    </div>
+  </div>
+
+  <div class="px-cart-items" id="cart-items">
+    <!-- Populated dynamically by JS -->
+    <div style="text-align:center;padding:3rem 1rem;color:var(--px-text-muted);">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 1rem;display:block;opacity:0.4;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+      </svg>
+      <p style="font-weight:600;margin-bottom:0.5rem;">Votre panier est vide</p>
+      <p style="font-size:0.88rem;">Découvrez nos produits et commencez votre shopping !</p>
+      <a href="/collections/all" class="px-btn px-btn-primary" style="margin-top:1.5rem;display:inline-flex;" data-close-cart>Voir les produits</a>
+    </div>
+  </div>
+
+  <div class="px-cart-footer" id="cart-footer" style="display:none;">
+    <div class="px-cart-savings" id="cart-savings" style="display:none;">
+      🎉 Vous économisez <span id="cart-savings-amount"></span> !
+    </div>
+    <div class="px-cart-subtotal">
+      <span class="px-cart-subtotal-label">Sous-total</span>
+      <span class="px-cart-subtotal-price">0,00 €</span>
+    </div>
+    <p style="font-size:0.78rem;color:var(--px-text-muted);margin-bottom:0.75rem;">TVA incluse. Frais de livraison calculés au checkout.</p>
+    <a href="/checkout" class="px-cart-checkout-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+      </svg>
+      Passer commande
+    </a>
+    <div class="px-cart-trust">
+      <div class="px-cart-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        Paiement sécurisé
+      </div>
+      <div class="px-cart-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        Retours 30 jours
+      </div>
+      <div class="px-cart-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        Satisfait ou remboursé
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Override refreshCart to render items in drawer
+  document.addEventListener('DOMContentLoaded', () => {
+    const origRefresh = window.PlumeX?.refreshCart;
+
+    async function renderCart() {
+      const res = await fetch('/cart.js');
+      const cart = await res.json();
+      const itemsEl = document.getElementById('cart-items');
+      const footerEl = document.getElementById('cart-footer');
+      if (!itemsEl) return;
+
+      if (cart.item_count === 0) {
+        itemsEl.innerHTML = `
+          <div style="text-align:center;padding:3rem 1rem;color:var(--px-text-muted);">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 1rem;display:block;opacity:0.4;"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <p style="font-weight:600;margin-bottom:0.5rem;">Votre panier est vide</p>
+            <p style="font-size:0.88rem;">Découvrez nos produits !</p>
+            <a href="/collections/all" class="px-btn px-btn-primary" style="margin-top:1.5rem;display:inline-flex;" data-close-cart onclick="window.PXCart&&window.PXCart.close()">Voir les produits</a>
+          </div>`;
+        if (footerEl) footerEl.style.display = 'none';
+      } else {
+        itemsEl.innerHTML = cart.items.map(item => `
+          <div class="px-cart-item" data-item-key="${item.key}">
+            <img class="px-cart-item-img" src="${item.image}" alt="${item.title}" loading="lazy">
+            <div class="px-cart-item-info">
+              <div class="px-cart-item-title">${item.product_title}</div>
+              ${item.variant_title && item.variant_title !== 'Default Title' ? `<div class="px-cart-item-variant">${item.variant_title}</div>` : ''}
+              <div class="px-cart-item-price-row">
+                <div class="px-cart-item-qty">
+                  <button onclick="updateCartItem('${item.key}', ${item.quantity - 1})">−</button>
+                  <span>${item.quantity}</span>
+                  <button onclick="updateCartItem('${item.key}', ${item.quantity + 1})">+</button>
+                </div>
+                <div class="px-cart-item-price">${window.PlumeX.formatMoney(item.line_price)}</div>
+              </div>
+            </div>
+          </div>`).join('');
+        if (footerEl) footerEl.style.display = '';
+
+        // Update counts
+        const counts = document.querySelectorAll('.px-cart-count, .px-cart-count-bubble');
+        counts.forEach(el => { el.textContent = cart.item_count; el.style.display = 'flex'; });
+        document.querySelectorAll('.px-cart-subtotal-price').forEach(el => el.textContent = window.PlumeX.formatMoney(cart.total_price));
+
+        const freeShipping = {{ section.settings.free_shipping_threshold | default: 60 | times: 100 }};
+        const remaining = Math.max(0, freeShipping - cart.total_price);
+        document.querySelectorAll('.px-cart-free-shipping-fill').forEach(el => {
+          el.style.width = Math.min(100, (cart.total_price / freeShipping) * 100) + '%';
+        });
+        document.querySelectorAll('.px-cart-free-shipping span').forEach(el => {
+          if (remaining > 0) el.innerHTML = `Plus que <strong>${window.PlumeX.formatMoney(remaining)}</strong> pour la livraison offerte !`;
+          else el.innerHTML = `🎉 Livraison offerte débloquée !`;
+        });
+      }
+    }
+
+    window.updateCartItem = async (key, qty) => {
+      if (qty < 0) return;
+      await fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: key, quantity: qty })
+      });
+      renderCart();
+    };
+
+    window.addEventListener('px:cart:refresh', renderCart);
+    renderCart();
+
+    const origFetch = window.PlumeX?.refreshCart;
+    if (window.PlumeX) {
+      const _orig = window.PlumeX.refreshCart;
+      window.PlumeX.refreshCart = async function() {
+        await renderCart();
+      };
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Panier coulissant",
+  "settings": [
+    { "type": "number", "id": "free_shipping_threshold", "label": "Seuil livraison gratuite (€)", "default": 60 }
+  ],
+  "presets": [{ "name": "Panier coulissant" }]
+}
+{% endschema %}

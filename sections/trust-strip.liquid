@@ -1,0 +1,44 @@
+<div class="px-trust-strip" role="complementary" aria-label="Avantages">
+  <div class="px-trust-strip-inner">
+    {%- for i in (1..5) -%}
+      {%- assign text_key = 'item_' | append: i -%}
+      {%- assign icon_key = 'icon_' | append: i -%}
+      {%- if section.settings[text_key] != blank -%}
+        <div class="px-trust-item">
+          {%- case section.settings[icon_key] -%}
+            {%- when 'truck' -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3m0 0h4l3 4v3m0 0a2 2 0 11-4 0m4 0H9m2 0a2 2 0 11-4 0"/></svg>
+            {%- when 'shield' -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            {%- when 'star' -%}
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            {%- when 'refresh' -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            {%- else -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          {%- endcase -%}
+          <span>{{ section.settings[text_key] }}</span>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Barre de confiance",
+  "settings": [
+    { "type": "select", "id": "icon_1", "label": "Icône 1", "options": [{"value":"truck","label":"Camion"},{"value":"shield","label":"Bouclier"},{"value":"star","label":"Étoile"},{"value":"refresh","label":"Retour"},{"value":"check","label":"Coche"}], "default": "truck" },
+    { "type": "text", "id": "item_1", "label": "Texte 1", "default": "Livraison offerte dès 60€" },
+    { "type": "select", "id": "icon_2", "label": "Icône 2", "options": [{"value":"truck","label":"Camion"},{"value":"shield","label":"Bouclier"},{"value":"star","label":"Étoile"},{"value":"refresh","label":"Retour"},{"value":"check","label":"Coche"}], "default": "refresh" },
+    { "type": "text", "id": "item_2", "label": "Texte 2", "default": "Retours gratuits 30 jours" },
+    { "type": "select", "id": "icon_3", "label": "Icône 3", "options": [{"value":"truck","label":"Camion"},{"value":"shield","label":"Bouclier"},{"value":"star","label":"Étoile"},{"value":"refresh","label":"Retour"},{"value":"check","label":"Coche"}], "default": "shield" },
+    { "type": "text", "id": "item_3", "label": "Texte 3", "default": "Paiement 100% sécurisé" },
+    { "type": "select", "id": "icon_4", "label": "Icône 4", "options": [{"value":"truck","label":"Camion"},{"value":"shield","label":"Bouclier"},{"value":"star","label":"Étoile"},{"value":"refresh","label":"Retour"},{"value":"check","label":"Coche"}], "default": "star" },
+    { "type": "text", "id": "item_4", "label": "Texte 4", "default": "4,9★ sur +500 avis" },
+    { "type": "select", "id": "icon_5", "label": "Icône 5", "options": [{"value":"truck","label":"Camion"},{"value":"shield","label":"Bouclier"},{"value":"star","label":"Étoile"},{"value":"refresh","label":"Retour"},{"value":"check","label":"Coche"}], "default": "check" },
+    { "type": "text", "id": "item_5", "label": "Texte 5", "default": "Fabriqué en France" }
+  ],
+  "presets": [{ "name": "Barre de confiance" }]
+}
+{% endschema %}
