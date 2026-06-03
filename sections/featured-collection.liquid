@@ -50,7 +50,7 @@
                 {%- elsif product.compare_at_price > product.price -%}
                   {%- assign saving = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
                   <span class="px-badge px-badge-sale">-{{ saving }}%</span>
-                {%- elsif product.created_at > 'now' | date: '%s' | minus: 2592000 | date: '%Y-%m-%d' -%}
+                {%- elsif product.tags contains 'new' -%}
                   <span class="px-badge px-badge-new">Nouveau</span>
                 {%- endif -%}
               </div>
