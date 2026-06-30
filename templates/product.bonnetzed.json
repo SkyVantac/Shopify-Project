@@ -1,0 +1,1909 @@
+{
+  "sections": {
+    "main-product": {
+      "type": "xswmkn-main-product",
+      "blocks": {
+        "benefits": {
+          "type": "xswmkn-benefits-list",
+          "settings": {
+            "namy_layout_style": "rows",
+            "namy_emoji_style": "checkmark",
+            "namy_show_dividers": false,
+            "namy_pill_style": "outlined",
+            "namy_pill_align": "start",
+            "namy_inherit_color_scheme": true,
+            "namy_color_scheme": "",
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {
+            "namy_benefit_item_B8zQ3h": {
+              "type": "xswmkn-benefit-item",
+              "name": "t:general.benefit_item",
+              "settings": {
+                "namy_icon_type": "emoji",
+                "namy_emoji": "❄️",
+                "namy_text": "Aide à décongestionner le visage"
+              },
+              "blocks": {}
+            },
+            "namy_benefit_item_Pn3fD8": {
+              "type": "xswmkn-benefit-item",
+              "name": "t:general.benefit_item",
+              "settings": {
+                "namy_icon_type": "emoji",
+                "namy_emoji": "👌",
+                "namy_text": "Tissu doux & confortable pour la peau"
+              },
+              "blocks": {}
+            },
+            "namy_benefit_item_LDzWq3": {
+              "type": "xswmkn-benefit-item",
+              "name": "t:general.benefit_item",
+              "settings": {
+                "namy_icon_type": "emoji",
+                "namy_emoji": "🌱",
+                "namy_text": "Alternative naturelle & réutilisable"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "namy_benefit_item_B8zQ3h",
+            "namy_benefit_item_Pn3fD8",
+            "namy_benefit_item_LDzWq3"
+          ]
+        },
+        "rapi_rapi_bundle_w49tA8": {
+          "type": "shopify://apps/rapi/blocks/rapi-bundle/99617c17-a32b-4e70-a883-7a155610d032",
+          "settings": {
+            "product": "{{closest.product}}"
+          }
+        },
+        "namy_product_trust_pill_aawrMC": {
+          "type": "xswmkn-product-trust-pill",
+          "name": "t:general.product_trust_pill",
+          "settings": {
+            "namy_demo_avatar_1": "namy-demo-review-1.jpg",
+            "namy_demo_avatar_2": "namy-demo-review-2.jpg",
+            "namy_demo_avatar_3": "namy-demo-review-3.jpg",
+            "namy_quote": "Coup de cœur",
+            "namy_rating_score": "",
+            "namy_review_count": "",
+            "namy_rating_value": 5,
+            "namy_star_style": "trustpilot",
+            "namy_border_style": "dashed",
+            "namy_inherit_color_scheme": true,
+            "namy_color_scheme": "",
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "namy_fake_variant_picker_UdAjcP": {
+          "type": "_xswmkn-fake-variant-picker",
+          "name": "t:general.fake_variant_picker",
+          "settings": {
+            "namy_label": ""
+          },
+          "blocks": {}
+        },
+        "namy_product_variant_picker_zqyLh7": {
+          "type": "_xswmkn-product-variant-picker",
+          "settings": {
+            "namy_picker_type": "dropdown",
+            "namy_show_swatches": true,
+            "namy_swatch_size": "normal",
+            "namy_show_option_label": true,
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "namy_subscription_toggle_6TFUVc": {
+          "type": "xswmkn-subscription-toggle",
+          "name": "t:general.subscription_toggle",
+          "disabled": true,
+          "settings": {
+            "namy_purchase_selector_style": "pill",
+            "namy_default_mode": "one-time",
+            "namy_trust_copy": "",
+            "namy_label_onetime": "",
+            "namy_label_subscribe": "",
+            "namy_promo_code": ""
+          },
+          "blocks": {}
+        },
+        "qty-breaks": {
+          "type": "xswmkn-quantity-breaks",
+          "disabled": true,
+          "settings": {
+            "namy_heading": "Plus tu prends, plus tu économises",
+            "namy_layout": "list",
+            "namy_default_tier": 2,
+            "namy_content_align": "start",
+            "namy_price_accent": false,
+            "namy_price_font": "body",
+            "namy_card_image_size": 80,
+            "namy_countdown_heading_enabled": false,
+            "namy_countdown_heading_end": "",
+            "namy_countdown_heading_text": "Offre se termine dans",
+            "namy_show_on_display": "desktop_and_mobile",
+            "namy_margin_top": 0,
+            "namy_margin_bottom": 16
+          },
+          "blocks": {
+            "namy_offer_1": {
+              "type": "_xswmkn-bundle-offer",
+              "name": "t:general.bundle_offer",
+              "disabled": true,
+              "settings": {
+                "namy_include_main_product": true,
+                "namy_main_quantity": 1,
+                "namy_master_image": "shopify://shop_images/17870A26-0CFE-4F57-94C3-DA2ABB95CA23.png",
+                "namy_compare_at_override": "59,99",
+                "namy_save_format": "amount",
+                "namy_extras_color_scheme": "",
+                "namy_show_variant_pickers": false,
+                "namy_card_layout": "expanded",
+                "namy_discount_type": "none",
+                "namy_discount_percentage": 0,
+                "namy_discount_fixed": "",
+                "namy_header_text": "",
+                "namy_header_style": "header",
+                "namy_image_badge_text": "",
+                "namy_image_badge_position": "bottom",
+                "namy_tier_name": "1 Masque",
+                "namy_subtitle": "",
+                "namy_tier_desc": "",
+                "namy_content_badge_text": "",
+                "namy_secondary_badge_text": "",
+                "namy_show_included_products": false,
+                "namy_footer_text": "Livraison offerte",
+                "namy_footer_image_size": 24,
+                "namy_footer_style": "subtle",
+                "namy_availability": "both",
+                "namy_promo_code": "",
+                "namy_countdown_enabled": false,
+                "namy_countdown_end": ""
+              },
+              "blocks": {}
+            },
+            "namy_offer_2": {
+              "type": "_xswmkn-bundle-offer",
+              "name": "t:general.bundle_offer",
+              "disabled": true,
+              "settings": {
+                "namy_include_main_product": true,
+                "namy_main_quantity": 2,
+                "namy_master_image": "shopify://shop_images/96F56F24-62FD-4E05-A180-AF1C247C6754.png",
+                "namy_compare_at_override": "119,80",
+                "namy_save_format": "amount",
+                "namy_extras_color_scheme": "",
+                "namy_show_variant_pickers": false,
+                "namy_card_layout": "expanded",
+                "namy_discount_type": "fixed",
+                "namy_discount_percentage": 0,
+                "namy_discount_fixed": "14,99",
+                "namy_header_text": "Offre la plus choisie",
+                "namy_header_style": "badge",
+                "namy_image_badge_text": "x2",
+                "namy_image_badge_position": "top",
+                "namy_tier_name": "2 Masques",
+                "namy_subtitle": "Le Rituel Fraîcheur PlumeX",
+                "namy_tier_desc": "",
+                "namy_content_badge_text": "",
+                "namy_secondary_badge_text": "",
+                "namy_show_included_products": true,
+                "namy_footer_text": "",
+                "namy_footer_image_size": 24,
+                "namy_footer_style": "subtle",
+                "namy_availability": "both",
+                "namy_promo_code": "",
+                "namy_countdown_enabled": false,
+                "namy_countdown_end": ""
+              },
+              "blocks": {
+                "gift_rollon": {
+                  "type": "_xswmkn-bundle-product",
+                  "settings": {
+                    "namy_display_only": true,
+                    "namy_product": "",
+                    "namy_icon": "shopify://shop_images/4AF357CB-BB7B-481F-BCB6-5F37E7F6E86A.png",
+                    "namy_is_gift": false,
+                    "namy_custom_label": "Roll-on fraîcheur offert",
+                    "namy_custom_discount_label": "OFFERT",
+                    "namy_show_image": true,
+                    "namy_demo_image": "namy-demo-product.png",
+                    "namy_show_price": false,
+                    "namy_quantity": 1,
+                    "namy_force_hide_picker": false
+                  },
+                  "blocks": {}
+                },
+                "gift_earplugs": {
+                  "type": "_xswmkn-bundle-product",
+                  "settings": {
+                    "namy_display_only": true,
+                    "namy_product": "",
+                    "namy_icon": "shopify://shop_images/7FC8A6C7-6347-4A68-8F2B-08664A50A755.png",
+                    "namy_is_gift": false,
+                    "namy_custom_label": "Bouchons anti-bruit réutilisables offerts",
+                    "namy_custom_discount_label": "OFFERT",
+                    "namy_show_image": true,
+                    "namy_demo_image": "namy-demo-product.png",
+                    "namy_show_price": false,
+                    "namy_quantity": 1,
+                    "namy_force_hide_picker": false
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "gift_rollon",
+                "gift_earplugs"
+              ]
+            }
+          },
+          "block_order": [
+            "namy_offer_1",
+            "namy_offer_2"
+          ]
+        },
+        "featured-icon-test": {
+          "type": "xswmkn-product-featured-icon",
+          "disabled": true,
+          "settings": {
+            "namy_icon_builtin": "shield",
+            "namy_text": "<p>Sans risque : <strong>garantie 60 jours satisfait ou remboursé</strong>.</p>",
+            "namy_use_scheme_bg": true,
+            "namy_bg_color": "",
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "namy_subscription_plans_test": {
+          "type": "xswmkn-subscription-plans",
+          "disabled": true,
+          "settings": {
+            "namy_plan_source": "auto",
+            "namy_heading": "Choisis ta formule",
+            "namy_layout": "list",
+            "namy_content_align": "start",
+            "namy_price_accent": false,
+            "namy_featured_label": "La plus choisie",
+            "namy_featured_plan_index": 1,
+            "namy_price_suffix": "/delivery",
+            "namy_reassurance_text": ""
+          },
+          "blocks": {}
+        },
+        "pdp-countdown": {
+          "type": "xswmkn-countdown",
+          "settings": {
+            "namy_label": "",
+            "namy_mode": "session",
+            "namy_end_date": "2026-06-13T23:59:59",
+            "namy_session_minutes": 20,
+            "namy_ended_text": "Offre terminée",
+            "namy_style": "minimal",
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "namy_product_form": {
+          "type": "_xswmkn-product-form",
+          "settings": {
+            "namy_show_quantity": false,
+            "namy_show_express_checkout": false,
+            "namy_direct_checkout": false,
+            "namy_button_style": "primary",
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "stock-emergency": {
+          "type": "xswmkn-stock-emergency",
+          "settings": {
+            "namy_mode": "simulated",
+            "namy_threshold": 20,
+            "namy_min_stock": 4,
+            "namy_max_stock": 10,
+            "namy_full_width": true,
+            "namy_framed_gradient": true,
+            "namy_style": "framed",
+            "namy_emoji": "",
+            "namy_alignment": "left",
+            "namy_content_alignment": "left",
+            "namy_override_urgency_accent": false,
+            "namy_urgency_accent": "#e85a3c",
+            "namy_show_bar": false,
+            "namy_inherit_color_scheme": true,
+            "namy_color_scheme": "scheme-1",
+            "namy_margin_top": 0,
+            "namy_margin_bottom": 8,
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "promo-urgency": {
+          "type": "xswmkn-promo-urgency",
+          "disabled": true,
+          "settings": {
+            "namy_source": "auto_seasonal",
+            "namy_use_product_image": true,
+            "namy_line_1": "2 ACHETÉS",
+            "namy_line_2": "=",
+            "namy_line_3": "1 OFFERT",
+            "namy_heading": "",
+            "namy_subheading": "2 achetés, 1 offert",
+            "namy_badge_text": "",
+            "namy_countdown_mode": "session",
+            "namy_session_minutes": 20,
+            "namy_session_reset_on_end": false,
+            "namy_end_date": "2028-01-01T00:00:00",
+            "namy_timer_lang": "auto",
+            "namy_ended_text": "Offre terminée",
+            "namy_urgency_text": "Vite — les stocks partent vite",
+            "namy_show_on_display": "desktop_and_mobile",
+            "namy_override_urgency_accent": false,
+            "namy_urgency_accent": "#e85a3c"
+          },
+          "blocks": {}
+        },
+        "payment": {
+          "type": "xswmkn-payment-methods",
+          "settings": {
+            "namy_source": "manual",
+            "namy_max_visible": 6,
+            "namy_show_visa": true,
+            "namy_show_mastercard": true,
+            "namy_show_amex": false,
+            "namy_show_paypal": true,
+            "namy_show_apple_pay": true,
+            "namy_show_google_pay": true,
+            "namy_show_shop_pay": true,
+            "namy_show_klarna": false,
+            "namy_show_maestro": false,
+            "namy_show_sepa": false,
+            "namy_alignment": "center",
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "trust": {
+          "type": "xswmkn-product-trust-badges",
+          "settings": {
+            "namy_layout": "inline",
+            "namy_icon_1": "shield",
+            "namy_text_1": "Livraison offerte",
+            "namy_icon_2": "refresh",
+            "namy_text_2": "Satisfait ou remboursé 30 j",
+            "namy_icon_3": "lock",
+            "namy_text_3": "Paiement sécurisé",
+            "namy_show_live_dot": true,
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "delivery": {
+          "type": "_xswmkn-product-delivery-estimation",
+          "settings": {
+            "namy_mode": "calculated",
+            "namy_text": "Expédié sous 2-3 jours ouvrés",
+            "namy_min_days": 5,
+            "namy_max_days": 10,
+            "namy_cutoff_hour": 14,
+            "namy_skip_weekends": true,
+            "namy_show_icon": true,
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "stories-carousel-test": {
+          "type": "xswmkn-stories-carousel",
+          "settings": {
+            "namy_heading": "EN ACTION",
+            "namy_tile_width": 80,
+            "namy_tile_radius": 6,
+            "namy_gap": 8,
+            "namy_aspect_ratio": "2/3",
+            "namy_autoplay_preview": true,
+            "namy_shop_target": "xswmkn-product-form"
+          },
+          "blocks": {
+            "tile-1": {
+              "type": "_xswmkn-story-tile",
+              "settings": {
+                "namy_video": "shopify://files/videos/WhatsApp Video 2026-05-27 at 13.35.11.mp4",
+                "namy_demo_video": "namy-demo-usage-1.mp4",
+                "namy_label": "",
+                "namy_product": "",
+                "namy_link": ""
+              },
+              "blocks": {}
+            },
+            "tile-2": {
+              "type": "_xswmkn-story-tile",
+              "settings": {
+                "namy_video": "shopify://files/videos/WhatsApp Video 2026-05-27 at 13.35.34.mp4",
+                "namy_demo_video": "namy-demo-usage-2.mp4",
+                "namy_label": "",
+                "namy_product": "",
+                "namy_link": ""
+              },
+              "blocks": {}
+            },
+            "tile-3": {
+              "type": "_xswmkn-story-tile",
+              "settings": {
+                "namy_video": "shopify://files/videos/Video 2 .MOV",
+                "namy_demo_video": "namy-demo-usage-3.mp4",
+                "namy_label": "",
+                "namy_product": "",
+                "namy_link": ""
+              },
+              "blocks": {}
+            },
+            "tile-4": {
+              "type": "_xswmkn-story-tile",
+              "settings": {
+                "namy_video": "shopify://files/videos/Video 1 .MOV",
+                "namy_demo_video": "namy-demo-hero-loop.mp4",
+                "namy_label": "",
+                "namy_product": "",
+                "namy_link": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "tile-1",
+            "tile-2",
+            "tile-3",
+            "tile-4"
+          ]
+        },
+        "separator-1": {
+          "type": "xswmkn-separator",
+          "settings": {
+            "namy_style": "line",
+            "namy_width": "full",
+            "namy_margin_top": 16,
+            "namy_margin_bottom": 16,
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "pdp-accordions": {
+          "type": "xswmkn-accordions",
+          "settings": {
+            "namy_heading": "",
+            "namy_heading_tag": "h2",
+            "namy_icon_style": "chevron",
+            "namy_show_dividers": true,
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {
+            "acc-desc": {
+              "type": "xswmkn-accordion",
+              "settings": {
+                "namy_heading": "Description",
+                "namy_body_source": "richtext",
+                "namy_content": "<p>PlumeX, c'est la cryothérapie du visage à la maison. Utilisé froid, ce masque enveloppant aide à décongestionner le visage, à atténuer l'apparence des poches et à réveiller l'éclat, pour un visage visiblement plus frais et reposé dès le matin. 5 minutes de froid suffisent à transformer votre réveil en véritable rituel beauté. Le froid, l'obscurité totale et la légère compression 360° sont aussi appréciés pour soulager migraines, maux de tête et tensions. Utilisé chaud, il aide à décongestionner les sinus et à relâcher les traits fatigués.</p>",
+                "namy_page": "",
+                "namy_open": false,
+                "namy_show_on_display": "desktop_and_mobile"
+              },
+              "blocks": {}
+            },
+            "acc-usage": {
+              "type": "xswmkn-accordion",
+              "settings": {
+                "namy_heading": "Comment l'utiliser",
+                "namy_body_source": "richtext",
+                "namy_content": "<p>❄️ En rituel beauté (à froid) :<br/><br/>Placez votre masque PlumeX au réfrigérateur environ 1 heure (ou 20 minutes au congélateur pour un froid plus intense). Appliquez-le 5 minutes au réveil : la fraîcheur aide à décongestionner le visage, à atténuer l'apparence des poches et à réveiller l'éclat, avant votre sérum et votre crème.</p><p>🔥 Pour la détente (à chaud) :<br/><br/>Placez le masque au micro-ondes environ 45 secondes pour une chaleur douce, idéale pour aider à décongestionner les sinus et à relâcher les traits fatigués.</p>",
+                "namy_page": "",
+                "namy_open": false,
+                "namy_show_on_display": "desktop_and_mobile"
+              },
+              "blocks": {}
+            },
+            "acc-ingredients": {
+              "type": "xswmkn-accordion",
+              "settings": {
+                "namy_heading": "Conseils d'entretien",
+                "namy_body_source": "richtext",
+                "namy_content": "<p>Pour entretenir votre masque anti-migraine PlumeX, nettoyez-le simplement à l’aide d’un chiffon ou d’un torchon en microfibre légèrement humide. Ensuite, laissez-le sécher naturellement à l’air libre avant de le réutiliser. Afin de préserver la qualité du gel et du tissu, ne pas mettre votre masque anti-migraine PlumeX à la machine à laver ni au sèche-linge. </p>",
+                "namy_page": "",
+                "namy_open": false,
+                "namy_show_on_display": "desktop_and_mobile"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "acc-desc",
+            "acc-usage",
+            "acc-ingredients"
+          ]
+        },
+        "sticky-atc": {
+          "type": "xswmkn-sticky-atc",
+          "settings": {
+            "namy_cta_mode": "add_direct",
+            "namy_post_add_action": "open_cart",
+            "namy_show_image": true,
+            "namy_show_price": true,
+            "namy_button_style": "primary",
+            "namy_show_on": "always",
+            "namy_show_on_display": "desktop_and_mobile",
+            "namy_color_scheme": ""
+          },
+          "blocks": {}
+        },
+        "namy_product_gallery": {
+          "type": "_xswmkn-product-gallery",
+          "static": true,
+          "settings": {
+            "namy_layout": "carousel",
+            "namy_mobile_layout": "card",
+            "namy_size": "medium",
+            "namy_media_ratio": "auto",
+            "namy_thumbnail_position": "below",
+            "namy_show_arrows": true,
+            "namy_pagination_style": "none",
+            "namy_zoom_mode": "lightbox",
+            "namy_show_badges": true,
+            "namy_hide_variant_images": false,
+            "namy_media_rounded": true,
+            "namy_video_loop": false,
+            "namy_grid_columns": "2",
+            "namy_grid_gap": 4,
+            "namy_first_image_full_width": true,
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "rating_below_gallery": {
+          "type": "xswmkn-rating-stars",
+          "static": true,
+          "settings": {
+            "namy_star_style": "trustpilot",
+            "namy_fallback_rating": 0,
+            "namy_fallback_count": 0,
+            "namy_show_count": true,
+            "namy_show_trustpilot_badge": false,
+            "namy_glass_capsule": true,
+            "namy_text_format": "default",
+            "namy_count_text": "",
+            "namy_display_mode": "card",
+            "namy_card_variant": "accent",
+            "namy_inherit_color_scheme": true,
+            "namy_color_scheme": "",
+            "namy_review_title": "Le pack duo est une excellente idée",
+            "namy_review_text": "J'en garde toujours un au congélateur pendant que j'utilise l'autre. Je ne regrette absolument pas mon achat.",
+            "namy_reviewer_name": "Marine L.",
+            "namy_show_verified_badge": true,
+            "namy_show_empty": false,
+            "namy_link_url": "",
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "rating_above_title": {
+          "type": "xswmkn-rating-stars",
+          "static": true,
+          "settings": {
+            "namy_star_style": "trustpilot",
+            "namy_fallback_rating": 0,
+            "namy_fallback_count": 0,
+            "namy_show_count": true,
+            "namy_show_trustpilot_badge": false,
+            "namy_glass_capsule": false,
+            "namy_text_format": "bonjour",
+            "namy_count_text": "",
+            "namy_display_mode": "inline",
+            "namy_card_variant": "minimal",
+            "namy_inherit_color_scheme": true,
+            "namy_color_scheme": "",
+            "namy_review_title": "Effet fraîcheur immédiat",
+            "namy_review_text": "J'étais sceptique, mais après une semaine mon visage paraît visiblement plus frais et reposé au réveil.",
+            "namy_reviewer_name": "",
+            "namy_show_verified_badge": true,
+            "namy_show_empty": false,
+            "namy_link_url": "",
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "namy_product_title": {
+          "type": "_xswmkn-product-title",
+          "static": true,
+          "settings": {
+            "namy_outcome_label": "",
+            "namy_outcome_label_style": "overline",
+            "namy_show_vendor": false,
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        },
+        "namy_product_price": {
+          "type": "_xswmkn-product-price",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "namy_show_badge": true,
+            "namy_show_bnpl": false,
+            "namy_show_compare_at": true,
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "benefits",
+        "rapi_rapi_bundle_w49tA8",
+        "namy_product_trust_pill_aawrMC",
+        "namy_fake_variant_picker_UdAjcP",
+        "namy_product_variant_picker_zqyLh7",
+        "namy_subscription_toggle_6TFUVc",
+        "qty-breaks",
+        "featured-icon-test",
+        "namy_subscription_plans_test",
+        "pdp-countdown",
+        "namy_product_form",
+        "stock-emergency",
+        "promo-urgency",
+        "payment",
+        "trust",
+        "delivery",
+        "stories-carousel-test",
+        "separator-1",
+        "pdp-accordions",
+        "sticky-atc"
+      ],
+      "settings": {
+        "namy_color_scheme": "",
+        "namy_padding_top": 20,
+        "namy_padding_bottom": 40,
+        "namy_image_position": "left",
+        "namy_show_breadcrumbs": false,
+        "namy_info_sticky": true,
+        "namy_info_width": 40,
+        "namy_gap": 50,
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_additional_class": ""
+      }
+    },
+    "product-essentials-test": {
+      "type": "xswmkn-product-essentials",
+      "blocks": {
+        "card-1": {
+          "type": "_xswmkn-essentials-card",
+          "settings": {
+            "namy_icon_builtin": "star",
+            "namy_title": "Réveillez votre éclat",
+            "namy_body": "<p>5 minutes de froid pour un visage visiblement plus frais et reposé.</p>"
+          },
+          "blocks": {}
+        },
+        "card-2": {
+          "type": "_xswmkn-essentials-card",
+          "settings": {
+            "namy_icon_builtin": "heart",
+            "namy_title": "Un rituel rien qu'à vous",
+            "namy_body": "<p>Un instant de fraîcheur et de calme avant de commencer la journée.</p>"
+          },
+          "blocks": {}
+        },
+        "card-3": {
+          "type": "_xswmkn-essentials-card",
+          "settings": {
+            "namy_icon_builtin": "award",
+            "namy_title": "Idéal après une courte nuit",
+            "namy_body": "<p>Le froid aide à décongestionner et à atténuer l'apparence des poches au réveil.</p>"
+          },
+          "blocks": {}
+        },
+        "card-4": {
+          "type": "_xswmkn-essentials-card",
+          "settings": {
+            "namy_icon_builtin": "sparkles",
+            "namy_title": "Apprécié aussi pour les migraines",
+            "namy_body": "<p>Grâce au froid, à l'obscurité et à la légère compression, il aide aussi à soulager migraines et tensions.</p>"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3",
+        "card-4"
+      ],
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_full_width": true,
+        "namy_color_scheme": "scheme-3",
+        "namy_heading": "Réveillez votre éclat, chaque matin",
+        "namy_intro": "<p>Parce qu'un visage frais et reposé change toute votre journée.</p>",
+        "namy_demo_media": "namy-demo-hero-loop.mp4",
+        "namy_bg_image": "shopify://shop_images/WhatsApp_Image_2026-05-05_at_20.38.11.jpg",
+        "namy_bg_video_url": "",
+        "namy_bg_image_fit": "cover",
+        "namy_bg_overlay_style": "solid",
+        "namy_bg_overlay_color": "#000000",
+        "namy_bg_overlay_opacity": 50,
+        "namy_card_style": "glass",
+        "namy_columns_desktop": "4",
+        "namy_columns_mobile": "2",
+        "namy_padding_top": 96,
+        "namy_padding_bottom": 96,
+        "namy_rounded_top": true,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "scheme-1",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_additional_class": ""
+      }
+    },
+    "namy_ingredients_list_BNRJNe": {
+      "type": "xswmkn-ingredients-list",
+      "blocks": {
+        "namy_ingredient_item_QaNinn": {
+          "type": "_xswmkn-ingredient-item",
+          "settings": {
+            "namy_demo_image": "namy-demo-ingredient-1.png",
+            "namy_emoji": "🕖",
+            "namy_icon": "clock",
+            "namy_latin_name": "Froid prolongé",
+            "namy_title": "Fraîcheur longue durée",
+            "namy_description": "500 g de gel médical pour une conservation optimale de la fraîcheur.",
+            "namy_pill_text": "",
+            "namy_dosage": "",
+            "namy_sourcing": "",
+            "namy_certification": "",
+            "namy_highlighted": false,
+            "namy_accent_color": "#b85c1f"
+          },
+          "blocks": {}
+        },
+        "namy_ingredient_item_FxXyb3": {
+          "type": "_xswmkn-ingredient-item",
+          "settings": {
+            "namy_demo_image": "namy-demo-ingredient-3.png",
+            "namy_emoji": "❤️",
+            "namy_icon": "heart",
+            "namy_latin_name": "Une souplesse remarquable",
+            "namy_title": "Un gel soigneusement sélectionné",
+            "namy_description": "Notre gel médical a été soigneusement sélectionné pour rester souple et agréable à porter, même après une congélation prolongée.",
+            "namy_pill_text": "",
+            "namy_dosage": "",
+            "namy_sourcing": "",
+            "namy_certification": "",
+            "namy_highlighted": false,
+            "namy_accent_color": "#b85c1f"
+          },
+          "blocks": {}
+        },
+        "namy_ingredient_item_NUJyJc": {
+          "type": "_xswmkn-ingredient-item",
+          "settings": {
+            "namy_demo_image": "namy-demo-ingredient-2.png",
+            "namy_emoji": "🌿",
+            "namy_icon": "leaf",
+            "namy_latin_name": "Respecte votre peau",
+            "namy_title": "Une douceur qui se ressent",
+            "namy_description": "Son tissu en soie de glace a été sélectionné pour sa douceur et son confort, afin d'offrir une sensation agréable à chaque utilisation.",
+            "namy_pill_text": "",
+            "namy_dosage": "",
+            "namy_sourcing": "",
+            "namy_certification": "",
+            "namy_highlighted": false,
+            "namy_accent_color": "#b85c1f"
+          },
+          "blocks": {}
+        },
+        "namy_ingredient_item_XNCiwP": {
+          "type": "_xswmkn-ingredient-item",
+          "settings": {
+            "namy_demo_image": "namy-demo-ingredient-4.png",
+            "namy_emoji": "✨",
+            "namy_icon": "leaf",
+            "namy_latin_name": "S'adapte naturellement a vous",
+            "namy_title": "Design enveloppant",
+            "namy_description": "Une conception qui épouse naturellement les contours de la tête.",
+            "namy_pill_text": "",
+            "namy_dosage": "",
+            "namy_sourcing": "",
+            "namy_certification": "",
+            "namy_highlighted": false,
+            "namy_accent_color": "#b85c1f"
+          },
+          "blocks": {}
+        },
+        "namy_ingredient_item_6aVq8P": {
+          "type": "_xswmkn-ingredient-item",
+          "settings": {
+            "namy_demo_image": "namy-demo-ingredient-6.png",
+            "namy_emoji": "⚡",
+            "namy_icon": "leaf",
+            "namy_latin_name": "Froid/Chaud",
+            "namy_title": "Polyvalence au quotidien",
+            "namy_description": "Passez facilement du froid à la chaleur selon vos envies.",
+            "namy_pill_text": "",
+            "namy_dosage": "",
+            "namy_sourcing": "",
+            "namy_certification": "",
+            "namy_highlighted": false,
+            "namy_accent_color": "#b85c1f"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "namy_ingredient_item_QaNinn",
+        "namy_ingredient_item_FxXyb3",
+        "namy_ingredient_item_NUJyJc",
+        "namy_ingredient_item_XNCiwP",
+        "namy_ingredient_item_6aVq8P"
+      ],
+      "name": "t:general.ingredients_list_cards",
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_color_scheme": "",
+        "namy_eyebrow_emoji": "",
+        "namy_subheading": "",
+        "namy_heading": "Pensé dans les moindres détails",
+        "namy_heading_accent": "",
+        "namy_description": "",
+        "namy_alignment": "center",
+        "namy_card_mode": "framed",
+        "namy_layout": "carousel",
+        "namy_items_to_show": 4,
+        "namy_mobile_peek": "medium",
+        "namy_show_arrows": true,
+        "namy_pagination_style": "dots",
+        "namy_autoplay": false,
+        "namy_autoplay_speed": 5,
+        "namy_padding_top": 40,
+        "namy_padding_bottom": 40,
+        "namy_full_width": true,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_additional_class": ""
+      }
+    },
+    "namy_how_to_use_cBHL4M": {
+      "type": "xswmkn-how-to-use",
+      "blocks": {
+        "namy_step_item_UtJqTy": {
+          "type": "xswmkn-step-item",
+          "name": "t:general.step_item",
+          "settings": {
+            "namy_title": "Applique",
+            "namy_description": "Tourne le stick et applique sur les joues, le front, le nez et le menton.",
+            "namy_number_override": "",
+            "namy_media_type": "video",
+            "namy_video_source": "uploaded",
+            "namy_video_url": "",
+            "namy_demo_image": "namy-demo-product-usage.png",
+            "namy_demo_video": "namy-demo-usage-1.mp4",
+            "namy_cta_label": "",
+            "namy_cta_url": ""
+          },
+          "blocks": {}
+        },
+        "namy_step_item_zNYKcz": {
+          "type": "xswmkn-step-item",
+          "settings": {
+            "namy_title": "Estompe",
+            "namy_description": "Au doigt ou au pinceau — le baume fond dans les deux cas.",
+            "namy_number_override": "",
+            "namy_media_type": "video",
+            "namy_video_source": "uploaded",
+            "namy_video_url": "",
+            "namy_demo_image": "namy-demo-product-usage.png",
+            "namy_demo_video": "namy-demo-usage-2.mp4",
+            "namy_cta_label": "",
+            "namy_cta_url": ""
+          },
+          "blocks": {}
+        },
+        "namy_step_item_eWh8eD": {
+          "type": "xswmkn-step-item",
+          "settings": {
+            "namy_title": "Rayonne",
+            "namy_description": "Une peau lumineuse, unifiée, qui respire — comme une seconde peau.",
+            "namy_number_override": "",
+            "namy_media_type": "video",
+            "namy_video_source": "uploaded",
+            "namy_video_url": "",
+            "namy_demo_image": "namy-demo-product-usage.png",
+            "namy_demo_video": "namy-demo-usage-3.mp4",
+            "namy_cta_label": "",
+            "namy_cta_url": ""
+          },
+          "blocks": {}
+        },
+        "namy_step_item_iLLyUL": {
+          "type": "xswmkn-step-item",
+          "settings": {
+            "namy_title": "Intensifie",
+            "namy_description": "Une couche de plus pour plus de couvrance, quand tu veux.",
+            "namy_number_override": "",
+            "namy_media_type": "video",
+            "namy_video_source": "uploaded",
+            "namy_video_url": "",
+            "namy_demo_image": "namy-demo-product-usage.png",
+            "namy_demo_video": "namy-demo-hero-loop.mp4",
+            "namy_cta_label": "",
+            "namy_cta_url": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "namy_step_item_UtJqTy",
+        "namy_step_item_zNYKcz",
+        "namy_step_item_eWh8eD",
+        "namy_step_item_iLLyUL"
+      ],
+      "disabled": true,
+      "name": "t:general.how_to_use_horizontal",
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_color_scheme": "",
+        "namy_heading": "Un éclat en 3 gestes",
+        "namy_subheading": "Aucun outil. Aucune technique. Juste une plus belle peau.",
+        "namy_layout": "horizontal-cards",
+        "namy_items_to_show": 4,
+        "namy_mobile_peek": "medium",
+        "namy_show_arrows": true,
+        "namy_pagination_style": "dots",
+        "namy_autoplay": false,
+        "namy_autoplay_speed": 5,
+        "namy_card_color_mode": "auto",
+        "namy_card_tint": 6,
+        "namy_card_custom_bg": "#ffffff",
+        "namy_card_custom_text": "#1a1a1a",
+        "namy_padding_top": 40,
+        "namy_padding_bottom": 40,
+        "namy_full_width": true,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_additional_class": ""
+      }
+    },
+    "before-after": {
+      "type": "xswmkn-before-after-carousel",
+      "blocks": {
+        "pair_bxNP4f": {
+          "type": "pair",
+          "settings": {
+            "namy_demo_pair": "1"
+          }
+        },
+        "namy_ba_pair_qgGRFm": {
+          "type": "pair",
+          "name": "t:general.before_after_pair",
+          "settings": {
+            "namy_demo_pair": "2"
+          }
+        },
+        "namy_ba_pair_xHHkiJ": {
+          "type": "pair",
+          "name": "t:general.before_after_pair",
+          "settings": {
+            "namy_demo_pair": "3"
+          }
+        }
+      },
+      "block_order": [
+        "pair_bxNP4f",
+        "namy_ba_pair_qgGRFm",
+        "namy_ba_pair_xHHkiJ"
+      ],
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_color_scheme": "",
+        "namy_heading": "De vrais résultats",
+        "namy_speed": 20,
+        "namy_image_height": 300,
+        "namy_image_aspect": "3 / 4",
+        "namy_border_radius": 12,
+        "namy_padding_top": 40,
+        "namy_padding_bottom": 40,
+        "namy_full_width": true,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "",
+        "namy_additional_class": "",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0
+      }
+    },
+    "pdp-stats": {
+      "type": "xswmkn-statistics-grid",
+      "blocks": {
+        "stat-1": {
+          "type": "xswmkn-statistic",
+          "settings": {
+            "namy_eyebrow": "",
+            "namy_value": "47.2%",
+            "namy_label": "Clientes fidèles",
+            "namy_caption": "",
+            "namy_inherit_color_scheme": true,
+            "namy_color_scheme": ""
+          },
+          "blocks": {}
+        },
+        "stat-2": {
+          "type": "xswmkn-statistic",
+          "settings": {
+            "namy_eyebrow": "",
+            "namy_value": "+1.4M",
+            "namy_label": "Commandes expédiées",
+            "namy_caption": "",
+            "namy_inherit_color_scheme": true,
+            "namy_color_scheme": ""
+          },
+          "blocks": {}
+        },
+        "stat-3": {
+          "type": "xswmkn-statistic",
+          "settings": {
+            "namy_eyebrow": "",
+            "namy_value": "4.8 / 5",
+            "namy_label": "Note moyenne",
+            "namy_caption": "",
+            "namy_inherit_color_scheme": true,
+            "namy_color_scheme": ""
+          },
+          "blocks": {}
+        },
+        "stat-4": {
+          "type": "xswmkn-statistic",
+          "settings": {
+            "namy_eyebrow": "",
+            "namy_value": "30 jours",
+            "namy_label": "Satisfait ou remboursé",
+            "namy_caption": "",
+            "namy_inherit_color_scheme": true,
+            "namy_color_scheme": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3",
+        "stat-4"
+      ],
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_full_width": true,
+        "namy_color_scheme": "",
+        "namy_heading": "Approuvé par des milliers de personnes",
+        "namy_subheading": "Les chiffres qui parlent d’eux-mêmes.",
+        "namy_body": "",
+        "namy_source_note": "",
+        "namy_heading_alignment": "start",
+        "namy_badge_label": "",
+        "namy_badge_icon": "caduceus",
+        "namy_layout": "grid",
+        "namy_columns": 4,
+        "namy_columns_mobile": 2,
+        "namy_animate_count": true,
+        "namy_count_duration": 1600,
+        "namy_cta_label": "",
+        "namy_cta_url": "",
+        "namy_cta_style": "primary",
+        "namy_reassurance_text": "",
+        "namy_reassurance_icon": "badge-check",
+        "namy_bg_video_url": "",
+        "namy_bg_image_fit": "cover",
+        "namy_min_height": 0,
+        "namy_overlay_style": "none",
+        "namy_overlay_opacity": 30,
+        "namy_overlay_color": "#000000",
+        "namy_padding_top": 32,
+        "namy_padding_bottom": 32,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_additional_class": ""
+      }
+    },
+    "tp-reviews": {
+      "type": "xswmkn-trustpilot-reviews",
+      "blocks": {
+        "review_6JFWwj": {
+          "type": "review",
+          "settings": {
+            "namy_title": "J'adore ce masque",
+            "namy_text": "<p>Le tissu est doux et frais naturellement je recommande ce masque je l'adore.<br/></p>",
+            "namy_author": "Mélanie F.",
+            "namy_rating": 5,
+            "namy_date": "il y a 3 Mois",
+            "namy_verified": true,
+            "namy_image": "shopify://shop_images/1A466DAA-1096-4770-AAFF-3187E7760204.png",
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review_HempJA": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Soulagement quasi immédiat",
+            "namy_text": "<p>Dès que je le mets, la fraîcheur et la légère compression procurent une sensation de bien-être vraiment agréable.<br/><br/></p>",
+            "namy_author": "Aurélie N.",
+            "namy_rating": 4,
+            "namy_date": "il y a 6 jours",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review_thiMTj": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Bien mieux que mon ancien masque",
+            "namy_text": "<p>J'avais un modèle d'une autre marque avant et ça n'a rien à voir. Celui-ci couvre beaucoup mieux et garde bien le froid.<br/><br/></p>",
+            "namy_author": "Sandrine O.",
+            "namy_rating": 5,
+            "namy_date": "il y a 22 jours",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review_jmk9hq": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Un vrai moment de détente",
+            "namy_text": "<p>Je le porte souvent après une longue journée de travail. La sensation de fraîcheur est incroyablement relaxante.<br/><br/></p>",
+            "namy_author": "Céline N.",
+            "namy_rating": 5,
+            "namy_date": "il y a 7 mois",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review_nmA9h3": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Une qualité au-dessus de ce que j'imaginais",
+            "namy_text": "<p>Le tissu est très doux et le gel reste souple même après plusieurs heures au congélateur<br/><br/></p>",
+            "namy_author": "Laura I.",
+            "namy_rating": 5,
+            "namy_date": "il y a 18 jours",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review_8XKF9Q": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Au top !",
+            "namy_text": "<p>Je suis vraiment satisfaite de ce masque, qui m’aide énormément lorsque j’ai des migraines. J’ai même pris l’habitude de m’endormir avec tant il est agréable à porter. </p>",
+            "namy_author": "Louise V.",
+            "namy_rating": 5,
+            "namy_date": "il y a 3 mois",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review_8nLrj7": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Très confortable à porter",
+            "namy_text": "<p>J'avais peur qu'il soit trop serré mais la compression est douce et agréable. Il tient bien sans faire mal.</p>",
+            "namy_author": "Nathalie B.",
+            "namy_rating": 5,
+            "namy_date": "il y a 42 jours",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review_AYRiHw": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Enfin un masque qui garde le froid",
+            "namy_text": "<p>On sent tout de suite la différence. Le gel est bien dosé et reste frais beaucoup plus longtemps que mon ancien masque.<br/><br/></p>",
+            "namy_author": "Elias B.",
+            "namy_rating": 5,
+            "namy_date": "il y a 10 jours",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review_pddy3Y": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Validé",
+            "namy_text": "<p>Pack duo pour mon mari et moi, je ne dors plus sans le porter.</p>",
+            "namy_author": "Sophie L.",
+            "namy_rating": 5,
+            "namy_date": "il y a 2 jours",
+            "namy_verified": true,
+            "namy_image": "shopify://shop_images/IMG_7679_1.jpg",
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review-1": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Incroyable",
+            "namy_text": "<p>J'avais déjà testé un masque d'une autre marque, ça n'a absolument rien à voir. Le froid dure bien plus longtemps.<br/><br/></p>",
+            "namy_author": "Paul D.",
+            "namy_rating": 5,
+            "namy_date": "il y a 2 mois",
+            "namy_verified": true,
+            "namy_image": "shopify://shop_images/IMG_7678.jpg",
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review-2": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Je recommande",
+            "namy_text": "<p>Je l'ai acheté pour les migraines, mais je m'en sers presque tous les soirs pour décompresser.</p>",
+            "namy_author": "Laura S.",
+            "namy_rating": 5,
+            "namy_date": "il y a 1 semaine",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review-3": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Je m'en passe plus",
+            "namy_text": "<p>Je l'ai acheté pour les migraines mais je l'utilise aussi simplement pour me détendre le soir.<br/><br/></p>",
+            "namy_author": "Sandrine G.",
+            "namy_rating": 5,
+            "namy_date": "il y a 4 mois",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review_K9rCtp": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Incroyable produit",
+            "namy_text": "",
+            "namy_author": "Sophie L.",
+            "namy_rating": 5,
+            "namy_date": "il y a 2 jours",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review-4": {
+          "type": "review",
+          "settings": {
+            "namy_title": "J’adore",
+            "namy_text": "<p>J'ai commandé le pack duo pour mon mari  et moi, on ne s'endort plus sans.<br/></p>",
+            "namy_author": "Lina E.",
+            "namy_rating": 5,
+            "namy_date": "il y a 6 mois",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        },
+        "review-5": {
+          "type": "review",
+          "settings": {
+            "namy_title": "Validé",
+            "namy_text": "<p>L’opacité est totale, même en pleine journée. Très pratique, car la lumière aggrave mes migraines.</p>",
+            "namy_author": "Camille N.",
+            "namy_rating": 5,
+            "namy_date": "il y a 3 jours",
+            "namy_verified": true,
+            "namy_demo_avatar": "namy-demo-review-1.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "review_6JFWwj",
+        "review_HempJA",
+        "review_thiMTj",
+        "review_jmk9hq",
+        "review_nmA9h3",
+        "review_8XKF9Q",
+        "review_8nLrj7",
+        "review_AYRiHw",
+        "review_pddy3Y",
+        "review-1",
+        "review-2",
+        "review-3",
+        "review_K9rCtp",
+        "review-4",
+        "review-5"
+      ],
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_full_width": true,
+        "namy_color_scheme": "",
+        "namy_heading": "Nos clients en parlent mieux que nous",
+        "namy_score": 0,
+        "namy_count": "",
+        "namy_show_trustpilot_logo": false,
+        "namy_emit_jsonld": true,
+        "namy_speed": 80,
+        "namy_pause_on_hover": true,
+        "namy_image_style": "avatar",
+        "namy_cta_label": "Tout voir sur Trustpilot",
+        "namy_cta_url": "",
+        "namy_cta_style": "primary",
+        "namy_padding_top": 60,
+        "namy_padding_bottom": 60,
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "",
+        "namy_additional_class": ""
+      }
+    },
+    "testimonials-grid": {
+      "type": "xswmkn-testimonials-grid",
+      "blocks": {
+        "card-1": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "namy_name": "Fairouz",
+            "namy_meta": "Teint terne · 3 mois",
+            "namy_categories": "Teint unifié",
+            "namy_quote": "<p>« Enfin un teint unifié sans effet maquillage. On ne voit que ma peau, en mieux. »</p>",
+            "namy_rating": 5,
+            "namy_show_verified": true,
+            "namy_note": "Premiers résultats : semaine 4",
+            "namy_demo_pair": "",
+            "namy_label_before": "SANS",
+            "namy_label_after": "AVEC"
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "namy_name": "Sarah",
+            "namy_meta": "Taches pigmentaires · 4 mois",
+            "namy_categories": "Taches & éclat",
+            "namy_quote": "<p>« Mes taches sont estompées et mon teint reste lumineux toute la journée. »</p>",
+            "namy_rating": 5,
+            "namy_show_verified": true,
+            "namy_note": "Premiers résultats : semaine 6",
+            "namy_demo_pair": "",
+            "namy_label_before": "SANS",
+            "namy_label_after": "AVEC"
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "namy_name": "Camille",
+            "namy_meta": "Rougeurs · 2 mois",
+            "namy_categories": "Rougeurs, Couvrance",
+            "namy_quote": "<p>« Couvre mes rougeurs en 30 secondes, et ma peau respire. »</p>",
+            "namy_rating": 5,
+            "namy_show_verified": true,
+            "namy_note": "Premiers résultats : semaine 3",
+            "namy_demo_pair": "",
+            "namy_label_before": "SANS",
+            "namy_label_after": "AVEC"
+          }
+        }
+      },
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
+      "disabled": true,
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_full_width": true,
+        "namy_color_scheme": "",
+        "namy_kicker": "ELLES Y SONT ARRIVÉES",
+        "namy_heading": "",
+        "namy_description": "Photos vérifiées · Achats confirmés",
+        "namy_show_filters": true,
+        "namy_filter_all_label": "TOUTES",
+        "namy_padding_top": 60,
+        "namy_padding_bottom": 60,
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "",
+        "namy_additional_class": ""
+      }
+    },
+    "authority-grid-test": {
+      "type": "xswmkn-authority-grid",
+      "blocks": {
+        "card-1": {
+          "type": "_xswmkn-authority-card",
+          "disabled": true,
+          "settings": {
+            "namy_demo_image": "namy-demo-influ-1.png",
+            "namy_name": "Camille Vidal",
+            "namy_role": "Fondatrice de PlumeX",
+            "namy_credential": "UNE MARQUE NÉE D'UN BESOIN PERSONNEL",
+            "namy_quote": "<p>Je cherchais un geste simple pour réveiller mon visage le matin, sans routine compliquée. Il n'existait pas vraiment. Alors nous avons créé PlumeX — la cryothérapie du visage à la maison.</p>",
+            "namy_reveal_index": 1
+          },
+          "blocks": {}
+        },
+        "card-3": {
+          "type": "_xswmkn-authority-card",
+          "disabled": true,
+          "settings": {
+            "namy_demo_image": "namy-demo-influ-3.png",
+            "namy_name": "Lena Hoffmann",
+            "namy_role": "Responsable produit · R&D",
+            "namy_credential": "NOTRE ÉQUIPE, OBSÉDÉE PAR LE DÉTAIL",
+            "namy_quote": "<p>On teste, on recommence, on affine — jusqu'à ce que le gel reste souple et que le froid dure. C'est tout l'esprit de l'équipe PlumeX.</p>",
+            "namy_reveal_index": 3
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "card-1",
+        "card-3"
+      ],
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_full_width": true,
+        "namy_color_scheme": "scheme-3",
+        "namy_kicker": "NOTRE HISTOIRE",
+        "namy_heading": "<p>Une marque née d'un <em>besoin personnel.</em></p>",
+        "namy_intro": "<p>PlumeX est née d'une idée simple : et si la fraîcheur devenait le premier geste beauté du matin ? Nous avons imaginé un rituel de cryothérapie du visage, simple et naturel, pour réveiller l'éclat et commencer chaque journée avec une sensation de fraîcheur.</p>",
+        "namy_bg_image_fit": "cover",
+        "namy_text_protection": "scrim",
+        "namy_bg_overlay_color": "#000000",
+        "namy_bg_overlay_opacity": 40,
+        "namy_card_aspect": "1/1",
+        "namy_show_decorative_glow": true,
+        "namy_show_noise_texture": false,
+        "namy_show_stat_bar": true,
+        "namy_stat_rating": "4.9",
+        "namy_stat_rating_label": "sur 5",
+        "namy_stat_rating_count": "12,500",
+        "namy_stat_count_label": "avis vérifiés",
+        "namy_padding_top": 96,
+        "namy_padding_bottom": 96,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": true,
+        "namy_stack_backdrop_scheme": "scheme-2",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_additional_class": ""
+      }
+    },
+    "pdp-comparison": {
+      "type": "xswmkn-feature-matrix",
+      "blocks": {
+        "row-1": {
+          "type": "matrix_row",
+          "settings": {
+            "namy_label": "Toucher",
+            "namy_pill": "LÉGER",
+            "namy_value": "Fini respirant",
+            "namy_subtitle": "Comme une seconde peau",
+            "namy_alt_a": "Effet masque",
+            "namy_alt_b": "Lourd"
+          }
+        },
+        "row-2": {
+          "type": "matrix_row",
+          "settings": {
+            "namy_label": "Soin intégré",
+            "namy_pill": "SÉRUM",
+            "namy_value": "Actifs qui soignent",
+            "namy_subtitle": "8 actifs",
+            "namy_alt_a": "Aucun soin",
+            "namy_alt_b": "Aucun soin"
+          }
+        },
+        "row-3": {
+          "type": "matrix_row",
+          "settings": {
+            "namy_label": "Texture & ridules",
+            "namy_pill": "FLOUTE",
+            "namy_value": "Lisse visiblement",
+            "namy_subtitle": "Effet flou",
+            "namy_alt_a": "Marque les ridules",
+            "namy_alt_b": "Accentue"
+          }
+        },
+        "row-4": {
+          "type": "matrix_row",
+          "settings": {
+            "namy_label": "Pores",
+            "namy_pill": "NON COMÉDOGÈNE",
+            "namy_value": "Ne bouche pas les pores",
+            "namy_subtitle": "Testé peaux à imperfections",
+            "namy_alt_a": "Bouche les pores",
+            "namy_alt_b": "Variable"
+          }
+        },
+        "row-5": {
+          "type": "matrix_row",
+          "settings": {
+            "namy_label": "Couvrance",
+            "namy_pill": "MODULABLE",
+            "namy_value": "Naturelle, modulable",
+            "namy_subtitle": "Du voile au couvrant",
+            "namy_alt_a": "Souvent figée",
+            "namy_alt_b": "Épaisse"
+          }
+        },
+        "row-6": {
+          "type": "matrix_row",
+          "settings": {
+            "namy_label": "Outils",
+            "namy_pill": "ZÉRO",
+            "namy_value": "Au doigt, sans outil",
+            "namy_subtitle": "Nomade",
+            "namy_alt_a": "Pinceau / éponge",
+            "namy_alt_b": "Plusieurs outils"
+          }
+        },
+        "row-7": {
+          "type": "matrix_row",
+          "settings": {
+            "namy_label": "Temps",
+            "namy_pill": "< 1 MIN",
+            "namy_value": "60 secondes",
+            "namy_subtitle": "Le matin pressé",
+            "namy_alt_a": "Plusieurs minutes",
+            "namy_alt_b": "Long"
+          }
+        },
+        "row-8": {
+          "type": "matrix_row",
+          "settings": {
+            "namy_label": "Types de peau",
+            "namy_pill": "TOUS",
+            "namy_value": "Toutes les peaux",
+            "namy_subtitle": "6 teintes",
+            "namy_alt_a": "Selon teinte",
+            "namy_alt_b": "Selon teinte"
+          }
+        },
+        "row-9": {
+          "type": "matrix_row",
+          "settings": {
+            "namy_label": "Effet",
+            "namy_pill": "INSTANTANÉ",
+            "namy_value": "Éclat dès l’application",
+            "namy_subtitle": "Glow immédiat",
+            "namy_alt_a": "Immédiat",
+            "namy_alt_b": "Immédiat"
+          }
+        },
+        "row-10": {
+          "type": "matrix_row",
+          "settings": {
+            "namy_label": "Au quotidien",
+            "namy_pill": "2-EN-1",
+            "namy_value": "Soin + maquillage en 1",
+            "namy_subtitle": "Un seul geste",
+            "namy_alt_a": "Maquillage seul",
+            "namy_alt_b": "Maquillage seul"
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-6",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10"
+      ],
+      "disabled": true,
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_full_width": true,
+        "namy_color_scheme": "scheme-2",
+        "namy_eyebrow": "Côte à côte",
+        "namy_heading": "Pourquoi tant de femmes troquent leur fond de teint contre ce baume",
+        "namy_description": "L’un laisse ta peau respirer. L’autre ne fait que la couvrir.",
+        "namy_criterion_label": "Critère",
+        "namy_footer_text": "Mis à jour pour la formule 2026",
+        "namy_col_1_label": "Ce baume",
+        "namy_col_1_badge": "Notre choix",
+        "namy_col_2_label": "Fond de teint",
+        "namy_col_2_badge": "",
+        "namy_col_3_label": "Maquillage classique",
+        "namy_col_3_badge": "",
+        "namy_highlighted_column": 1,
+        "namy_collapse_after": 6,
+        "namy_cta_label": "Je passe au baume",
+        "namy_cta_url": "",
+        "namy_padding_top": 80,
+        "namy_padding_bottom": 80,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "scheme-1",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_additional_class": "xswmkn-fm--editorial"
+      }
+    },
+    "pdp-guarantee": {
+      "type": "xswmkn-satisfaction-guarantee",
+      "blocks": {
+        "seal": {
+          "type": "xswmkn-guarantee-seal",
+          "settings": {
+            "namy_heading": "Satisfait ou remboursé",
+            "namy_body": "",
+            "namy_days": 30,
+            "namy_icon": "check",
+            "namy_layout": "inline-compact",
+            "namy_show_on_display": "desktop_and_mobile"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "seal"
+      ],
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_full_width": true,
+        "namy_color_scheme": "",
+        "namy_layout": "split-left-seal",
+        "namy_padding_top": 64,
+        "namy_padding_bottom": 64,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_additional_class": ""
+      }
+    },
+    "faq_classic_pdp": {
+      "type": "xswmkn-faq-classic",
+      "blocks": {
+        "q1": {
+          "type": "item",
+          "settings": {
+            "namy_show_on_display": "desktop_and_mobile",
+            "namy_category": "Le produit",
+            "namy_question": "Combien de teintes existe-t-il ?",
+            "namy_answer": "<p>Six teintes universelles, du plus clair au plus profond. Fais le quiz pour trouver la tienne en 60 secondes.</p>",
+            "namy_margin_top": 0,
+            "namy_margin_bottom": 0
+          }
+        },
+        "q2": {
+          "type": "item",
+          "settings": {
+            "namy_show_on_display": "desktop_and_mobile",
+            "namy_category": "Application",
+            "namy_question": "Est-ce que ça remplace mon fond de teint ?",
+            "namy_answer": "<p>Oui — couvrance modulable, fini naturel et soin en un seul geste, sans effet maquillage.</p>",
+            "namy_margin_top": 0,
+            "namy_margin_bottom": 0
+          }
+        },
+        "q3": {
+          "type": "item",
+          "settings": {
+            "namy_show_on_display": "desktop_and_mobile",
+            "namy_category": "Peau",
+            "namy_question": "Convient-il aux peaux sensibles ?",
+            "namy_answer": "<p>Oui. Testé sous contrôle dermatologique, sans parfum, avec des actifs apaisants comme la centella et la niacinamide.</p>",
+            "namy_margin_top": 0,
+            "namy_margin_bottom": 0
+          }
+        },
+        "q4": {
+          "type": "item",
+          "settings": {
+            "namy_show_on_display": "desktop_and_mobile",
+            "namy_category": "Application",
+            "namy_question": "Combien de temps pour l’appliquer ?",
+            "namy_answer": "<p>Moins d’une minute : on applique, on estompe au doigt, c’est prêt.</p>",
+            "namy_margin_top": 0,
+            "namy_margin_bottom": 0
+          }
+        },
+        "q5": {
+          "type": "item",
+          "settings": {
+            "namy_show_on_display": "desktop_and_mobile",
+            "namy_category": "Résultats",
+            "namy_question": "Quand vais-je voir des résultats sur ma peau ?",
+            "namy_answer": "<p>L’éclat est immédiat. Les actifs (niacinamide, acide hyaluronique) améliorent visiblement le teint au fil des semaines.</p>",
+            "namy_margin_top": 0,
+            "namy_margin_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "disabled": true,
+      "settings": {
+        "namy_color_scheme": "scheme-1",
+        "namy_heading": "Questions fréquentes",
+        "namy_subheading": "Tout ce qu’il faut savoir avant ton premier baume.",
+        "namy_first_open": true,
+        "namy_emit_jsonld": true,
+        "namy_padding_top": 64,
+        "namy_padding_bottom": 64,
+        "namy_full_width": true,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "scheme-1",
+        "namy_additional_class": ""
+      }
+    },
+    "cross-sell": {
+      "type": "xswmkn-featured-collection",
+      "disabled": true,
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_color_scheme": "",
+        "namy_padding_top": 40,
+        "namy_padding_bottom": 40,
+        "namy_full_width": true,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_collection": "",
+        "namy_heading": "Complète ta routine",
+        "namy_products_to_show": 4,
+        "namy_layout_type": "grid",
+        "namy_grid_gap": 32,
+        "namy_hover_scale": "none",
+        "namy_columns_desktop": "4",
+        "namy_columns_mobile": "2",
+        "namy_show_arrows": true,
+        "namy_show_pagination": false,
+        "namy_image_ratio": "auto",
+        "namy_show_vendor": false,
+        "namy_show_secondary_image": true,
+        "namy_show_quick_add": false,
+        "namy_show_swatches": true,
+        "namy_show_view_all": false,
+        "namy_additional_class": ""
+      }
+    },
+    "namy_rich_text_fwLDEJ": {
+      "type": "xswmkn-rich-text",
+      "disabled": true,
+      "name": "t:general.rich_text",
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_color_scheme": "",
+        "namy_heading": "Application d'avis (judge me..)",
+        "namy_text": "<p>supprime cette section et met l'application judge me </p>",
+        "namy_btn_label": "",
+        "namy_btn_url": "",
+        "namy_heading_style": "h2",
+        "namy_alignment": "center",
+        "namy_narrow": true,
+        "namy_padding_top": 40,
+        "namy_padding_bottom": 40,
+        "namy_full_width": true,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_additional_class": ""
+      }
+    },
+    "namy_instagram_pdp": {
+      "type": "xswmkn-instagram",
+      "blocks": {
+        "post_1": {
+          "type": "post",
+          "settings": {
+            "namy_image": "shopify://shop_images/20E85313-2C13-46D4-B189-C6BCD2412156.png",
+            "namy_url": "",
+            "namy_demo_image": "namy-demo-influ-1.png"
+          }
+        },
+        "post_2": {
+          "type": "post",
+          "settings": {
+            "namy_image": "shopify://shop_images/B41AAB4B-F98B-4158-8C89-9F872A617200.png",
+            "namy_url": "",
+            "namy_demo_image": "namy-demo-influ-2.png"
+          }
+        },
+        "post_3": {
+          "type": "post",
+          "settings": {
+            "namy_image": "shopify://shop_images/avis-plumex-ecran-homme.jpg",
+            "namy_url": "",
+            "namy_demo_image": "namy-demo-influ-3.png"
+          }
+        }
+      },
+      "block_order": [
+        "post_1",
+        "post_2",
+        "post_3"
+      ],
+      "settings": {
+        "namy_show_on_display": "desktop_and_mobile",
+        "namy_full_width": false,
+        "namy_color_scheme": "scheme-1",
+        "namy_heading": "Suivez-nous sur Instagram",
+        "namy_avatar": "shopify://shop_images/IMG_7680.jpg",
+        "namy_demo_avatar": "namy-demo-product-packshot.png",
+        "namy_handle": "PlumeX",
+        "namy_profile_url": "https://www.instagram.com/plume.x?igsh=bDZoZzMyYnBjcG5i&utm_source=qr",
+        "namy_follow_label": "Suivre",
+        "namy_layout_style": "card",
+        "namy_columns_desktop": "3",
+        "namy_columns_mobile": "3",
+        "namy_gap": 4,
+        "namy_padding_top": 32,
+        "namy_padding_bottom": 32,
+        "namy_rounded_top": false,
+        "namy_rounded_bottom": false,
+        "namy_stack_backdrop_scheme": "",
+        "namy_margin_top": 0,
+        "namy_margin_bottom": 0,
+        "namy_additional_class": ""
+      }
+    },
+    "177670975130b462a0": {
+      "type": "apps",
+      "settings": {
+        "namy_color_scheme": "",
+        "namy_padding_top": 0,
+        "namy_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "product-essentials-test",
+    "namy_ingredients_list_BNRJNe",
+    "namy_how_to_use_cBHL4M",
+    "before-after",
+    "pdp-stats",
+    "tp-reviews",
+    "testimonials-grid",
+    "authority-grid-test",
+    "pdp-comparison",
+    "pdp-guarantee",
+    "faq_classic_pdp",
+    "cross-sell",
+    "namy_rich_text_fwLDEJ",
+    "namy_instagram_pdp",
+    "177670975130b462a0"
+  ]
+}
