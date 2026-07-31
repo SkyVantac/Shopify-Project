@@ -1,0 +1,48 @@
+/* ============================================================
+   PlumeX — Home v3 — design system partagé
+   Chargé UNE seule fois (layout/theme.liquid). Scopé sous .plumex-home
+   pour ne jamais fuiter sur le reste du thème.
+   ============================================================ */
+.plumex-home{
+  --brand-bg:      #FAF8FC;   /* fond principal (blanc lilas)        */
+  --brand-soft:    #F1ECF8;   /* fond des sections claires (lilas)   */
+  --brand-ink:     #1F1B47;   /* couleur du texte (indigo profond)   */
+  --brand-accent:  #7A33D4;   /* couleur d'accent (violet marque)    */
+  --brand-accent-2:#A98CE0;   /* violet clair / lavande              */
+  --brand-dark:    #1B1840;   /* fond des bandeaux foncés (indigo)   */
+}
+.plumex-home{
+  --ink-soft:color-mix(in srgb,var(--brand-ink) 62%,#fff);
+  --line:color-mix(in srgb,var(--brand-ink) 12%,transparent);
+  --display:'Playfair Display',Georgia,serif;
+  --body:'Instrument Sans',system-ui,sans-serif;
+  --mono:'Space Mono',monospace;
+  --container:1180px;--r:18px;--ease:cubic-bezier(.22,.61,.36,1);
+}
+.plumex-home *{margin:0;padding:0;box-sizing:border-box}
+.plumex-home{font-family:var(--body);color:var(--brand-ink);background:var(--brand-bg);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.plumex-home h1,.plumex-home h2,.plumex-home h3{font-family:var(--display);font-weight:600;line-height:1.06;letter-spacing:-.01em}
+.plumex-home a{color:inherit;text-decoration:none}
+.plumex-home img{max-width:100%;display:block}
+.plumex-home .wrap{max-width:var(--container);margin:0 auto;padding:0 26px}
+.plumex-home .eyebrow{font-family:var(--body);font-weight:600;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brand-accent)}
+.plumex-home .section{padding:clamp(60px,8vw,120px) 0}
+.plumex-home :focus-visible{outline:2.5px solid var(--brand-accent);outline-offset:3px;border-radius:6px}
+
+/* buttons */
+.plumex-home .btn{display:inline-flex;align-items:center;gap:.55em;font-family:var(--body);font-weight:600;font-size:.97rem;padding:15px 30px;border-radius:100px;border:none;cursor:pointer;background:var(--brand-ink);color:#fff;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease);box-shadow:0 10px 28px -14px color-mix(in srgb,var(--brand-ink) 70%,transparent)}
+.plumex-home .btn:hover{transform:translateY(-2px);background:var(--brand-accent);box-shadow:0 16px 36px -14px color-mix(in srgb,var(--brand-accent) 70%,transparent)}
+.plumex-home .btn .arw{transition:transform .35s var(--ease)}
+.plumex-home .btn:hover .arw{transform:translateX(5px)}
+.plumex-home .btn-ghost{background:transparent;color:var(--brand-ink);border:1px solid var(--line);box-shadow:none}
+.plumex-home .btn-ghost:hover{background:var(--brand-soft);color:var(--brand-ink);box-shadow:none;transform:translateY(-2px)}
+
+.plumex-home .stars{color:var(--brand-accent-2);letter-spacing:2px}
+
+.plumex-home .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.plumex-home .reveal.in{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  .plumex-home *{animation:none!important;transition:none!important}
+  .plumex-home .reveal{opacity:1;transform:none}
+}

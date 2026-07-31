@@ -1,0 +1,129 @@
+{% comment %}
+  PlumeX — Home v3 — Vidéo immersive + bande de reels
+  Vidéo : laisser "video_url" vide pour garder l'état "poster + bouton play"
+  (placeholder volontaire en attendant la vidéo définitive), ou coller une
+  URL Shopify (ou toute URL .mp4) pour l'activer automatiquement.
+{% endcomment %}
+{% assign featured_product = all_products['masque-cryo-plumex™-decongestionne-anti-migraine-copie'] %}
+{% assign poster_image = section.settings.poster_image | default: featured_product.images[5] %}
+{% style %}
+.plumex-home .cine{position:relative;background:var(--brand-dark);color:#fff;overflow:hidden}
+.plumex-home .cine::before{content:"";position:absolute;inset:0;opacity:.55;background:radial-gradient(60% 60% at 18% 8%,color-mix(in srgb,var(--brand-accent) 48%,transparent),transparent 60%),radial-gradient(55% 55% at 92% 92%,color-mix(in srgb,var(--brand-accent-2) 42%,transparent),transparent 60%)}
+.plumex-home .cine .wrap{position:relative;z-index:2}
+.plumex-home .cine-head{text-align:center;max-width:720px;margin:0 auto 40px}
+.plumex-home .cine .eyebrow{color:color-mix(in srgb,var(--brand-accent) 60%,#fff)}
+.plumex-home .cine h2{color:#fff;font-size:clamp(2rem,4vw,3.2rem);margin:14px 0 12px}
+.plumex-home .cine-head p{color:color-mix(in srgb,#fff 78%,transparent)}
+.plumex-home .cine-stage{position:relative;border-radius:calc(var(--r) + 4px);overflow:hidden;aspect-ratio:16/9;box-shadow:0 50px 100px -40px rgba(0,0,0,.7);background:linear-gradient(135deg,color-mix(in srgb,var(--brand-accent) 40%,var(--brand-dark)),var(--brand-dark));background-size:cover;background-position:center}
+.plumex-home .cine-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.plumex-home .cine-poster{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:14px;text-align:center}
+.plumex-home .play{width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;cursor:pointer;transition:transform .3s var(--ease);box-shadow:0 14px 34px -10px rgba(0,0,0,.55)}
+.plumex-home .play:hover{transform:scale(1.08)}
+.plumex-home .play::after{content:"";width:0;height:0;border-left:22px solid var(--brand-ink);border-top:14px solid transparent;border-bottom:14px solid transparent;margin-left:6px}
+.plumex-home .cine-poster .cap{color:color-mix(in srgb,#fff 80%,transparent);font-size:.82rem;letter-spacing:.04em}
+.plumex-home .cine-cta{text-align:center;margin-top:32px}
+.plumex-home .reels-head{display:flex;justify-content:space-between;align-items:baseline;margin:60px auto 20px;gap:16px}
+.plumex-home .reels-head h3{color:#fff;font-size:clamp(1.4rem,2.4vw,2rem)}
+.plumex-home .reels-head span{color:color-mix(in srgb,#fff 58%,transparent);font-size:.85rem}
+.plumex-home .reels{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch}
+.plumex-home .reels::-webkit-scrollbar{height:6px}
+.plumex-home .reels::-webkit-scrollbar-thumb{background:color-mix(in srgb,#fff 25%,transparent);border-radius:6px}
+.plumex-home .reel{flex:none;width:212px;aspect-ratio:9/16;border-radius:16px;scroll-snap-align:start;position:relative;overflow:hidden;background:linear-gradient(160deg,color-mix(in srgb,var(--brand-accent) 32%,var(--brand-dark)),var(--brand-dark));border:1px solid color-mix(in srgb,#fff 14%,transparent);background-size:cover;background-position:center}
+.plumex-home .reel .play{width:50px;height:50px;position:absolute;top:44%;left:50%;transform:translate(-50%,-50%)}
+.plumex-home .reel .play::after{border-left-width:14px;border-top-width:9px;border-bottom-width:9px;margin-left:4px}
+.plumex-home .reel .rcap{position:absolute;left:0;right:0;bottom:0;padding:16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.6));font-size:.78rem;color:color-mix(in srgb,#fff 82%,transparent)}
+.plumex-home .reel .rcap b{display:block;font-family:var(--display);font-weight:600;font-size:.98rem;color:#fff;margin-bottom:2px}
+@media(max-width:560px){ .plumex-home .reel{width:168px} }
+{% endstyle %}
+
+<div class="plumex-home">
+  <section class="cine section">
+    <div class="wrap">
+      <div class="cine-head reveal">
+        <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.lead }}</p>
+      </div>
+
+      <div class="cine-stage reveal" {% unless section.settings.video_url != blank %}style="background-image:linear-gradient(rgba(10,8,30,.45),rgba(10,8,30,.6)),url({{ poster_image | image_url: width: 1600 }})"{% endunless %}>
+        {% if section.settings.video_url != blank %}
+          <video autoplay muted loop playsinline {% if poster_image %}poster="{{ poster_image | image_url: width: 1600 }}"{% endif %}>
+            <source src="{{ section.settings.video_url }}" type="video/mp4">
+          </video>
+        {% else %}
+          <div class="cine-poster">
+            <div class="play" role="button" tabindex="0" aria-label="Lire la vidéo"></div>
+            <div class="cap">◇ Ta vidéo immersive ici — format 16:9</div>
+          </div>
+        {% endif %}
+      </div>
+      {% if section.settings.cta_label != blank %}
+        <div class="cine-cta reveal"><a href="{{ section.settings.cta_link | default: '#offre' }}" class="btn">{{ section.settings.cta_label }} <span class="arw">→</span></a></div>
+      {% endif %}
+
+      <div class="reels-head reveal">
+        <h3>{{ section.settings.reels_heading }}</h3>
+        <span>{{ section.settings.reels_sub }}</span>
+      </div>
+      <div class="reels reveal">
+        {% for block in section.blocks %}
+          {% assign reel_image = block.settings.image %}
+          {% unless reel_image %}
+            {% case forloop.index0 %}
+              {% when 0 %}{% assign reel_image = featured_product.images[1] %}
+              {% when 1 %}{% assign reel_image = featured_product.images[4] %}
+              {% when 2 %}{% assign reel_image = featured_product.images[6] %}
+              {% when 3 %}{% assign reel_image = featured_product.images[3] %}
+              {% when 4 %}{% assign reel_image = featured_product.images[0] %}
+              {% else %}{% assign reel_image = featured_product.images[0] %}
+            {% endcase %}
+          {% endunless %}
+          <div class="reel" {% if reel_image %}style="background-image:linear-gradient(rgba(10,8,30,.15),rgba(10,8,30,.55)),url({{ reel_image | image_url: width: 500 }})"{% endif %} {{ block.shopify_attributes }}>
+            <div class="play" tabindex="0" aria-label="Lire"></div>
+            <div class="rcap"><b>{{ block.settings.caption_title }}</b>{{ block.settings.caption_subtitle }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "PlumeX — Vidéo & reels",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "PlumeX en mouvement" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Le froid, ça se ressent. Regardez-le." },
+    { "type": "textarea", "id": "lead", "label": "Sous-titre", "default": "La fraîcheur qui enveloppe, le geste du matin, le rituel du soir. On montre l'expérience — pas juste le produit." },
+    { "type": "text", "id": "video_url", "label": "URL vidéo (.mp4, optionnel)", "info": "Laisser vide pour garder l'affichage placeholder (image + bouton play)." },
+    { "type": "image_picker", "id": "poster_image", "label": "Image d'affiche (par défaut : image produit)" },
+    { "type": "text", "id": "cta_label", "label": "Bouton — texte", "default": "Adopter le geste" },
+    { "type": "url", "id": "cta_link", "label": "Bouton — lien" },
+    { "type": "text", "id": "reels_heading", "label": "Titre de la bande reels", "default": "Elles l'ont adopté" },
+    { "type": "text", "id": "reels_sub", "label": "Sous-texte", "default": "← faites glisser →" }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Reel",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (par défaut : image produit)" },
+        { "type": "text", "id": "caption_title", "label": "Titre", "default": "Le geste du matin" },
+        { "type": "text", "id": "caption_subtitle", "label": "Sous-titre", "default": "Dégonfle & réveille" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PlumeX — Vidéo & reels",
+      "blocks": [
+        { "type": "reel", "settings": { "caption_title": "Le geste du matin", "caption_subtitle": "Dégonfle & réveille" } },
+        { "type": "reel", "settings": { "caption_title": "Avant / après", "caption_subtitle": "Poches & cernes" } },
+        { "type": "reel", "settings": { "caption_title": "Le rituel du soir", "caption_subtitle": "Défatigue & détend" } },
+        { "type": "reel", "settings": { "caption_title": "Unboxing", "caption_subtitle": "La soie de glace" } },
+        { "type": "reel", "settings": { "caption_title": "Témoignage", "caption_subtitle": "« Un vrai changement »" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

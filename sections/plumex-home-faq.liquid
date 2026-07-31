@@ -1,0 +1,63 @@
+{% comment %}
+  PlumeX — Home v3 — FAQ
+{% endcomment %}
+{% style %}
+.plumex-home .faq{max-width:760px;margin:0 auto}
+.plumex-home .faq-head{text-align:center;margin-bottom:40px}
+.plumex-home .faq-head h2{font-size:clamp(1.9rem,3.5vw,2.8rem);margin-top:10px}
+.plumex-home .q{border-bottom:1px solid var(--line)}
+.plumex-home .q button{width:100%;background:none;border:none;text-align:left;cursor:pointer;padding:21px 4px;font-family:var(--display);font-size:1.18rem;color:var(--brand-ink);display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:44px}
+.plumex-home .q .sign{font-family:var(--body);font-size:1.4rem;color:var(--brand-accent);transition:transform .3s var(--ease);flex:none}
+.plumex-home .q.open .sign{transform:rotate(45deg)}
+.plumex-home .q .a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+.plumex-home .q .a p{padding:0 4px 21px;color:var(--ink-soft);font-size:.94rem;max-width:60ch}
+{% endstyle %}
+
+<div class="plumex-home">
+  <section class="section">
+    <div class="wrap faq">
+      <div class="faq-head reveal">
+        <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      {% for block in section.blocks %}
+        <div class="q" {{ block.shopify_attributes }}>
+          <button>{{ block.settings.question }}<span class="sign">+</span></button>
+          <div class="a"><div>{{ block.settings.answer }}</div></div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "PlumeX — FAQ",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Questions fréquentes" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Tout ce qu'il faut savoir." }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question ?" },
+        { "type": "richtext", "id": "answer", "label": "Réponse", "default": "<p>Réponse.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PlumeX — FAQ",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "Je l'utilise le matin ou le soir ?", "answer": "<p>Les deux. Le matin pour dégonfler poches et cernes et réveiller le teint avant le maquillage ; le soir pour défatiguer les traits et détendre le visage avant la nuit.</p>" } },
+        { "type": "faq", "settings": { "question": "Ça aide vraiment à dégonfler le visage ?", "answer": "<p>Oui. Au contact du froid, les vaisseaux se resserrent : cela réduit temporairement l'apparence des poches et des gonflements, pour un regard plus reposé et un teint plus net.</p>" } },
+        { "type": "faq", "settings": { "question": "Combien de temps au frais ?", "answer": "<p>Environ 1 h au réfrigérateur, ou 20 à 30 min au congélateur. Vous pouvez le garder au frais en continu pour l'avoir prêt matin et soir.</p>" } },
+        { "type": "faq", "settings": { "question": "Ça marche aussi pour les migraines ?", "answer": "<p>Oui. Au-delà de la routine beauté, le froid, l'obscurité totale et la compression douce aident à soulager migraines, maux de tête et tensions. Il ne remplace pas un traitement médical, mais offre une solution naturelle et réutilisable.</p>" } },
+        { "type": "faq", "settings": { "question": "En combien de temps serai-je livré(e) ?", "answer": "<p>La livraison prend généralement entre 6 et 10 jours ouvrés. Un numéro de suivi vous est envoyé dès l'expédition.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,133 @@
+{% comment %}
+  PlumeX — Home v3 — L'offre
+  Le marchand choisit le produit affiché depuis le customizer (aucun code à toucher).
+  Si aucun produit n'est sélectionné, on retombe sur PlumeX Cryo Pro.
+{% endcomment %}
+{% assign featured_product = section.settings.product | default: all_products['masque-cryo-plumex™-decongestionne-anti-migraine-copie'] %}
+{% style %}
+.plumex-home .offer-card{max-width:960px;margin:0 auto;border-radius:calc(var(--r) + 6px);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);box-shadow:0 40px 86px -50px color-mix(in srgb,var(--brand-ink) 60%,transparent)}
+.plumex-home .offer-visual{background:linear-gradient(160deg,color-mix(in srgb,var(--brand-accent) 18%,var(--brand-bg)),var(--brand-soft));display:grid;place-items:center;min-height:330px;position:relative;overflow:hidden}
+.plumex-home .offer-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.plumex-home .offer-body{padding:clamp(32px,4vw,52px)}
+.plumex-home .offer-body .eyebrow{margin-bottom:12px}
+.plumex-home .offer-body h2{font-size:clamp(1.8rem,3.2vw,2.5rem);margin-bottom:14px}
+.plumex-home .offer-body>p{color:var(--ink-soft)}
+.plumex-home .offer-price{display:flex;align-items:baseline;gap:12px;margin:18px 0 6px}
+.plumex-home .offer-price .now{font-family:var(--display);font-size:2.3rem}
+.plumex-home .offer-price .compare{font-size:.95rem;color:var(--ink-soft);text-decoration:line-through}
+.plumex-home .offer-list{list-style:none;margin:16px 0 26px;display:flex;flex-direction:column;gap:9px}
+.plumex-home .offer-list li{display:flex;gap:10px;font-size:.93rem}
+.plumex-home .offer-list li::before{content:"❄";color:var(--brand-accent)}
+.plumex-home .offer-badges{display:flex;gap:16px;margin-top:18px;flex-wrap:wrap;font-size:.8rem;color:var(--ink-soft)}
+@media(max-width:960px){
+  .plumex-home .offer-card{grid-template-columns:1fr}
+  .plumex-home .offer-visual{max-width:460px;margin:0 auto;width:100%}
+}
+@media(max-width:560px){
+  .plumex-home .offer-price{flex-direction:column;gap:2px;align-items:flex-start}
+}
+{% endstyle %}
+
+<div class="plumex-home">
+  <section class="section" id="offre" style="background:var(--brand-bg)">
+    <div class="wrap">
+      <div class="offer-card reveal">
+        <div class="offer-visual">
+          {% if featured_product.featured_image %}
+            <img src="{{ featured_product.featured_image | image_url: width: 1000 }}" alt="{{ featured_product.featured_image.alt | default: featured_product.title | escape }}" width="1000" height="1050" loading="lazy">
+          {% endif %}
+        </div>
+        <div class="offer-body">
+          <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+          <h2>{{ featured_product.title }}</h2>
+          {% if section.settings.description != blank %}
+            <p>{{ section.settings.description }}</p>
+          {% else %}
+            <p>{{ featured_product.description | strip_html | truncatewords: 40 }}</p>
+          {% endif %}
+          <div class="offer-price">
+            <span class="now">{{ featured_product.price | money }}</span>
+            {% if featured_product.compare_at_price > featured_product.price %}
+              <span class="compare">{{ featured_product.compare_at_price | money }}</span>
+            {% endif %}
+          </div>
+          <ul class="offer-list">
+            {% for block in section.blocks %}
+              {% if block.type == 'benefit_item' %}
+                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          <form action="{{ routes.cart_add_url }}" method="post" style="width:100%">
+            <input type="hidden" name="id" value="{{ featured_product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="btn" style="width:100%;justify-content:center" {% unless featured_product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+              {% if featured_product.selected_or_first_available_variant.available %}
+                Ajouter au panier <span class="arw">→</span>
+              {% else %}
+                Épuisé
+              {% endif %}
+            </button>
+          </form>
+          <div class="offer-badges">
+            {% for block in section.blocks %}
+              {% if block.type == 'badge' %}
+                <span {{ block.shopify_attributes }}>{{ block.settings.icon }} {{ block.settings.label }}</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "PlumeX — L'offre",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produit affiché",
+      "info": "Choisis n'importe quel produit de la boutique. Par défaut : PlumeX Cryo Pro."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "L'offre" },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description (optionnel — sinon la description produit est utilisée)",
+      "default": "Le geste froid qui dégonfle le matin et détend le soir. Adopté par +12 000 visages."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_item",
+      "name": "Point clé",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texte", "default": "Décongestionne poches et cernes dès le réveil" }
+      ]
+    },
+    {
+      "type": "badge",
+      "name": "Badge de confiance",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icône (emoji)", "default": "🚚" },
+        { "type": "text", "id": "label", "label": "Texte", "default": "Livraison offerte" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PlumeX — L'offre",
+      "blocks": [
+        { "type": "benefit_item", "settings": { "text": "Décongestionne poches et cernes dès le réveil" } },
+        { "type": "benefit_item", "settings": { "text": "500 g de gel médical — 4× plus que les masques classiques" } },
+        { "type": "benefit_item", "settings": { "text": "Chaud ou froid · obscurité totale · soie de glace" } },
+        { "type": "badge", "settings": { "icon": "🚚", "label": "Livraison offerte" } },
+        { "type": "badge", "settings": { "icon": "😌", "label": "30 j satisfait ou remboursé" } },
+        { "type": "badge", "settings": { "icon": "🔒", "label": "Paiement sécurisé" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

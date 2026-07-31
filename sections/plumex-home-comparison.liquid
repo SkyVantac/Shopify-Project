@@ -1,0 +1,86 @@
+{% comment %}
+  PlumeX — Home v3 — Tableau comparatif
+{% endcomment %}
+{% style %}
+.plumex-home .cmp-head{text-align:center;margin:0 auto 42px;max-width:560px}
+.plumex-home .cmp-head h2{font-size:clamp(1.9rem,3.5vw,2.8rem);margin:12px 0 8px}
+.plumex-home .cmp-head p{color:var(--ink-soft)}
+.plumex-home .cmp{max-width:840px;margin:0 auto;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+.plumex-home .cmp-row{display:grid;grid-template-columns:1.3fr 1fr 1fr;align-items:center}
+.plumex-home .cmp-row+.cmp-row{border-top:1px solid var(--line)}
+.plumex-home .cmp-row>div{padding:15px 20px;font-size:.92rem}
+.plumex-home .cmp-row .lbl{font-weight:600}
+.plumex-home .cmp-row .plx{background:color-mix(in srgb,var(--brand-accent) 12%,transparent);font-weight:500}
+.plumex-home .cmp-row .oth{color:var(--ink-soft)}
+.plumex-home .cmp-head-row{background:var(--brand-dark);color:#fff}
+.plumex-home .cmp-head-row>div{padding:17px 20px;font-weight:600;font-size:.9rem}
+.plumex-home .cmp-head-row .plx{background:var(--brand-dark);color:color-mix(in srgb,var(--brand-accent) 70%,#fff)}
+.plumex-home .cmp .tick{color:var(--brand-accent);font-weight:700;margin-right:5px}
+@media(max-width:560px){
+  .plumex-home .cmp-row{grid-template-columns:1fr}
+  .plumex-home .cmp-row .oth,.plumex-home .cmp-head-row .oth{display:none}
+}
+{% endstyle %}
+
+<div class="plumex-home">
+  <section class="section">
+    <div class="wrap">
+      <div class="cmp-head reveal">
+        <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.lead }}</p>
+      </div>
+      <div class="cmp reveal">
+        <div class="cmp-row cmp-head-row">
+          <div>&nbsp;</div>
+          <div class="plx">{{ section.settings.plumex_label }}</div>
+          <div class="oth">{{ section.settings.other_label }}</div>
+        </div>
+        {% for block in section.blocks %}
+          <div class="cmp-row" {{ block.shopify_attributes }}>
+            <div class="lbl">{{ block.settings.label }}</div>
+            <div class="plx"><span class="tick">✓</span>{{ block.settings.plumex_text }}</div>
+            <div class="oth">{{ block.settings.other_text }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "PlumeX — Comparatif",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Comparatif" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Un vrai soin cryo, pas un gadget." },
+    { "type": "textarea", "id": "lead", "label": "Sous-titre", "default": "La différence se ressent dès la première utilisation." },
+    { "type": "text", "id": "plumex_label", "label": "Colonne PlumeX", "default": "PlumeX Cryo Pro" },
+    { "type": "text", "id": "other_label", "label": "Colonne concurrent", "default": "Masques classiques" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Ligne",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Critère", "default": "Gel" },
+        { "type": "text", "id": "plumex_text", "label": "PlumeX", "default": "500 g médical, souple même congelé" },
+        { "type": "text", "id": "other_text", "label": "Concurrent", "default": "Bas de gamme, mal réparti" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PlumeX — Comparatif",
+      "blocks": [
+        { "type": "row", "settings": { "label": "Gel", "plumex_text": "500 g médical, souple même congelé", "other_text": "Bas de gamme, mal réparti" } },
+        { "type": "row", "settings": { "label": "Fraîcheur", "plumex_text": "Froid profond longue durée", "other_text": "Tiédit en quelques minutes" } },
+        { "type": "row", "settings": { "label": "Effet dégonflant", "plumex_text": "Tout le visage, contour des yeux", "other_text": "Zone limitée" } },
+        { "type": "row", "settings": { "label": "Matin & soir", "plumex_text": "Pensé pour un usage quotidien", "other_text": "S'use ou déçoit vite" } },
+        { "type": "row", "settings": { "label": "Chaud / froid", "plumex_text": "Deux usages en un", "other_text": "Froid uniquement" } },
+        { "type": "row", "settings": { "label": "Matière", "plumex_text": "Soie de glace premium", "other_text": "Tissu standard" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,207 @@
+
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    {% render 'xswmkn-signature' %}
+
+    {% # Color scheme CSS variables %}
+    {% render 'xswmkn-color-schemes' %}
+
+    {% # Inlined CSS Variables %}
+    {% render 'css-variables' %}
+
+
+    {%- assign namy_cdn = 'cdn.econamy.com' -%}
+    {%- assign is_dev = false -%}
+    {%- if namy_cdn contains '__NAMY' -%}
+      {%- assign is_dev = true -%}
+    {%- endif -%}
+
+    {%- comment -%}
+      Resource hints — budget per web.dev: cap dns-prefetch at 4-6, preconnect at 4-6.
+      preconnect supersedes dns-prefetch on same origin (do NOT pair both for same host).
+      Conditional gating by page_type drops hints on pages where the origin won't be hit.
+    {%- endcomment -%}
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    {%- if settings.namy_demo_mode -%}
+      {%- capture namy_demo_origin -%}{%- render 'xswmkn-demo-cdn' -%}{%- endcapture -%}
+      <link rel="preconnect" href="{{ namy_demo_origin | strip }}">
+    {%- endif -%}
+    {%- unless is_dev -%}
+      <link rel="preconnect" href="https://cdn.econamy.com" crossorigin>
+      <meta name="referrer" content="origin">
+    {%- endunless -%}
+
+    {%- comment -%} Video provider hints — only on pages where video blocks can render (home + PDP). {%- endcomment -%}
+    {%- case request.page_type -%}
+      {%- when 'index', 'product' -%}
+        {% # theme-check-disable RemoteAsset %}
+        <link rel="dns-prefetch" href="https://www.youtube.com">
+        <link rel="dns-prefetch" href="https://i.ytimg.com">
+        <link rel="dns-prefetch" href="https://player.vimeo.com">
+        {% # theme-check-enable RemoteAsset %}
+    {%- endcase -%}
+    {%- comment -%} Font preload — guarded: only preload a genuine NON-system font drop.
+      A string / invalid handle (a font not in Shopify's library) has no `.system?`
+      (returns nil), so `X.system? == false` is false → skipped. Prevents the error
+      "font_url can only be used with a font drop" from leaking into the <head> and
+      breaking page parsing. NEVER pipe a font setting to font_url without first
+      proving it is a font drop. {%- endcomment -%}
+    {%- assign namy_body_font = settings.namy_type_body_font -%}
+    {%- assign namy_heading_font = settings.namy_type_heading_font -%}
+    {%- if namy_body_font.system? == false or namy_heading_font.system? == false -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endif -%}
+    {%- if namy_body_font != blank and namy_body_font.system? == false -%}
+      {{ namy_body_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
+    {%- endif -%}
+    {%- if namy_heading_font != blank and namy_heading_font.system? == false -%}
+      {{ namy_heading_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
+    {%- endif -%}
+
+    {% # Load and preload the critical CSS %}
+    {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
+
+    {%- comment -%} D12 — perf policy resolves the effective surface/shadow/animation levers.
+      'fast' forces flat + no animations + subtle shadow; 'balanced' (default) = individual settings (byte-identical). {%- endcomment -%}
+    {%- assign perf_policy = settings.namy_codebase_performance_policy | default: 'balanced' -%}
+    {%- assign namy_surface = settings.namy_surface_style | default: 'flat' -%}
+    {%- assign namy_btn_shadow = settings.namy_button_hard_shadow -%}
+    {%- assign eff_scroll_reveal = settings.namy_animation_scroll_reveal -%}
+    {%- assign eff_micro = settings.namy_micro_interactions -%}
+    {%- assign eff_texture = settings.namy_show_texture_overlay | default: 'none' -%}
+    {%- assign eff_mono = settings.namy_monospace_emphasis | default: 'off' -%}
+    {%- if perf_policy == 'fast' -%}
+      {%- assign namy_surface = 'flat' -%}
+      {%- assign namy_btn_shadow = false -%}
+      {%- assign eff_scroll_reveal = false -%}
+      {%- assign eff_micro = false -%}
+      {%- assign eff_texture = 'none' -%}
+    {%- endif -%}
+
+    {%- comment -%} Liquid-glass surface utility — loaded ONLY when effective surface is glass. Zero bytes when off. See rules/css-styling.md → "Conditional asset loading". {%- endcomment -%}
+    {%- if namy_surface == 'liquid-glass' -%}
+      <link rel="stylesheet" href="{{ 'xswmkn-glass.css' | asset_url }}">
+    {%- endif -%}
+
+    {%- comment -%} D4 — grain texture overlay loaded ONLY when opted in (zero bytes when 'none'). {%- endcomment -%}
+    {%- if eff_texture != 'none' -%}
+      <link rel="stylesheet" href="{{ 'xswmkn-grain.css' | asset_url }}">
+    {%- endif -%}
+
+    {% # Deferred CSS (2026 Dawn pattern: media=print swap to all on load — no render blocking, no <noscript> required since stylesheet still loads when JS disabled via media=print) %}
+    <link rel="stylesheet" href="{{ 'xswmkn-deferred.css' | asset_url }}" media="print" onload="this.media='all';this.onload=null">
+    <noscript><link rel="stylesheet" href="{{ 'xswmkn-deferred.css' | asset_url }}"></noscript>
+
+    {% # Social, title, etc. %}
+    {% render 'meta-tags' %}
+
+    {%- if settings.namy_favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.namy_favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- comment -%}
+      Speculation Rules API (perf.md P1.1) — instruct Chrome/Edge to prerender
+      likely next navigation. Eagerness `moderate` triggers on hover/touch ≥200ms.
+      Excludes POST endpoints, account, cart, checkout, search query strings.
+      Chrome 144+ "prerender-until-script" pauses on first sync script (Shopify
+      analytics in {{ content_for_header }}) so no manual prerendering gate
+      needed. Per Shopify performance.shopify.com: LCP gain ≈ -130/180ms
+      desktop/mobile. Empirical -200-500ms PDP-from-collection.
+    {%- endcomment -%}
+    <script type="speculationrules">
+    {
+      "prerender": [{
+        "where": {
+          "and": [
+            { "href_matches": "/*" },
+            { "not": { "href_matches": "/cart*" } },
+            { "not": { "href_matches": "/checkout*" } },
+            { "not": { "href_matches": "/account*" } },
+            { "not": { "href_matches": "/orders*" } },
+            { "not": { "href_matches": "/admin*" } },
+            { "not": { "href_matches": "/policies*" } },
+            { "not": { "href_matches": "/api/*" } },
+            { "not": { "href_matches": "/*\\?*" } },
+            { "not": { "selector_matches": "[rel~=nofollow]" } },
+            { "not": { "selector_matches": "[data-no-prerender]" } }
+          ]
+        },
+        "eagerness": "moderate"
+      }],
+      "prefetch": [{
+        "where": {
+          "and": [
+            { "href_matches": "/*" },
+            { "not": { "href_matches": "/cart*" } },
+            { "not": { "href_matches": "/checkout*" } },
+            { "not": { "href_matches": "/account*" } },
+            { "not": { "selector_matches": "[rel~=nofollow]" } },
+            { "not": { "selector_matches": "[data-no-prerender]" } }
+          ]
+        },
+        "eagerness": "conservative"
+      }]
+    }
+    </script>
+
+    {{ content_for_header }}
+    {{ 'plumex-home.css' | asset_url | stylesheet_tag }}
+  </head>
+
+
+  <body data-surface="{{ namy_surface }}"{% if namy_btn_shadow %} data-button-shadow="hard"{% endif %}{% unless eff_scroll_reveal %} data-no-scroll-reveal{% endunless %}{% unless eff_micro %} data-no-micro-interactions{% endunless %}{% if eff_texture != 'none' %} data-texture-overlay="{{ eff_texture }}"{% endif %}{% unless eff_mono == 'off' %} data-monospace="{{ eff_mono }}"{% endunless %}>
+    <a class="xswmkn-skip-to-content" href="#main-content">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    {% sections 'header-group' %}
+
+    <main id="main-content">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    {%- if settings.namy_activate_wishlist -%}
+      {% section 'xswmkn-wishlist-drawer' %}
+    {%- endif -%}
+
+    {% render 'xswmkn-toast' %}
+
+    {%- comment -%} Quick-add modal: custom element + deferred script {%- endcomment -%}
+    {%- assign add_label = 'products.add_to_cart' | t -%}
+    {%- assign sold_out_label = 'products.sold_out' | t -%}
+    {%- assign close_label = 'general.accessibility.close' | t -%}
+    <xswmkn-quick-add
+      data-add-label="{{ add_label | escape }}"
+      data-sold-out-label="{{ sold_out_label | escape }}"
+      data-close-label="{{ close_label | escape }}"
+    ></xswmkn-quick-add>
+
+    {%- if is_dev -%}
+
+      {%- render 'xswmkn-dev-js-loader' -%}
+    {%- else -%}
+
+      <script>
+        (function () {
+          var src = 'https://cdn.econamy.com/main.js?lic=6274cdfb5f2ed298b23891c1c8fe0fec&ns=xswmkn';
+          function load() {
+            var s = document.createElement('script');
+            s.src = src;
+            s.defer = true;
+            s.crossOrigin = 'anonymous';
+            document.body.appendChild(s);
+          }
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(load, { timeout: 2000 });
+          } else {
+            setTimeout(load, 1000);
+          }
+        })();
+      </script>
+    {%- endif -%}
+    {{ 'plumex-home.js' | asset_url | script_tag }}
+  </body>
+</html>
+{% comment %} fid:e:2 {% endcomment %}

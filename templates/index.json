@@ -1,8 +1,135 @@
 {
   "sections": {
-    "plumex-home-v2": {
-      "type": "plumex-home-v2"
+    "plumex-hero": { "type": "plumex-home-hero" },
+    "plumex-sensations": {
+      "type": "plumex-home-sensations",
+      "blocks": {
+        "s1": { "type": "sensation", "settings": { "icon": "❄️", "title": "Un coup de frais", "description": "Le froid réveille le teint dès le contact." } },
+        "s2": { "type": "sensation", "settings": { "icon": "💧", "title": "Poches dégonflées", "description": "Le contour des yeux se défatigue, les traits se lissent." } },
+        "s3": { "type": "sensation", "settings": { "icon": "✨", "title": "L'effet bonne mine", "description": "La peau paraît plus nette, plus lisse, plus reposée." } },
+        "s4": { "type": "sensation", "settings": { "icon": "😌", "title": "Tensions relâchées", "description": "Mâchoire, front, tempes : tout se détend." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "plumex-ritual-toggle": { "type": "plumex-home-ritual-toggle" },
+    "plumex-reframe": {
+      "type": "plumex-home-reframe",
+      "blocks": {
+        "c1": { "type": "card", "settings": { "label": "Crème · sérum · contour", "description": "→ agit en surface" } },
+        "c2": { "type": "card", "settings": { "label": "PlumeX · froid + 500 g de poids", "description": "→ détend le muscle en dessous" } }
+      },
+      "block_order": ["c1", "c2"]
+    },
+    "plumex-data": {
+      "type": "plumex-home-data",
+      "blocks": {
+        "d1": { "type": "stat", "settings": { "number": "500", "unit": "g", "label": "PlumeX Cryo Pro", "sub_label": "gel médical · froid qui dure toute la séance", "style": "plumex" } },
+        "d2": { "type": "stat", "settings": { "number": "120", "unit": "g", "label": "Masques classiques", "sub_label": "tiédit en 3 minutes · aucune pression", "style": "other" } }
+      },
+      "block_order": ["d1", "d2"]
+    },
+    "plumex-steps": {
+      "type": "plumex-home-steps",
+      "blocks": {
+        "st1": { "type": "step", "settings": { "number": "01", "title": "Froid ou chaud", "description": "Au frigo pour l'effet dégonflant, ou 45 s au micro-ondes pour la détente." } },
+        "st2": { "type": "step", "settings": { "number": "02", "title": "Enfilez", "description": "Il épouse le visage, l'obscurité se fait, le confort enveloppe." } },
+        "st3": { "type": "step", "settings": { "number": "03", "title": "Compression douce", "description": "Une pression légère sur les tempes relâche la tension." } },
+        "st4": { "type": "step", "settings": { "number": "04", "title": "Le résultat", "description": "Visage dégonflé et teint réveillé le matin ; peau apaisée le soir." } }
+      },
+      "block_order": ["st1", "st2", "st3", "st4"]
+    },
+    "plumex-video": {
+      "type": "plumex-home-video",
+      "blocks": {
+        "r1": { "type": "reel", "settings": { "caption_title": "Le geste du matin", "caption_subtitle": "Dégonfle & réveille" } },
+        "r2": { "type": "reel", "settings": { "caption_title": "Avant / après", "caption_subtitle": "Poches & cernes" } },
+        "r3": { "type": "reel", "settings": { "caption_title": "Le rituel du soir", "caption_subtitle": "Défatigue & détend" } },
+        "r4": { "type": "reel", "settings": { "caption_title": "Unboxing", "caption_subtitle": "La soie de glace" } },
+        "r5": { "type": "reel", "settings": { "caption_title": "Témoignage", "caption_subtitle": "« Un vrai changement »" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5"]
+    },
+    "plumex-benefits": {
+      "type": "plumex-home-benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "💧", "title": "Dégonfle poches & cernes", "description": "Un regard reposé, comme après une nuit complète." } },
+        "b2": { "type": "benefit", "settings": { "icon": "✨", "title": "Effet bonne mine", "description": "Le teint est ravivé, plus lumineux, moins terne." } },
+        "b3": { "type": "benefit", "settings": { "icon": "🧊", "title": "Pores resserrés", "description": "La fraîcheur affine le grain sur l'instant." } },
+        "b4": { "type": "benefit", "settings": { "icon": "🪶", "title": "Traits défatigués", "description": "10 à 15 minutes pour un visage plus frais." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    },
+    "plumex-comparison": {
+      "type": "plumex-home-comparison",
+      "blocks": {
+        "row1": { "type": "row", "settings": { "label": "Gel", "plumex_text": "500 g médical, souple même congelé", "other_text": "Bas de gamme, mal réparti" } },
+        "row2": { "type": "row", "settings": { "label": "Fraîcheur", "plumex_text": "Froid profond longue durée", "other_text": "Tiédit en quelques minutes" } },
+        "row3": { "type": "row", "settings": { "label": "Effet dégonflant", "plumex_text": "Tout le visage, contour des yeux", "other_text": "Zone limitée" } },
+        "row4": { "type": "row", "settings": { "label": "Matin & soir", "plumex_text": "Pensé pour un usage quotidien", "other_text": "S'use ou déçoit vite" } },
+        "row5": { "type": "row", "settings": { "label": "Chaud / froid", "plumex_text": "Deux usages en un", "other_text": "Froid uniquement" } },
+        "row6": { "type": "row", "settings": { "label": "Matière", "plumex_text": "Soie de glace premium", "other_text": "Tissu standard" } }
+      },
+      "block_order": ["row1", "row2", "row3", "row4", "row5", "row6"]
+    },
+    "plumex-reviews": {
+      "type": "plumex-home-reviews",
+      "blocks": {
+        "rev1": { "type": "review", "settings": { "stars": 5, "title": "J'adore", "body": "Au top ! Je le porte chaque soir avant de dormir, ça fait un bien fou. En plus, je me réveille avec un visage moins gonflé.", "author": "Sophie A." } },
+        "rev2": { "type": "review", "settings": { "stars": 5, "title": "Ce masque est dingue !", "body": "Le pack duo est devenu notre rituel quotidien : je comprends enfin pourquoi la cryothérapie est autant appréciée, la sensation de fraîcheur est incroyable !", "author": "Sylvie C." } },
+        "rev3": { "type": "review", "settings": { "stars": 5, "title": "Incroyable", "body": "Je pensais qu'il serait trop serré, mais le maintien est juste parfait.", "author": "Marie L." } },
+        "rev4": { "type": "review", "settings": { "stars": 5, "title": "J'adore", "body": "Ce bonnet est vraiment top : il soulage les maux de tête, les migraines et aide à se détendre après une longue journée.", "author": "Valérie M." } },
+        "rev5": { "type": "review", "settings": { "stars": 5, "title": "Incroyable produit", "body": "Wow, je viens de le recevoir à l'instant, je suis agréablement surprise du fait qu'il soit frais, sans même l'avoir mis au frigo.", "author": "Laura L." } },
+        "rev6": { "type": "review", "settings": { "stars": 5, "title": "Magnifique", "body": "Dès les premiers signes d'une migraine ophtalmique, la fraîcheur me soulage immédiatement.", "author": "Sara E." } }
+      },
+      "block_order": ["rev1", "rev2", "rev3", "rev4", "rev5", "rev6"]
+    },
+    "plumex-stats": {
+      "type": "plumex-home-stats",
+      "blocks": {
+        "stat1": { "type": "stat", "settings": { "number": "47", "suffix": "%", "label": "Clients fidèles" } },
+        "stat2": { "type": "stat", "settings": { "number": "+12", "suffix": "K", "label": "Commandes expédiées" } },
+        "stat3": { "type": "stat", "settings": { "number": "4,8", "suffix": "/5", "label": "Note moyenne" } },
+        "stat4": { "type": "stat", "settings": { "number": "30", "suffix": "j", "label": "Satisfait ou remboursé" } }
+      },
+      "block_order": ["stat1", "stat2", "stat3", "stat4"]
+    },
+    "plumex-offer": {
+      "type": "plumex-home-offer",
+      "blocks": {
+        "bi1": { "type": "benefit_item", "settings": { "text": "Décongestionne poches et cernes dès le réveil" } },
+        "bi2": { "type": "benefit_item", "settings": { "text": "500 g de gel médical — 4× plus que les masques classiques" } },
+        "bi3": { "type": "benefit_item", "settings": { "text": "Chaud ou froid · obscurité totale · soie de glace" } },
+        "bg1": { "type": "badge", "settings": { "icon": "🚚", "label": "Livraison offerte" } },
+        "bg2": { "type": "badge", "settings": { "icon": "😌", "label": "30 j satisfait ou remboursé" } },
+        "bg3": { "type": "badge", "settings": { "icon": "🔒", "label": "Paiement sécurisé" } }
+      },
+      "block_order": ["bi1", "bi2", "bi3", "bg1", "bg2", "bg3"]
+    },
+    "plumex-faq": {
+      "type": "plumex-home-faq",
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "Je l'utilise le matin ou le soir ?", "answer": "<p>Les deux. Le matin pour dégonfler poches et cernes et réveiller le teint avant le maquillage ; le soir pour défatiguer les traits et détendre le visage avant la nuit.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "Ça aide vraiment à dégonfler le visage ?", "answer": "<p>Oui. Au contact du froid, les vaisseaux se resserrent : cela réduit temporairement l'apparence des poches et des gonflements, pour un regard plus reposé et un teint plus net.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "Combien de temps au frais ?", "answer": "<p>Environ 1 h au réfrigérateur, ou 20 à 30 min au congélateur. Vous pouvez le garder au frais en continu pour l'avoir prêt matin et soir.</p>" } },
+        "q4": { "type": "faq", "settings": { "question": "Ça marche aussi pour les migraines ?", "answer": "<p>Oui. Au-delà de la routine beauté, le froid, l'obscurité totale et la compression douce aident à soulager migraines, maux de tête et tensions. Il ne remplace pas un traitement médical, mais offre une solution naturelle et réutilisable.</p>" } },
+        "q5": { "type": "faq", "settings": { "question": "En combien de temps serai-je livré(e) ?", "answer": "<p>La livraison prend généralement entre 6 et 10 jours ouvrés. Un numéro de suivi vous est envoyé dès l'expédition.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"]
     }
   },
-  "order": ["plumex-home-v2"]
+  "order": [
+    "plumex-hero",
+    "plumex-sensations",
+    "plumex-ritual-toggle",
+    "plumex-reframe",
+    "plumex-data",
+    "plumex-steps",
+    "plumex-video",
+    "plumex-benefits",
+    "plumex-comparison",
+    "plumex-reviews",
+    "plumex-stats",
+    "plumex-offer",
+    "plumex-faq"
+  ]
 }

@@ -1,0 +1,70 @@
+{% comment %}
+  PlumeX — Home v3 — Sensations grid
+{% endcomment %}
+{% style %}
+.plumex-home .sens-head{text-align:center;max-width:640px;margin:0 auto 50px}
+.plumex-home .sens-head h2{font-size:clamp(1.9rem,3.5vw,2.8rem);margin:12px 0 10px}
+.plumex-home .sens-head p{color:var(--ink-soft)}
+.plumex-home .sens-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.plumex-home .sens{background:var(--brand-soft);border-radius:var(--r);padding:28px 24px;border:1px solid var(--line);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.plumex-home .sens:hover{transform:translateY(-5px);box-shadow:0 24px 46px -28px color-mix(in srgb,var(--brand-ink) 45%,transparent)}
+.plumex-home .sens .ic{font-size:1.55rem;margin-bottom:14px}
+.plumex-home .sens h3{font-size:1.24rem;margin-bottom:7px}
+.plumex-home .sens p{font-size:.9rem;color:var(--ink-soft)}
+@media(max-width:960px){ .plumex-home .sens-grid{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:560px){ .plumex-home .sens-grid{grid-template-columns:1fr} }
+{% endstyle %}
+
+<div class="plumex-home">
+  <section class="section">
+    <div class="wrap">
+      <div class="sens-head reveal">
+        <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.lead }}</p>
+      </div>
+      <div class="sens-grid">
+        {% for block in section.blocks %}
+          <div class="sens reveal" {{ block.shopify_attributes }}>
+            <div class="ic">{{ block.settings.icon }}</div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "PlumeX — Sensations",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Dès les premières secondes" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Ce que vous ressentez, tout de suite." },
+    { "type": "textarea", "id": "lead", "label": "Sous-titre", "default": "Sortez-le du froid. Posez-le. Le visage se réveille." }
+  ],
+  "blocks": [
+    {
+      "type": "sensation",
+      "name": "Sensation",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icône (emoji)", "default": "❄️" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Un coup de frais" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Le froid réveille le teint dès le contact." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PlumeX — Sensations",
+      "blocks": [
+        { "type": "sensation", "settings": { "icon": "❄️", "title": "Un coup de frais", "description": "Le froid réveille le teint dès le contact." } },
+        { "type": "sensation", "settings": { "icon": "💧", "title": "Poches dégonflées", "description": "Le contour des yeux se défatigue, les traits se lissent." } },
+        { "type": "sensation", "settings": { "icon": "✨", "title": "L'effet bonne mine", "description": "La peau paraît plus nette, plus lisse, plus reposée." } },
+        { "type": "sensation", "settings": { "icon": "😌", "title": "Tensions relâchées", "description": "Mâchoire, front, tempes : tout se détend." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

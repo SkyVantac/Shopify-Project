@@ -1,0 +1,86 @@
+{% comment %}
+  PlumeX — Home v3 — Hero
+  Section indépendante, éditable/déplaçable dans le customizer.
+{% endcomment %}
+{% assign featured_product = all_products['masque-cryo-plumex™-decongestionne-anti-migraine-copie'] %}
+{% assign hero_image = section.settings.hero_image | default: featured_product.images[0] %}
+{% style %}
+.plumex-home .hero{position:relative;padding:clamp(46px,6vw,84px) 0 clamp(58px,7vw,104px);overflow:hidden;background:var(--brand-bg)}
+.plumex-home .hero::before{content:"";position:absolute;inset:0;z-index:0;opacity:.5;background:radial-gradient(55% 55% at 84% 16%,color-mix(in srgb,var(--brand-accent-2) 34%,transparent),transparent 60%),radial-gradient(52% 58% at 10% 90%,color-mix(in srgb,var(--brand-accent) 30%,transparent),transparent 62%)}
+.plumex-home .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+.plumex-home .hero h1{font-size:clamp(2.5rem,5.2vw,4.3rem);margin:20px 0 22px}
+.plumex-home .hero h1 em{font-style:italic;color:var(--brand-accent)}
+.plumex-home .hero .lead{font-size:1.12rem;max-width:34ch;color:var(--ink-soft);margin-bottom:32px}
+.plumex-home .hero-actions{display:flex;gap:13px;flex-wrap:wrap;align-items:center}
+.plumex-home .proof{display:flex;align-items:center;gap:11px;margin-top:28px;font-size:.9rem;color:var(--ink-soft)}
+.plumex-home .proof b{color:var(--brand-ink)}
+.plumex-home .hero-visual{position:relative;aspect-ratio:4/4.3;border-radius:var(--r)}
+.plumex-home .gel-blob{position:absolute;inset:7% 5% 9% 7%;border-radius:46% 54% 58% 42%/48% 46% 54% 52%;background:linear-gradient(150deg,color-mix(in srgb,var(--brand-accent) 70%,#fff),var(--brand-accent) 65%,var(--brand-dark));opacity:.85;filter:blur(2px);animation:plumexHome_morph 15s ease-in-out infinite}
+@keyframes plumexHome_morph{0%,100%{border-radius:46% 54% 58% 42%/48% 46% 54% 52%;transform:rotate(0)}50%{border-radius:56% 44% 42% 58%/54% 58% 42% 46%;transform:rotate(4deg)}}
+.plumex-home .glass-card{position:absolute;inset:0;border-radius:var(--r);background:linear-gradient(160deg,color-mix(in srgb,#fff 55%,transparent),color-mix(in srgb,#fff 16%,transparent));backdrop-filter:blur(6px);border:1px solid color-mix(in srgb,#fff 60%,transparent);box-shadow:0 30px 66px -30px color-mix(in srgb,var(--brand-ink) 55%,transparent);display:grid;place-items:center;text-align:center;overflow:hidden}
+.plumex-home .glass-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.plumex-home .float-chip{position:absolute;left:-14px;bottom:26px;z-index:3;background:var(--brand-bg);border-radius:15px;padding:12px 16px;box-shadow:0 18px 38px -18px color-mix(in srgb,var(--brand-ink) 55%,transparent);display:flex;gap:11px;align-items:center;max-width:236px;border:1px solid var(--line)}
+.plumex-home .float-chip .fx{width:34px;height:34px;border-radius:9px;background:linear-gradient(140deg,var(--brand-accent-2),var(--brand-accent));flex:none}
+.plumex-home .float-chip small{font-size:.74rem;color:var(--ink-soft);line-height:1.35}
+.plumex-home .float-chip b{color:var(--brand-ink)}
+@media(max-width:960px){
+  .plumex-home .hero-grid{grid-template-columns:1fr;gap:38px}
+  .plumex-home .hero-visual{max-width:440px;margin:0 auto;width:100%}
+}
+{% endstyle %}
+
+<div class="plumex-home">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h1>{{ section.settings.heading_before }} <em>{{ section.settings.heading_emphasis }}</em> {{ section.settings.heading_after }}</h1>
+        <p class="lead">{{ section.settings.lead }}</p>
+        <div class="hero-actions">
+          {% if section.settings.cta1_label != blank %}
+            <a href="{{ section.settings.cta1_link | default: '#offre' }}" class="btn">{{ section.settings.cta1_label }} <span class="arw">→</span></a>
+          {% endif %}
+          {% if section.settings.cta2_label != blank %}
+            <a href="{{ section.settings.cta2_link | default: '#rituel' }}" class="btn btn-ghost">{{ section.settings.cta2_label }}</a>
+          {% endif %}
+        </div>
+        <div class="proof"><span class="stars">★★★★★</span><span>{{ section.settings.proof_text }}</span></div>
+      </div>
+      <div class="hero-visual">
+        <div class="gel-blob"></div>
+        <div class="glass-card">
+          {% if hero_image %}
+            <img src="{{ hero_image | image_url: width: 900 }}" alt="{{ hero_image.alt | default: featured_product.title | escape }}" width="900" height="967" loading="eager">
+          {% endif %}
+        </div>
+        {% if section.settings.testimonial_quote != blank %}
+          <div class="float-chip"><div class="fx"></div><small><b>{{ section.settings.testimonial_quote }}</b><br>{{ section.settings.testimonial_author }}</small></div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "PlumeX — Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "La cryothérapie beauté, chez vous" },
+    { "type": "text", "id": "heading_before", "label": "Titre — début", "default": "La première" },
+    { "type": "text", "id": "heading_emphasis", "label": "Titre — mot en emphase", "default": "et" },
+    { "type": "text", "id": "heading_after", "label": "Titre — fin", "default": "la dernière routine skincare de votre journée." },
+    { "type": "textarea", "id": "lead", "label": "Paragraphe d'accroche", "default": "Le matin, elle dégonfle poches et cernes avant le maquillage. Le soir, elle défatigue les traits et détend le visage. 500 g de gel médical, 10 minutes, matin et soir." },
+    { "type": "text", "id": "cta1_label", "label": "Bouton 1 — texte", "default": "Adopter le geste" },
+    { "type": "url", "id": "cta1_link", "label": "Bouton 1 — lien" },
+    { "type": "text", "id": "cta2_label", "label": "Bouton 2 — texte", "default": "Voir le rituel" },
+    { "type": "url", "id": "cta2_link", "label": "Bouton 2 — lien" },
+    { "type": "text", "id": "testimonial_quote", "label": "Citation client", "default": "« Je me réveille avec un visage moins gonflé.»" },
+    { "type": "text", "id": "testimonial_author", "label": "Auteur de la citation", "default": "Sophie A. — acheteuse vérifiée" },
+    { "type": "richtext", "id": "proof_text", "label": "Ligne de preuve sociale", "default": "<p><b>4,8/5</b> · 2 000+ avis vérifiés · adopté par <b>+12 000 visages</b></p>" },
+    { "type": "image_picker", "id": "hero_image", "label": "Visuel (par défaut : image produit)" }
+  ],
+  "presets": [
+    { "name": "PlumeX — Hero" }
+  ]
+}
+{% endschema %}

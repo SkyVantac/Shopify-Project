@@ -1,0 +1,66 @@
+{% comment %}
+  PlumeX — Home v3 — Reframe (crème vs PlumeX)
+{% endcomment %}
+{% style %}
+.plumex-home .reframe{background:var(--brand-soft)}
+.plumex-home .reframe-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.plumex-home .reframe h2{font-size:clamp(1.9rem,3.6vw,2.8rem);margin:14px 0 20px;max-width:16ch}
+.plumex-home .reframe p{color:var(--ink-soft);margin-bottom:16px}
+.plumex-home .reframe .accent{font-family:var(--display);font-style:italic;font-size:1.45rem;color:var(--brand-ink);padding-left:18px;border-left:3px solid var(--brand-accent);line-height:1.35;margin-top:6px}
+.plumex-home .reframe-art{aspect-ratio:1/1.05;border-radius:var(--r);position:relative;overflow:hidden;background:linear-gradient(160deg,var(--brand-bg),color-mix(in srgb,var(--brand-accent) 16%,var(--brand-bg)))}
+.plumex-home .reframe-art .layer{position:absolute;left:24px;right:24px;padding:15px 18px;border-radius:12px;background:color-mix(in srgb,#fff 78%,transparent);backdrop-filter:blur(4px);font-size:.9rem;box-shadow:0 14px 28px -20px color-mix(in srgb,var(--brand-ink) 55%,transparent)}
+.plumex-home .reframe-art .l1{top:24px}
+.plumex-home .reframe-art .l1 b{color:var(--ink-soft)}
+.plumex-home .reframe-art .l2{bottom:24px;background:var(--brand-dark);color:#fff}
+.plumex-home .reframe-art .l2 b{color:var(--brand-accent-2)}
+@media(max-width:960px){ .plumex-home .reframe-grid{grid-template-columns:1fr} }
+{% endstyle %}
+
+<div class="plumex-home">
+  <section class="reframe section" id="difference">
+    <div class="wrap reframe-grid">
+      <div class="reveal">
+        <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.paragraph }}</p>
+        <p class="accent">{{ section.settings.accent_quote }}</p>
+      </div>
+      <div class="reframe-art reveal">
+        {% for block in section.blocks %}
+          <div class="layer l{{ forloop.index }}" {{ block.shopify_attributes }}>{{ block.settings.label }}<br><b>{{ block.settings.description }}</b></div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "PlumeX — Reframe",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Là où les crèmes s'arrêtent" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Votre visage travaille toute la journée." },
+    { "type": "textarea", "id": "paragraph", "label": "Paragraphe", "default": "Mâchoire serrée devant l'écran, front contracté en réunion, sourcils froncés sans raison. Votre visage compte plus de 40 muscles — la plupart sous tension du matin au soir, sans que vous le remarquiez. C'est ce qui durcit les traits et donne cet air fatigué que le fond de teint ne couvre pas." },
+    { "type": "textarea", "id": "accent_quote", "label": "Citation en exergue", "default": "Les crèmes agissent en surface. PlumeX agit sur ce qui se passe dessous." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Carte comparative",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Libellé", "default": "Crème · sérum · contour" },
+        { "type": "text", "id": "description", "label": "Description", "default": "→ agit en surface" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PlumeX — Reframe",
+      "blocks": [
+        { "type": "card", "settings": { "label": "Crème · sérum · contour", "description": "→ agit en surface" } },
+        { "type": "card", "settings": { "label": "PlumeX · froid + 500 g de poids", "description": "→ détend le muscle en dessous" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
