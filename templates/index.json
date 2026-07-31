@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "plumex-home-v2": {
+      "type": "plumex-home-v2"
+    }
+  },
+  "order": ["plumex-home-v2"]
+}
