@@ -1,0 +1,60 @@
+import { createServerClient } from "@supabase/ssr";
+import { NextResponse, type NextRequest } from "next/server";
+
+// Garde la session Supabase à jour à chaque requête, et bloque l'accès
+// à l'espace membre si l'utilisateur n'est pas connecté.
+export async function updateSession(request: NextRequest) {
+  let response = NextResponse.next({ request });
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          );
+          response = NextResponse.next({ request });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options)
+          );
+        },
+      },
+    }
+  );
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const isProtectedRoute = request.nextUrl.pathname.startsWith("/membre");
+
+  if (isProtectedRoute && !user) {
+    const loginUrl = request.nextUrl.clone();
+    loginUrl.pathname = "/connexion";
+    return NextResponse.redirect(loginUrl);
+  }
+
+  if (isProtectedRoute && user) {
+    // L'accès n'est jamais accordé juste parce que l'utilisateur revient sur
+    // le site : on relit à chaque fois le statut stocké en base, qui n'est
+    // modifié que par le webhook Stripe une fois le paiement confirmé.
+    const { data: abonne } = await supabase
+      .from("abonnes")
+      .select("statut")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (abonne?.statut !== "actif") {
+      const pendingUrl = request.nextUrl.clone();
+      pendingUrl.pathname = "/paiement-en-attente";
+      return NextResponse.redirect(pendingUrl);
+    }
+  }
+
+  return response;
+}
