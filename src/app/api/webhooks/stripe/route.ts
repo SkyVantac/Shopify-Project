@@ -31,26 +31,70 @@ export async function POST(request: Request) {
     );
   }
 
-  const admin = createAdminClient();
+  let admin: ReturnType<typeof createAdminClient>;
+  try {
+    admin = createAdminClient();
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Erreur inconnue";
+    console.error("[webhook stripe] configuration Supabase invalide:", message);
+    return NextResponse.json({ erreur: message }, { status: 500 });
+  }
 
   switch (event.type) {
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session;
       const userId = session.client_reference_id ?? session.metadata?.supabase_user_id;
 
-      if (userId) {
-        await admin
-          .from("abonnes")
-          .update({
-            statut: "actif",
-            stripe_customer_id:
-              typeof session.customer === "string" ? session.customer : null,
-            stripe_subscription_id:
-              typeof session.subscription === "string"
-                ? session.subscription
-                : null,
-          })
-          .eq("id", userId);
+      if (!userId) {
+        console.error(
+          "[webhook stripe] checkout.session.completed sans client_reference_id ni metadata.supabase_user_id",
+          { sessionId: session.id }
+        );
+        return NextResponse.json(
+          { erreur: "Session Stripe sans identifiant utilisateur." },
+          { status: 400 }
+        );
+      }
+
+      const { data, error } = await admin
+        .from("abonnes")
+        .update({
+          statut: "actif",
+          stripe_customer_id:
+            typeof session.customer === "string" ? session.customer : null,
+          stripe_subscription_id:
+            typeof session.subscription === "string"
+              ? session.subscription
+              : null,
+        })
+        .eq("id", userId)
+        .select("id");
+
+      if (error) {
+        // On logue l'erreur ET on la renvoie dans la réponse : elle sera
+        // visible directement dans Stripe -> Développeurs -> Webhooks ->
+        // (ton endpoint) -> historique des tentatives.
+        console.error("[webhook stripe] échec de la mise à jour Supabase", error);
+        return NextResponse.json(
+          { erreur: `Supabase: ${error.message}` },
+          { status: 500 }
+        );
+      }
+
+      if (!data || data.length === 0) {
+        // La requête a réussi mais n'a modifié aucune ligne : soit la
+        // ligne "abonnes" pour cet utilisateur n'existe pas (le trigger
+        // d'inscription n'a pas tourné), soit l'id ne correspond à rien.
+        console.error(
+          "[webhook stripe] aucune ligne 'abonnes' mise à jour pour userId=",
+          userId
+        );
+        return NextResponse.json(
+          {
+            erreur: `Aucun abonné trouvé avec id=${userId} dans la table "abonnes".`,
+          },
+          { status: 500 }
+        );
       }
       break;
     }
@@ -59,10 +103,18 @@ export async function POST(request: Request) {
     // on referme l'accès.
     case "customer.subscription.deleted": {
       const subscription = event.data.object as Stripe.Subscription;
-      await admin
+      const { error } = await admin
         .from("abonnes")
         .update({ statut: "annule" })
         .eq("stripe_subscription_id", subscription.id);
+
+      if (error) {
+        console.error("[webhook stripe] échec de l'annulation Supabase", error);
+        return NextResponse.json(
+          { erreur: `Supabase: ${error.message}` },
+          { status: 500 }
+        );
+      }
       break;
     }
 
