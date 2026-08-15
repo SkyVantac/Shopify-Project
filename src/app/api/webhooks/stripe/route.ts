@@ -4,10 +4,10 @@ import { stripe } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 // C'est le SEUL endroit du site qui a le droit de faire passer un
-// abonné de "en_attente" à "actif". L'accès ne s'ouvre donc jamais
-// juste parce qu'un visiteur revient sur le site après avoir payé :
-// il s'ouvre uniquement quand Stripe confirme ici, par ce webhook,
-// que le paiement a bien été effectué.
+// abonné de "en_attente" à "en_revue" (paiement confirmé). Le passage
+// à "actif" se fait ensuite manuellement, par toi, depuis /admin.
+// L'accès ne s'ouvre donc jamais juste parce qu'un visiteur revient
+// sur le site après avoir payé.
 export async function POST(request: Request) {
   const corpsBrut = await request.text();
   const signature = request.headers.get("stripe-signature");
@@ -56,10 +56,14 @@ export async function POST(request: Request) {
         );
       }
 
+      // Le paiement est confirmé, mais l'accès ne s'ouvre pas encore :
+      // la candidature passe en revue, c'est toi qui valides ou refuses
+      // depuis /admin.
       const { data, error } = await admin
         .from("abonnes")
         .update({
-          statut: "actif",
+          statut: "en_revue",
+          paye_le: new Date().toISOString(),
           stripe_customer_id:
             typeof session.customer === "string" ? session.customer : null,
           stripe_subscription_id:
