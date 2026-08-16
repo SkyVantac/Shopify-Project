@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { estAdmin } from "@/lib/admin";
 
 // Garde la session Supabase à jour à chaque requête, et bloque l'accès
 // à l'espace membre si l'utilisateur n'est pas connecté.
@@ -32,11 +33,18 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const isProtectedRoute = request.nextUrl.pathname.startsWith("/membre");
+  const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
 
-  if (isProtectedRoute && !user) {
+  if ((isProtectedRoute || isAdminRoute) && !user) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/connexion";
     return NextResponse.redirect(loginUrl);
+  }
+
+  if (isAdminRoute && user && !estAdmin(user.email)) {
+    const accueilUrl = request.nextUrl.clone();
+    accueilUrl.pathname = "/";
+    return NextResponse.redirect(accueilUrl);
   }
 
   if (isProtectedRoute && user) {

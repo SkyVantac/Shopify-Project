@@ -1,25 +1,37 @@
-# SKY VANTAC — Brique 1 : inscription + paiement + accès membre
+# SKY VANTAC — inscription + paiement + validation admin + accès membre
 
-Ce projet fait UNIQUEMENT ceci pour l'instant :
+Le parcours complet aujourd'hui :
 
 1. Un visiteur crée un compte (e-mail + mot de passe).
 2. Il est redirigé vers Stripe Checkout pour payer l'abonnement (1000&nbsp;€/an).
-3. Une fois que **Stripe confirme le paiement** (via un webhook), son accès
-   à `/membre` s'ouvre automatiquement.
-4. Tant que Stripe n'a rien confirmé, l'accès reste fermé — même si la
-   personne revient sur le site cent fois.
+3. Une fois que **Stripe confirme le paiement** (via un webhook), sa
+   candidature passe en revue (`en_revue`) — l'accès n'est **pas** encore
+   ouvert.
+4. Toi (l'admin) tu vas sur `/admin`, tu vois la liste des candidatures en
+   attente, et tu cliques **Valider** ou **Refuser**.
+5. Si validé → l'accès à `/membre` s'ouvre. Si refusé → tu rembourses
+   toi-même le paiement depuis le Dashboard Stripe.
+6. Tant que rien n'a été validé, l'accès reste fermé — même si la personne
+   revient sur le site cent fois.
 
 ## Comment ça marche (en simple)
 
 - **Supabase** garde les comptes (e-mail / mot de passe) et une table
-  `abonnes` qui dit, pour chaque personne, si elle a payé (`actif`) ou
-  pas encore (`en_attente`).
+  `abonnes` avec un statut par personne :
+  - `en_attente` — compte créé, pas encore payé
+  - `en_revue` — a payé, en attente de ta validation
+  - `actif` — validé, accès ouvert
+  - `refuse` — candidature refusée (à toi de rembourser dans Stripe)
+  - `annule` — abonnement résilié après avoir été actif
 - **Stripe** gère le paiement. Après paiement, Stripe appelle notre site
-  en coulisses (un "webhook") pour dire "cette personne a payé". C'est
-  seulement à ce moment-là que le statut passe à `actif`.
+  en coulisses (un "webhook") pour dire "cette personne a payé" — le
+  statut passe alors à `en_revue`, jamais directement à `actif`.
+- **`/admin`** est une page protégée (réservée aux e-mails listés dans
+  `ADMIN_EMAILS`) où tu valides ou refuses chaque candidature à la main.
 - Personne — ni l'utilisateur, ni même une erreur de code côté site — ne
-  peut mettre son propre statut à `actif`. Seule la clé secrète Stripe →
-  webhook peut le faire.
+  peut mettre son propre statut à `actif`. Seuls le webhook Stripe (pour
+  passer en `en_revue`) et toi depuis `/admin` (pour passer en `actif`)
+  peuvent le faire, via la clé secrète Supabase.
 
 ## Ce qu'il te reste à faire (5 étapes)
 
@@ -36,6 +48,16 @@ brique — pour l'instant ça simplifie le parcours inscription → paiement.)
 Supabase → **SQL Editor → New query** → colle tout le contenu du fichier
 `supabase/schema.sql` de ce projet → clique **Run**.
 Ça crée la table `abonnes` qui garde en mémoire qui a payé.
+
+Ensuite, fais la même chose avec `supabase/migration-02-admission.sql`
+(nouvelle requête, coller, Run) — ça ajoute les statuts `en_revue` /
+`refuse` nécessaires à la validation manuelle des candidatures.
+
+### 3bis. Définir qui a accès à /admin
+Dans `.env.local`, remplis `ADMIN_EMAILS` avec l'e-mail (ou les e-mails,
+séparés par des virgules) avec le(s)quel(s) tu te connectes en tant
+qu'admin. Doit correspondre exactement à l'e-mail d'un compte déjà créé
+sur le site.
 
 ### 4. Configurer le webhook Stripe
 C'est l'étape la plus importante : c'est elle qui permet à Stripe de dire
@@ -70,8 +92,11 @@ Ouvre http://localhost:3000 dans ton navigateur.
 3. Va sur http://localhost:3000/inscription, crée un compte de test.
 4. Tu arrives sur Stripe Checkout : utilise une carte de test, par exemple
    `4242 4242 4242 4242`, une date future, n'importe quel CVC.
-5. Après le paiement, tu es redirigé vers "On confirme ton paiement...".
-   En quelques secondes, tu es automatiquement envoyé vers `/membre`.
+5. Après le paiement, tu es redirigé vers une page "candidature en cours
+   de vérification".
+6. Connecte-toi avec ton compte admin (celui listé dans `ADMIN_EMAILS`),
+   va sur `/admin`, clique **Valider**. En quelques secondes, la personne
+   est automatiquement envoyée vers `/membre`.
 
 Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 `stripe listen` tourne toujours et que `STRIPE_WEBHOOK_SECRET` dans
@@ -81,10 +106,14 @@ Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 
 - `.env.local` — toutes les clés secrètes (jamais envoyé sur GitHub).
 - `supabase/schema.sql` — à coller dans Supabase une seule fois.
+- `supabase/migration-02-admission.sql` — à coller ensuite, une seule fois.
 - `src/app/inscription` — page de création de compte.
 - `src/app/connexion` — page de connexion.
 - `src/app/api/checkout` — crée la session de paiement Stripe.
-- `src/app/api/webhooks/stripe` — reçoit la confirmation de paiement de Stripe.
+- `src/app/api/webhooks/stripe` — reçoit la confirmation de paiement de
+  Stripe (fait passer le statut à `en_revue`, jamais directement `actif`).
+- `src/app/admin` — page où tu valides/refuses les candidatures.
 - `src/app/membre` — l'espace réservé aux abonnés actifs.
 - `src/proxy.ts` — vérifie à chaque visite que la personne est bien connectée
-  et abonnée avant de la laisser entrer dans `/membre`.
+  (et abonnée active pour `/membre`, admin pour `/admin`) avant de la
+  laisser entrer.
