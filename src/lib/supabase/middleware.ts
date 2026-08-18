@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { estAdmin } from "@/lib/admin";
 
 // Garde la session Supabase à jour à chaque requête, et bloque l'accès
-// à l'espace membre si l'utilisateur n'est pas connecté.
+// aux pages protégées si l'utilisateur n'est pas connecté.
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
 
@@ -32,7 +32,19 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isProtectedRoute = request.nextUrl.pathname.startsWith("/membre");
+  // Toutes les pages de l'espace connecté (header + navigation commune,
+  // Brique 3), plus /membre qui redirige désormais vers /accueil.
+  const routesProtegees = [
+    "/accueil",
+    "/marchandises",
+    "/recherches",
+    "/messages",
+    "/mon-espace",
+    "/membre",
+  ];
+  const isProtectedRoute = routesProtegees.some((route) =>
+    request.nextUrl.pathname.startsWith(route)
+  );
   const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
 
   if ((isProtectedRoute || isAdminRoute) && !user) {

@@ -40,7 +40,7 @@ export default function PaiementEnAttentePage() {
       const reponse = await fetch("/api/statut");
       const { statut: statutRecu } = await reponse.json();
       if (statutRecu === "actif") {
-        router.push("/membre");
+        router.push("/accueil");
         router.refresh();
         return;
       }

@@ -28,9 +28,9 @@ export default function ConnexionPage() {
       return;
     }
 
-    // La page /membre vérifie elle-même (côté serveur) si l'abonnement
+    // La page /accueil vérifie elle-même (côté serveur) si l'abonnement
     // est actif ; sinon elle renverra automatiquement vers la page d'attente.
-    router.push("/membre");
+    router.push("/accueil");
     router.refresh();
   }
 
