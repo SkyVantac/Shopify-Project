@@ -24,22 +24,25 @@ export default async function AppLayout({
     redirect("/connexion");
   }
 
-  const { data: abonne } = await supabase
-    .from("abonnes")
-    .select("statut")
-    .eq("id", user.id)
-    .maybeSingle();
+  const admin = estAdmin(user.email);
 
-  if (abonne?.statut !== "actif") {
-    redirect("/paiement-en-attente");
+  // Un admin ne paie pas d'abonnement : il a accès aux pages membres sans
+  // avoir le statut "actif". Un membre normal, lui, doit toujours l'avoir.
+  if (!admin) {
+    const { data: abonne } = await supabase
+      .from("abonnes")
+      .select("statut")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (abonne?.statut !== "actif") {
+      redirect("/paiement-en-attente");
+    }
   }
 
   return (
     <div className="flex min-h-full flex-1 flex-col">
-      <Header
-        emailUtilisateur={user.email ?? ""}
-        estAdmin={estAdmin(user.email)}
-      />
+      <Header emailUtilisateur={user.email ?? ""} estAdmin={admin} />
       <div className="flex flex-1 flex-col">{children}</div>
     </div>
   );

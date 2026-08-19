@@ -59,7 +59,9 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(accueilUrl);
   }
 
-  if (isProtectedRoute && user) {
+  // Un admin ne paie pas d'abonnement : il a accès aux pages membres sans
+  // avoir le statut "actif". Un membre normal, lui, doit toujours l'avoir.
+  if (isProtectedRoute && user && !estAdmin(user.email)) {
     // L'accès n'est jamais accordé juste parce que l'utilisateur revient sur
     // le site : on relit à chaque fois le statut stocké en base, qui n'est
     // modifié que par le webhook Stripe une fois le paiement confirmé.
