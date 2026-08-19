@@ -1,4 +1,4 @@
-# SKY VANTAC — inscription + paiement + validation admin + accès membre
+# SKY VANTAC — inscription + paiement + validation admin + coquille applicative
 
 Le parcours complet aujourd'hui :
 
@@ -9,7 +9,7 @@ Le parcours complet aujourd'hui :
    ouvert.
 4. Toi (l'admin) tu vas sur `/admin`, tu vois la liste des candidatures en
    attente, et tu cliques **Valider** ou **Refuser**.
-5. Si validé → l'accès à `/membre` s'ouvre. Si refusé → tu rembourses
+5. Si validé → l'accès à `/accueil` s'ouvre. Si refusé → tu rembourses
    toi-même le paiement depuis le Dashboard Stripe.
 6. Tant que rien n'a été validé, l'accès reste fermé — même si la personne
    revient sur le site cent fois.
@@ -96,7 +96,7 @@ Ouvre http://localhost:3000 dans ton navigateur.
    de vérification".
 6. Connecte-toi avec ton compte admin (celui listé dans `ADMIN_EMAILS`),
    va sur `/admin`, clique **Valider**. En quelques secondes, la personne
-   est automatiquement envoyée vers `/membre`.
+   est automatiquement envoyée vers `/accueil`.
 
 Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 `stripe listen` tourne toujours et que `STRIPE_WEBHOOK_SECRET` dans
@@ -113,7 +113,21 @@ Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 - `src/app/api/webhooks/stripe` — reçoit la confirmation de paiement de
   Stripe (fait passer le statut à `en_revue`, jamais directement `actif`).
 - `src/app/admin` — page où tu valides/refuses les candidatures.
-- `src/app/membre` — l'espace réservé aux abonnés actifs.
+- `src/app/(app)` — les pages connectées avec header commun (Brique 3) :
+  `/accueil` (dashboard), `/marchandises`, `/recherches`, `/messages`,
+  `/mon-espace`. `/membre` redirige désormais vers `/accueil`.
+- `src/components/header.tsx` — barre de navigation commune à toutes les
+  pages connectées (logo, menu, recherche, notifications, profil, admin).
 - `src/proxy.ts` — vérifie à chaque visite que la personne est bien connectée
-  (et abonnée active pour `/membre`, admin pour `/admin`) avant de la
-  laisser entrer.
+  (et abonnée active pour les pages de `(app)`, admin pour `/admin`) avant
+  de la laisser entrer.
+
+## Confidentialité (règle structurante depuis la Brique 3)
+
+Il n'existe **aucun annuaire de membres** dans l'application, et il n'y en
+aura jamais : impossible de lister, chercher ou parcourir les autres
+membres. L'identité d'un membre ne se révèle que dans le cadre d'un
+échange commercial initié via une marchandise. Il n'y a pas non plus
+d'indicateur de présence, et les admins sont invisibles pour tout le
+monde (y compris entre eux). Toute nouvelle fonctionnalité doit respecter
+cette règle.
