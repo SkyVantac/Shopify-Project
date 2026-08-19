@@ -52,6 +52,18 @@ export default function Header({ emailUtilisateur, estAdmin }: HeaderProps) {
                 </Link>
               );
             })}
+            {estAdmin && (
+              <Link
+                href="/admin"
+                className={
+                  pathname === "/admin"
+                    ? "text-zinc-900"
+                    : "text-zinc-500 transition-colors hover:text-zinc-900"
+                }
+              >
+                Admin
+              </Link>
+            )}
           </nav>
         </div>
 
