@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import BoutonPrimaire from "@/components/bouton-primaire";
 
 type Statut = "en_attente" | "en_revue" | "actif" | "refuse" | "annule" | null;
 type StatutAffiche = Exclude<Statut, "actif" | null>;
@@ -62,21 +63,21 @@ export default function PaiementEnAttentePage() {
   const contenu = CONTENU[statut ?? "en_revue"] ?? CONTENU.en_revue;
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center">
-      <p className="mb-4 text-sm font-medium uppercase tracking-widest text-zinc-500">
+    <main className="flex flex-1 flex-col items-center justify-center bg-ink px-6 py-24 text-center">
+      <p className="mb-4 text-sm font-medium uppercase tracking-[.14em] text-muted">
         Un instant
       </p>
-      <h1 className="max-w-lg text-3xl font-semibold tracking-tight">
+      <h1 className="font-playfair max-w-lg text-3xl font-semibold tracking-[.07em] text-parchment">
         {contenu.titre}
       </h1>
-      <p className="mt-4 max-w-md text-zinc-600">{contenu.texte}</p>
-      <button
+      <p className="mt-4 max-w-md text-muted">{contenu.texte}</p>
+      <BoutonPrimaire
         onClick={verifierStatut}
         disabled={verification}
-        className="mt-10 rounded-full bg-zinc-900 px-8 py-3 text-base font-medium text-white transition-colors hover:bg-zinc-700 disabled:opacity-50"
+        className="mt-10 disabled:opacity-50"
       >
         {verification ? "Vérification..." : "Vérifier maintenant"}
-      </button>
+      </BoutonPrimaire>
     </main>
   );
 }

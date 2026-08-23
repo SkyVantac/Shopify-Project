@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import LogoMeridien from "./logo-meridien";
 import MenuDeroulant from "./menu-deroulant";
 
 const LIENS_NAV = [
@@ -29,11 +30,14 @@ export default function Header({ emailUtilisateur, estAdmin }: HeaderProps) {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-zinc-200 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-line bg-ink/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-6">
         <div className="flex items-center gap-10">
-          <Link href="/accueil" className="text-lg font-semibold tracking-tight">
-            SKY VANTAC
+          <Link href="/accueil" className="flex items-center gap-2">
+            <LogoMeridien size={22} />
+            <span className="font-playfair text-lg font-semibold tracking-[.07em] text-parchment">
+              SKY VANTAC
+            </span>
           </Link>
           <nav className="hidden items-center gap-7 text-sm font-medium md:flex">
             {LIENS_NAV.map((lien) => {
@@ -44,8 +48,8 @@ export default function Header({ emailUtilisateur, estAdmin }: HeaderProps) {
                   href={lien.href}
                   className={
                     actif
-                      ? "text-zinc-900"
-                      : "text-zinc-500 transition-colors hover:text-zinc-900"
+                      ? "text-parchment"
+                      : "text-muted transition-colors hover:text-parchment"
                   }
                 >
                   {lien.label}
@@ -57,8 +61,8 @@ export default function Header({ emailUtilisateur, estAdmin }: HeaderProps) {
                 href="/admin"
                 className={
                   pathname === "/admin"
-                    ? "text-zinc-900"
-                    : "text-zinc-500 transition-colors hover:text-zinc-900"
+                    ? "text-parchment"
+                    : "text-muted transition-colors hover:text-parchment"
                 }
               >
                 Admin
@@ -71,13 +75,13 @@ export default function Header({ emailUtilisateur, estAdmin }: HeaderProps) {
           <Link
             href="/marchandises"
             aria-label="Recherche"
-            className="flex h-10 w-10 items-center justify-center rounded-full text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
+            className="flex h-10 w-10 items-center justify-center rounded-brand text-muted transition-colors hover:bg-ink-2 hover:text-parchment"
           >
             🔍
           </Link>
 
           <MenuDeroulant ariaLabel="Notifications" bouton="🔔">
-            <p className="px-4 py-3 text-sm text-zinc-500">
+            <p className="px-4 py-3 text-sm text-muted">
               Aucune notification pour l&apos;instant.
             </p>
           </MenuDeroulant>
@@ -85,42 +89,42 @@ export default function Header({ emailUtilisateur, estAdmin }: HeaderProps) {
           <MenuDeroulant
             ariaLabel="Publier"
             bouton="+ Publier"
-            boutonClassName="flex h-10 items-center gap-1 whitespace-nowrap rounded-full bg-zinc-900 px-5 text-sm font-medium text-white transition-colors hover:bg-zinc-700"
+            boutonClassName="flex h-10 items-center gap-1 whitespace-nowrap rounded-brand bg-accent px-5 text-sm font-semibold text-ink transition-colors hover:bg-accent-2"
           >
-            <div className="flex items-center justify-between px-4 py-3 text-sm text-zinc-400">
+            <div className="flex items-center justify-between px-4 py-3 text-sm text-dim">
               Publier une marchandise
-              <span className="ml-2 rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-500">
+              <span className="ml-2 rounded-brand bg-ink px-2 py-0.5 text-xs text-muted">
                 Bientôt
               </span>
             </div>
-            <div className="flex items-center justify-between px-4 py-3 text-sm text-zinc-400">
+            <div className="flex items-center justify-between px-4 py-3 text-sm text-dim">
               Publier une recherche
-              <span className="ml-2 rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-500">
+              <span className="ml-2 rounded-brand bg-ink px-2 py-0.5 text-xs text-muted">
                 Bientôt
               </span>
             </div>
           </MenuDeroulant>
 
           <MenuDeroulant ariaLabel="Profil" bouton="👤">
-            <div className="truncate border-b border-zinc-100 px-4 py-3 text-sm text-zinc-500">
+            <div className="truncate border-b border-line px-4 py-3 text-sm text-muted">
               {emailUtilisateur}
             </div>
             <Link
               href="/mon-espace"
-              className="block px-4 py-2.5 text-sm hover:bg-zinc-50"
+              className="block px-4 py-2.5 text-sm text-parchment hover:bg-ink"
             >
               Mon Espace
             </Link>
             <Link
               href="/mon-espace"
-              className="block px-4 py-2.5 text-sm hover:bg-zinc-50"
+              className="block px-4 py-2.5 text-sm text-parchment hover:bg-ink"
             >
               Paramètres
             </Link>
             {estAdmin && (
               <Link
                 href="/admin"
-                className="block px-4 py-2.5 text-sm hover:bg-zinc-50"
+                className="block px-4 py-2.5 text-sm text-parchment hover:bg-ink"
               >
                 Admin
               </Link>
@@ -128,7 +132,7 @@ export default function Header({ emailUtilisateur, estAdmin }: HeaderProps) {
             <button
               type="button"
               onClick={seDeconnecter}
-              className="block w-full px-4 py-2.5 text-left text-sm text-red-700 hover:bg-red-50"
+              className="block w-full px-4 py-2.5 text-left text-sm text-red-400 hover:bg-ink"
             >
               Se déconnecter
             </button>

@@ -11,7 +11,7 @@ type MenuDeroulantProps = {
 };
 
 const STYLE_BOUTON_PAR_DEFAUT =
-  "flex h-10 w-10 items-center justify-center rounded-full text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-900";
+  "flex h-10 w-10 items-center justify-center rounded-brand text-muted transition-colors hover:bg-ink-2 hover:text-parchment";
 
 export default function MenuDeroulant({
   bouton,
@@ -49,7 +49,7 @@ export default function MenuDeroulant({
         <div
           className={`absolute top-12 ${
             align === "right" ? "right-0" : "left-0"
-          } z-50 w-64 overflow-hidden rounded-xl border border-zinc-200 bg-white py-1 shadow-lg`}
+          } z-50 w-64 overflow-hidden rounded-card border border-line bg-ink-2 py-1 shadow-lg`}
           onClick={() => setOuvert(false)}
         >
           {children}

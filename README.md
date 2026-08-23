@@ -112,10 +112,10 @@ Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 - `src/app/api/checkout` — crée la session de paiement Stripe.
 - `src/app/api/webhooks/stripe` — reçoit la confirmation de paiement de
   Stripe (fait passer le statut à `en_revue`, jamais directement `actif`).
-- `src/app/admin` — page où tu valides/refuses les candidatures.
 - `src/app/(app)` — les pages connectées avec header commun (Brique 3) :
   `/accueil` (dashboard), `/marchandises`, `/recherches`, `/messages`,
-  `/mon-espace`. `/membre` redirige désormais vers `/accueil`.
+  `/mon-espace`, `/admin` (page où tu valides/refuses les candidatures).
+  `/membre` redirige désormais vers `/accueil`.
 - `src/components/header.tsx` — barre de navigation commune à toutes les
   pages connectées (logo, menu, recherche, notifications, profil, admin).
 - `src/proxy.ts` — vérifie à chaque visite que la personne est bien connectée

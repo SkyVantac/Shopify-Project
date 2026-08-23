@@ -5,9 +5,11 @@ type CarteVideProps = {
 
 export default function CarteVide({ titre, message }: CarteVideProps) {
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6">
-      <h2 className="text-sm font-semibold text-zinc-900">{titre}</h2>
-      <p className="mt-2 text-sm text-zinc-500">{message}</p>
+    <div className="rounded-card border border-line bg-ink-2 p-6">
+      <h2 className="font-playfair text-sm font-semibold tracking-[.14em] text-parchment uppercase">
+        {titre}
+      </h2>
+      <p className="mt-2 text-sm text-dim">{message}</p>
     </div>
   );
 }

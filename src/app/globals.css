@@ -3,6 +3,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* SKY VANTAC — design system repris de la vitrine (www.skyvantac.com).
+     Coexiste avec les tokens ci-dessus : n'affecte aucune page tant que
+     ses classes (bg-ink, text-parchment, font-playfair...) ne sont pas
+     utilisées explicitement. */
+  --ink: #0b0f14;
+  --ink-2: #141a21;
+  --line: #212b36;
+  --accent: #5b8cff;
+  --accent-2: #9fc5ff;
+  --parchment: #f4f7fa;
+  --muted: #8e99a8;
+  --dim: #5c6875;
 }
 
 @theme inline {
@@ -10,6 +23,22 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-parchment: var(--parchment);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+
+  --font-playfair: var(--font-playfair-display);
+  --font-body: var(--font-inter);
+  --font-arabic: var(--font-cairo);
+
+  --radius-brand: 2px;
+  --radius-card: 5px;
 }
 
 @media (prefers-color-scheme: dark) {

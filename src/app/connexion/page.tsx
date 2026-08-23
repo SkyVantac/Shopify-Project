@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import ChampTexte from "@/components/champ-texte";
+import BoutonPrimaire from "@/components/bouton-primaire";
 
 export default function ConnexionPage() {
   const router = useRouter();
@@ -35,60 +37,45 @@ export default function ConnexionPage() {
   }
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center px-6 py-24">
+    <main className="flex flex-1 flex-col items-center justify-center bg-ink px-6 py-24">
       <div className="w-full max-w-sm">
-        <h1 className="mb-8 text-2xl font-semibold">Se connecter</h1>
+        <h1 className="font-playfair mb-8 text-2xl font-semibold tracking-[.07em] text-parchment">
+          Se connecter
+        </h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-medium">
-              E-mail
-            </label>
-            <input
-              id="email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-lg border border-zinc-300 px-4 py-2.5 outline-none focus:border-zinc-900"
-            />
-          </div>
+          <ChampTexte
+            id="email"
+            label="E-mail"
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-          <div>
-            <label
-              htmlFor="motDePasse"
-              className="mb-1 block text-sm font-medium"
-            >
-              Mot de passe
-            </label>
-            <input
-              id="motDePasse"
-              type="password"
-              required
-              value={motDePasse}
-              onChange={(e) => setMotDePasse(e.target.value)}
-              className="w-full rounded-lg border border-zinc-300 px-4 py-2.5 outline-none focus:border-zinc-900"
-            />
-          </div>
+          <ChampTexte
+            id="motDePasse"
+            label="Mot de passe"
+            type="password"
+            required
+            value={motDePasse}
+            onChange={(e) => setMotDePasse(e.target.value)}
+          />
 
           {erreur && (
-            <p className="rounded-lg bg-red-50 px-4 py-2.5 text-sm text-red-700">
+            <p className="rounded-brand border border-red-900 bg-red-950/40 px-4 py-2.5 text-sm text-red-300">
               {erreur}
             </p>
           )}
 
-          <button
-            type="submit"
-            disabled={enCours}
-            className="mt-2 rounded-full bg-zinc-900 px-8 py-3 text-base font-medium text-white transition-colors hover:bg-zinc-700 disabled:opacity-50"
-          >
+          <BoutonPrimaire type="submit" disabled={enCours} className="mt-2 disabled:opacity-50">
             {enCours ? "Un instant..." : "Se connecter"}
-          </button>
+          </BoutonPrimaire>
         </form>
 
-        <p className="mt-6 text-center text-sm text-zinc-600">
+        <p className="mt-6 text-center text-sm text-muted">
           Pas encore membre ?{" "}
-          <a href="/inscription" className="font-medium text-zinc-900 underline">
+          <a href="/inscription" className="font-medium text-accent underline">
             Créer un compte
           </a>
         </p>
