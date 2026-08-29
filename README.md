@@ -109,6 +109,9 @@ Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 - `supabase/migration-02-admission.sql` — à coller ensuite, une seule fois.
 - `supabase/migration-03-marchandises.sql` — à coller ensuite, une seule
   fois : table des marchandises (Brique 4).
+- `supabase/migration-04-marchandises-photos.sql` — à coller ensuite,
+  une seule fois : registre des empreintes de photos, pour empêcher la
+  publication de la même image sur deux annonces (Brique 4).
 - `src/app/inscription` — page de création de compte.
 - `src/app/connexion` — page de connexion.
 - `src/app/api/checkout` — crée la session de paiement Stripe.
