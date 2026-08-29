@@ -118,9 +118,14 @@ Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 - `src/app/api/webhooks/stripe` — reçoit la confirmation de paiement de
   Stripe (fait passer le statut à `en_revue`, jamais directement `actif`).
 - `src/app/(app)` — les pages connectées avec header commun (Brique 3) :
-  `/accueil` (dashboard), `/marchandises`, `/recherches`, `/messages`,
+  `/accueil` (dashboard), `/marchandises`, `/marchandises/nouvelle`
+  (formulaire de publication, Brique 4), `/recherches`, `/messages`,
   `/mon-espace`, `/admin` (page où tu valides/refuses les candidatures).
   `/membre` redirige désormais vers `/accueil`.
+- `src/app/(app)/marchandises/nouvelle/actions.ts` — Server Action qui
+  crée une marchandise : calcule le hash SHA-256 de chaque photo et
+  bloque la publication si l'image existe déjà (voir
+  `marchandises_photos`), avant toute création ou upload.
 - `src/components/header.tsx` — barre de navigation commune à toutes les
   pages connectées (logo, menu, recherche, notifications, profil, admin).
 - `src/proxy.ts` — vérifie à chaque visite que la personne est bien connectée
