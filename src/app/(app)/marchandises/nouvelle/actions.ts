@@ -4,6 +4,7 @@ import { createHash, randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { estAdmin } from "@/lib/admin";
 import {
   CATEGORIES,
   ETATS_MARCHANDISE,
@@ -32,17 +33,20 @@ export async function creerMarchandise(
   }
 
   const admin = createAdminClient();
+  const estUnAdmin = estAdmin(user.email);
 
-  // On ne fait confiance qu'au statut stocké en base, jamais à l'URL ou
-  // au fait que l'utilisateur ait atteint cette page (même logique que
-  // partout ailleurs dans le projet).
+  // Un admin ne paie pas d'abonnement (même règle que pour l'accès aux
+  // pages membres) : il peut publier sans être "actif". Un membre
+  // normal doit toujours l'être. On ne fait confiance qu'au statut
+  // stocké en base, jamais à l'URL ou au fait que l'utilisateur ait
+  // atteint cette page.
   const { data: abonne } = await admin
     .from("abonnes")
     .select("statut")
     .eq("id", user.id)
     .maybeSingle();
 
-  if (abonne?.statut !== "actif") {
+  if (!estUnAdmin && abonne?.statut !== "actif") {
     return {
       succes: false,
       erreur: "Ton abonnement doit être actif pour publier une marchandise.",
@@ -185,16 +189,24 @@ export async function creerMarchandise(
     };
   }
 
-  // --- Upload des photos (via le client authentifié, pas admin, pour
-  // que les policies du bucket s'appliquent réellement) + registre des
-  // empreintes. ---
+  // --- Upload des photos + registre des empreintes. ---
+  //
+  // La policy Storage d'upload exige abonnes.statut = 'actif' — ce que
+  // ADMIN_EMAILS ne peut pas exprimer (cette liste vit dans une
+  // variable d'environnement, pas en base). Pour un membre normal, on
+  // passe donc par le client authentifié pour que la policy s'applique
+  // réellement. Pour un admin (dont l'autorisation a déjà été vérifiée
+  // ci-dessus), on utilise le client admin pour cette seule étape —
+  // même principe que /admin, qui contourne déjà les policies RLS pour
+  // la même raison.
+  const clientStockage = estUnAdmin ? admin : supabase;
   const cheminsPhotos: string[] = [];
 
   for (const { fichier, empreinte } of photosAvecEmpreinte) {
     const extension = fichier.name.split(".").pop() ?? "jpg";
     const chemin = `${user.id}/${marchandise.id}/${randomUUID()}.${extension}`;
 
-    const { error: erreurUpload } = await supabase.storage
+    const { error: erreurUpload } = await clientStockage.storage
       .from("marchandises-photos")
       .upload(chemin, fichier);
 
@@ -217,7 +229,7 @@ export async function creerMarchandise(
       // Collision rare : deux envois strictement simultanés de la même
       // image. La contrainte UNIQUE a bloqué l'insertion en base — on
       // nettoie le fichier tout juste uploadé et on prévient l'utilisateur.
-      await supabase.storage.from("marchandises-photos").remove([chemin]);
+      await clientStockage.storage.from("marchandises-photos").remove([chemin]);
       return {
         succes: false,
         erreur: `L'image « ${fichier.name} » vient d'être publiée par quelqu'un d'autre à l'instant. Remplace cette image et réessaie.`,
