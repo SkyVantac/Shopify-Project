@@ -121,10 +121,18 @@ Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 - `src/app/api/webhooks/stripe` — reçoit la confirmation de paiement de
   Stripe (fait passer le statut à `en_revue`, jamais directement `actif`).
 - `src/app/(app)` — les pages connectées avec header commun (Brique 3) :
-  `/accueil` (dashboard), `/marchandises`, `/marchandises/nouvelle`
-  (formulaire de publication, Brique 4), `/recherches`, `/messages`,
-  `/mon-espace`, `/admin` (page où tu valides/refuses les candidatures).
-  `/membre` redirige désormais vers `/accueil`.
+  `/accueil` (dashboard), `/marchandises` (liste des annonces
+  publiées), `/marchandises/nouvelle` (formulaire de publication),
+  `/marchandises/[id]` (fiche détail — vendeur anonyme, "Membre
+  vérifié"), `/recherches`, `/messages`, `/mon-espace` (dont "Mes
+  marchandises", tous statuts confondus), `/admin`. `/membre` redirige
+  désormais vers `/accueil`.
+- `src/lib/marchandises-serveur.ts` — récupération des marchandises
+  (visibles ou propres à l'utilisateur) et génération d'URLs signées
+  pour les photos du bucket privé. Gère la même double logique
+  actif/admin que la publication : un admin contourne la RLS via le
+  client de service, donc la règle de visibilité est reproduite
+  manuellement en code pour lui.
 - `src/app/(app)/marchandises/nouvelle/actions.ts` — Server Action qui
   crée une marchandise : calcule le hash SHA-256 de chaque photo et
   bloque la publication si l'image existe déjà (voir

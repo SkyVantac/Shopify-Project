@@ -61,3 +61,38 @@ export const DEVISES = [
 
 export const MAX_PHOTOS = 8;
 export const TAILLE_PHOTO_MAX_OCTETS = 5 * 1024 * 1024; // 5 Mo, cohérent avec le bucket
+
+export function libelleCategorie(valeur: string): string {
+  return CATEGORIES.find((c) => c.valeur === valeur)?.libelle ?? valeur;
+}
+
+export function libelleUnite(valeur: string): string {
+  return UNITES.find((u) => u.valeur === valeur)?.libelle ?? valeur;
+}
+
+export function libelleEtat(valeur: string): string {
+  return ETATS_MARCHANDISE.find((e) => e.valeur === valeur)?.libelle ?? valeur;
+}
+
+export function formaterPrix(prix: number | null, devise: string): string {
+  if (prix === null) return "Prix sur demande";
+  return `${prix.toLocaleString("fr-FR")} ${devise}`;
+}
+
+export function badgeStatutMarchandise(statut: string): {
+  texte: string;
+  classe: string;
+} {
+  switch (statut) {
+    case "publiee":
+      return { texte: "Publiée", classe: "border-accent text-accent" };
+    case "brouillon":
+      return { texte: "Brouillon", classe: "border-line text-muted" };
+    case "vendue":
+      return { texte: "Vendue", classe: "border-line text-parchment" };
+    case "retiree":
+      return { texte: "Retirée", classe: "border-red-800 text-red-400" };
+    default:
+      return { texte: statut, classe: "border-line text-muted" };
+  }
+}

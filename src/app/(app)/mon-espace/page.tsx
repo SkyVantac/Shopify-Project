@@ -1,11 +1,11 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { estAdmin } from "@/lib/admin";
+import { recupererMesMarchandises } from "@/lib/marchandises-serveur";
+import { badgeStatutMarchandise } from "@/lib/marchandises";
 import LogoMeridien from "@/components/logo-meridien";
 import BoutonPrimaire from "@/components/bouton-primaire";
 
-// Page témoin du design system SKY VANTAC (repris de la vitrine). Seule
-// cette page est stylée ainsi pour l'instant — le reste de l'app garde
-// son apparence claire actuelle tant que ce témoin n'est pas validé.
 export default async function MonEspacePage() {
   const supabase = await createClient();
   const {
@@ -15,6 +15,7 @@ export default async function MonEspacePage() {
   // Un admin peut arriver ici sans être "actif" (il ne paie pas
   // d'abonnement) : on évite de lui afficher à tort le badge "Actif".
   const admin = estAdmin(user?.email);
+  const mesMarchandises = await recupererMesMarchandises();
 
   return (
     <main className="flex-1 bg-ink px-6 py-10 text-parchment">
@@ -50,9 +51,35 @@ export default async function MonEspacePage() {
             <h2 className="font-playfair text-sm font-semibold tracking-[.14em] uppercase">
               Mes marchandises
             </h2>
-            <p className="mt-2 text-sm text-dim">
-              Vous n&apos;avez rien publié pour l&apos;instant.
-            </p>
+            {mesMarchandises.length === 0 ? (
+              <p className="mt-2 text-sm text-dim">
+                Vous n&apos;avez rien publié pour l&apos;instant.
+              </p>
+            ) : (
+              <ul className="mt-4 divide-y divide-line">
+                {mesMarchandises.map((marchandise) => {
+                  const badge = badgeStatutMarchandise(marchandise.statut);
+                  return (
+                    <li
+                      key={marchandise.id}
+                      className="flex items-center justify-between gap-3 py-3"
+                    >
+                      <Link
+                        href={`/marchandises/${marchandise.id}`}
+                        className="truncate text-sm text-parchment transition-colors hover:text-accent"
+                      >
+                        {marchandise.titre}
+                      </Link>
+                      <span
+                        className={`shrink-0 rounded-brand border px-2 py-0.5 text-xs font-medium ${badge.classe}`}
+                      >
+                        {badge.texte}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
         </div>
       </div>
