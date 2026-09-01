@@ -191,22 +191,17 @@ export async function creerMarchandise(
 
   // --- Upload des photos + registre des empreintes. ---
   //
-  // La policy Storage d'upload exige abonnes.statut = 'actif' — ce que
-  // ADMIN_EMAILS ne peut pas exprimer (cette liste vit dans une
-  // variable d'environnement, pas en base). Pour un membre normal, on
-  // passe donc par le client authentifié pour que la policy s'applique
-  // réellement. Pour un admin (dont l'autorisation a déjà été vérifiée
-  // ci-dessus), on utilise le client admin pour cette seule étape —
-  // même principe que /admin, qui contourne déjà les policies RLS pour
-  // la même raison.
-  const clientStockage = estUnAdmin ? admin : supabase;
+  // Les policies du bucket marchandises-photos gèrent directement
+  // "actif OU admin" (migration-06-admins.sql) : le client authentifié
+  // suffit pour tout le monde, plus besoin de choisir un client
+  // différent selon le rôle de l'utilisateur.
   const cheminsPhotos: string[] = [];
 
   for (const { fichier, empreinte } of photosAvecEmpreinte) {
     const extension = fichier.name.split(".").pop() ?? "jpg";
     const chemin = `${user.id}/${marchandise.id}/${randomUUID()}.${extension}`;
 
-    const { error: erreurUpload } = await clientStockage.storage
+    const { error: erreurUpload } = await supabase.storage
       .from("marchandises-photos")
       .upload(chemin, fichier);
 
@@ -229,7 +224,7 @@ export async function creerMarchandise(
       // Collision rare : deux envois strictement simultanés de la même
       // image. La contrainte UNIQUE a bloqué l'insertion en base — on
       // nettoie le fichier tout juste uploadé et on prévient l'utilisateur.
-      await clientStockage.storage.from("marchandises-photos").remove([chemin]);
+      await supabase.storage.from("marchandises-photos").remove([chemin]);
       return {
         succes: false,
         erreur: `L'image « ${fichier.name} » vient d'être publiée par quelqu'un d'autre à l'instant. Remplace cette image et réessaie.`,
