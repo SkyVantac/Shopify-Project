@@ -115,6 +115,10 @@ Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 - `supabase/migration-05-grants-marchandises.sql` — à coller ensuite,
   une seule fois : corrige des droits SQL manquants sur `marchandises`
   et `marchandises_photos` qui bloquaient toute publication.
+- `supabase/migration-06-admins.sql` — à coller ensuite, une seule
+  fois : table `admins` (contrepartie base de `ADMIN_EMAILS`) et
+  réécriture des policies concernées pour accepter "actif OU admin" de
+  façon unifiée, au lieu de contourner la RLS au cas par cas côté code.
 - `src/app/inscription` — page de création de compte.
 - `src/app/connexion` — page de connexion.
 - `src/app/api/checkout` — crée la session de paiement Stripe.
