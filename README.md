@@ -119,6 +119,8 @@ Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
   fois : table `admins` (contrepartie base de `ADMIN_EMAILS`) et
   réécriture des policies concernées pour accepter "actif OU admin" de
   façon unifiée, au lieu de contourner la RLS au cas par cas côté code.
+- `supabase/migration-07-messagerie.sql` — à coller ensuite, une seule
+  fois : tables `conversations` et `messages` (Brique 5).
 - `src/app/inscription` — page de création de compte.
 - `src/app/connexion` — page de connexion.
 - `src/app/api/checkout` — crée la session de paiement Stripe.
@@ -127,10 +129,16 @@ Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 - `src/app/(app)` — les pages connectées avec header commun (Brique 3) :
   `/accueil` (dashboard), `/marchandises` (liste des annonces
   publiées), `/marchandises/nouvelle` (formulaire de publication),
-  `/marchandises/[id]` (fiche détail — vendeur anonyme, "Membre
-  vérifié"), `/recherches`, `/messages`, `/mon-espace` (dont "Mes
+  `/marchandises/[id]` (fiche détail, bouton "Contacter le vendeur"),
+  `/recherches`, `/messages` (liste des conversations), `/messages/[id]`
+  (fil d'une conversation, Brique 5), `/mon-espace` (dont "Mes
   marchandises", tous statuts confondus), `/admin`. `/membre` redirige
   désormais vers `/accueil`.
+- `src/lib/messagerie-serveur.ts` — récupération des conversations et
+  messages. Aucune donnée personnelle n'y transite jamais vers le
+  client : seul un booléen "membre vérifié" (actif ou admin) est
+  calculé côté serveur et renvoyé, jamais l'e-mail ni aucune autre
+  colonne d'`abonnes`.
 - `src/lib/marchandises-serveur.ts` — récupération des marchandises
   (visibles ou propres à l'utilisateur) et génération d'URLs signées
   pour les photos du bucket privé. Gère la même double logique
