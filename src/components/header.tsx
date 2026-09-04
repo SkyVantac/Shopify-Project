@@ -91,12 +91,12 @@ export default function Header({ emailUtilisateur, estAdmin }: HeaderProps) {
             bouton="+ Publier"
             boutonClassName="flex h-10 items-center gap-1 whitespace-nowrap rounded-brand bg-accent px-5 text-sm font-semibold text-ink transition-colors hover:bg-accent-2"
           >
-            <div className="flex items-center justify-between px-4 py-3 text-sm text-dim">
+            <Link
+              href="/marchandises/nouvelle"
+              className="block px-4 py-3 text-sm text-parchment hover:bg-ink"
+            >
               Publier une marchandise
-              <span className="ml-2 rounded-brand bg-ink px-2 py-0.5 text-xs text-muted">
-                Bientôt
-              </span>
-            </div>
+            </Link>
             <div className="flex items-center justify-between px-4 py-3 text-sm text-dim">
               Publier une recherche
               <span className="ml-2 rounded-brand bg-ink px-2 py-0.5 text-xs text-muted">

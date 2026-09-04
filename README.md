@@ -109,15 +109,38 @@ Si ça reste bloqué sur "on confirme ton paiement", vérifie que la commande
 - `supabase/migration-02-admission.sql` — à coller ensuite, une seule fois.
 - `supabase/migration-03-marchandises.sql` — à coller ensuite, une seule
   fois : table des marchandises (Brique 4).
+- `supabase/migration-04-marchandises-photos.sql` — à coller ensuite,
+  une seule fois : registre des empreintes de photos, pour empêcher la
+  publication de la même image sur deux annonces (Brique 4).
+- `supabase/migration-05-grants-marchandises.sql` — à coller ensuite,
+  une seule fois : corrige des droits SQL manquants sur `marchandises`
+  et `marchandises_photos` qui bloquaient toute publication.
+- `supabase/migration-06-admins.sql` — à coller ensuite, une seule
+  fois : table `admins` (contrepartie base de `ADMIN_EMAILS`) et
+  réécriture des policies concernées pour accepter "actif OU admin" de
+  façon unifiée, au lieu de contourner la RLS au cas par cas côté code.
 - `src/app/inscription` — page de création de compte.
 - `src/app/connexion` — page de connexion.
 - `src/app/api/checkout` — crée la session de paiement Stripe.
 - `src/app/api/webhooks/stripe` — reçoit la confirmation de paiement de
   Stripe (fait passer le statut à `en_revue`, jamais directement `actif`).
 - `src/app/(app)` — les pages connectées avec header commun (Brique 3) :
-  `/accueil` (dashboard), `/marchandises`, `/recherches`, `/messages`,
-  `/mon-espace`, `/admin` (page où tu valides/refuses les candidatures).
-  `/membre` redirige désormais vers `/accueil`.
+  `/accueil` (dashboard), `/marchandises` (liste des annonces
+  publiées), `/marchandises/nouvelle` (formulaire de publication),
+  `/marchandises/[id]` (fiche détail — vendeur anonyme, "Membre
+  vérifié"), `/recherches`, `/messages`, `/mon-espace` (dont "Mes
+  marchandises", tous statuts confondus), `/admin`. `/membre` redirige
+  désormais vers `/accueil`.
+- `src/lib/marchandises-serveur.ts` — récupération des marchandises
+  (visibles ou propres à l'utilisateur) et génération d'URLs signées
+  pour les photos du bucket privé. Gère la même double logique
+  actif/admin que la publication : un admin contourne la RLS via le
+  client de service, donc la règle de visibilité est reproduite
+  manuellement en code pour lui.
+- `src/app/(app)/marchandises/nouvelle/actions.ts` — Server Action qui
+  crée une marchandise : calcule le hash SHA-256 de chaque photo et
+  bloque la publication si l'image existe déjà (voir
+  `marchandises_photos`), avant toute création ou upload.
 - `src/components/header.tsx` — barre de navigation commune à toutes les
   pages connectées (logo, menu, recherche, notifications, profil, admin).
 - `src/proxy.ts` — vérifie à chaque visite que la personne est bien connectée
